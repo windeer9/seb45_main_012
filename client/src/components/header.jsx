@@ -8,6 +8,8 @@ import Cookies from 'js-cookie';
 
 const LogoutHeader = ( {fakeLogin}) => {
 
+  const accessToken = localStorage.getItem('accessToken');
+
   return (
     <>
       <div className="header_container">
