@@ -44,6 +44,7 @@ img {
   justify-content: left;
   align-items: center;
   color: rgb(43 43 43);
+  pointer-events: none;
 }
 
 .header_bar_user {
