@@ -64,6 +64,12 @@ img {
   gap: 10px;
 }
 
-.w60 {
-  max-width: 60px;
+.w55 {
+  max-width: 55px;
+}
+
+.logout_logo {
+  display: flex;
+  flex-direction: row;
+  flex: 7 1 auto;
 }

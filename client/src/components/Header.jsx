@@ -9,38 +9,16 @@ import jwtDecode from 'jwt-decode';
 
 const LogoutHeader = ( {fakeLogin}) => {
 
-  // localStorage.setItem('accessToken',)
-  // const accessToken = localStorage.getItem('accessToken');
-  // const decodedToken = jwtDecode(accessToken);
-  // const username = decodedToken.username;
-  const username = 'charlie';
-
-
   return (
     <>
       <div className="header_container">
         <div className="header_bar">
-          <div className="logo">
+          <div className="logout_logo">
             {/* <Link to='/'> */}
             <img src={require("../assets/logo.png")} alt="logo" />
             {/* </Link> */}
           </div>
-          <div className="search disabled">
-              {/* <Link to={'/search'}> */}
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              {/* </Link> */}
-          </div>
           <div className='header_bar_user'>
-            <div className='profile disabled'>
-              <div className="user_info">
-                {/* <Link to={'/member-id'}> */}
-                  <img src={require("../assets/user_shadow.png")} className="w60" alt="user profile" />
-                {/* </Link> */}
-              </div>
-              <div className='user_info'>
-                {username} 님
-              </div>
-            </div>
             <div className="header_icon">
               {/* <Link to={'/post/write'}> */}
                 <FontAwesomeIcon icon={faPencil} className="header_icon" />
@@ -68,7 +46,6 @@ const LoginHeader = ( {fakeLogout}) => {
   // const accessToken = localStorage.getItem('accessToken');
   // const decodedToken = jwtDecode(accessToken);
   // const username = decodedToken.username;
-
   const username = 'charlie';
 
   return (
@@ -89,7 +66,7 @@ const LoginHeader = ( {fakeLogout}) => {
             <div className="profile">
               <div className='user_info'>
               {/* <Link to={'/member-id'}> */}
-                <img src={require("../assets/user_shadow.png")} className="w60" alt="user profile" />
+                <img className="w55" src={require("../assets/user_shadow.png")} alt="user profile" />
               {/* </Link> */}
               </div>
               <div className='user_info'>
