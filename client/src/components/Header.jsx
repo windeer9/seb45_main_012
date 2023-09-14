@@ -5,10 +5,16 @@ import { faPencil, faRightToBracket, faRightFromBracket, faMagnifyingGlass } fro
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 // import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 const LogoutHeader = ( {fakeLogin}) => {
 
-  const accessToken = localStorage.getItem('accessToken');
+  // localStorage.setItem('accessToken',)
+  // const accessToken = localStorage.getItem('accessToken');
+  // const decodedToken = jwtDecode(accessToken);
+  // const username = decodedToken.username;
+  const username = 'charlie';
+
 
   return (
     <>
@@ -19,23 +25,28 @@ const LogoutHeader = ( {fakeLogin}) => {
             <img src={require("../assets/logo.png")} alt="logo" />
             {/* </Link> */}
           </div>
-          <div className="header_icon search disabled">
+          <div className="search disabled">
               {/* <Link to={'/search'}> */}
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               {/* </Link> */}
           </div>
-          <div className='header_bar user'>
-            <div className="header_icon black disabled">
-              {/* <Link to={'/member-id'}> */}
-                <img src={require("../assets/user_shadow.png")} className="w70" alt="user profile" />
-              {/* </Link> */}
+          <div className='header_bar_user'>
+            <div className='profile disabled'>
+              <div className="user_info">
+                {/* <Link to={'/member-id'}> */}
+                  <img src={require("../assets/user_shadow.png")} className="w60" alt="user profile" />
+                {/* </Link> */}
+              </div>
+              <div className='user_info'>
+                {username} 님
+              </div>
             </div>
-            <div className="header_icon black">
+            <div className="header_icon">
               {/* <Link to={'/post/write'}> */}
                 <FontAwesomeIcon icon={faPencil} className="header_icon" />
               {/* </Link> */}
             </div>
-            <div className="header_icon black">
+            <div className="header_icon">
               {/* <Link to={'/logout'}> */}
                 <FontAwesomeIcon icon={faRightToBracket} className="header_icon" onClick={fakeLogin}/>
               {/* </Link> */}
@@ -52,6 +63,14 @@ LogoutHeader.propTypes = {
 }
 
 const LoginHeader = ( {fakeLogout}) => {
+  
+  // localStorage.setItem('accessToken',)
+  // const accessToken = localStorage.getItem('accessToken');
+  // const decodedToken = jwtDecode(accessToken);
+  // const username = decodedToken.username;
+
+  const username = 'charlie';
+
   return (
     <>
       <div className="header_container">
@@ -61,23 +80,28 @@ const LoginHeader = ( {fakeLogout}) => {
             <img src={require("../assets/logo.png")} alt="logo" />
             {/* </Link> */}
           </div>
-          <div className="header_icon search">
+          <div className="search">
               {/* <Link to={'/search'}> */}
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               {/* </Link> */}
           </div>
-          <div className='header_bar user'>
-            <div className="header_icon black">
+          <div className='header_bar_user'>
+            <div className="profile">
+              <div className='user_info'>
               {/* <Link to={'/member-id'}> */}
-                <img src={require("../assets/user_shadow.png")} className="w70" alt="user profile" />
+                <img src={require("../assets/user_shadow.png")} className="w60" alt="user profile" />
               {/* </Link> */}
+              </div>
+              <div className='user_info'>
+                {username} 님
+              </div>
             </div>
-            <div className="header_icon black">
+            <div className="header_icon">
               {/* <Link to={'/post/write'}> */}
                 <FontAwesomeIcon icon={faPencil} className="header_icon" />
               {/* </Link> */}
             </div>
-            <div className="header_icon black">
+            <div className="header_icon">
               {/* <Link to={'/logout'}> */}
                 <FontAwesomeIcon icon={faRightFromBracket} className="header_icon" onClick={fakeLogout}/>
               {/* </Link> */}
