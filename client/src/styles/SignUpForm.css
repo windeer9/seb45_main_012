@@ -154,6 +154,7 @@
   font-size: 15px;
   color: #fff;
   cursor: pointer;
+  border: none;
 }
 
 .signup_complete:hover {

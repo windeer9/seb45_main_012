@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "../styles/header.css";
+import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightToBracket, faRightFromBracket, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from 'prop-types';
