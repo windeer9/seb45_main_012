@@ -14,21 +14,27 @@ const NavBar = () => {
 
     if (menuName === '전체 글 보기') {
       navigate('/');
+      return;
     }
-    if (menuName === '자유 게시판') {
+    else if (menuName === '자유 게시판') {
       navigate('/free');
+      return;
     }
-    if (menuName === '인증 게시판') {
+    else if (menuName === '인증 게시판') {
       navigate('/auth');
+      return;
     }
-    if (menuName === '환경 정보 게시판') {
+    else if (menuName === '환경 정보 게시판') {
       navigate('/env');
+      return;
     }
-    if (menuName === '내가 쓴 글') {
+    else if (menuName === '내가 쓴 글') {
       navigate('/mypage/main');
+      return;
     }
-    if (menuName === '내 정보') {
+    else if (menuName === '내 정보') {
       navigate('/mypage/info');
+      return;
     }
   };
 
