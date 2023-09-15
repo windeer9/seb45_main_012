@@ -40,8 +40,8 @@ export const getVote = (postId, voteId) => {
   return instance.get(`/vote/${postId}/${voteId}`);
 };
 
-export const getComment = (postId, userId) => {
-  return instance.get(`/comment/${postId}/${userId}`);
+export const getComment = (postId) => {
+  return instance.get(`/comment/${postId}`);
 };
 
 export const postComment = (postId, userId, commentText) => {
