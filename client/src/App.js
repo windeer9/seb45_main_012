@@ -8,6 +8,7 @@ import NavBar from './components/NavBar.jsx';
 import MyPageMain from './pages/MyPageMain.jsx';
 import { PostEditerWithImage, PostEditer } from './components/PostEditer.jsx';
 import EditerPage from './pages/EditerPage.jsx';
+import { ReEditFree, ReEditAuth } from './components/ReEdit.jsx';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       {/* <FreeBoardPage/> */}
       {/* <MyPageMain /> */}
       {/* <EditerPage /> */}
+      <ReEditFree />
     </div>
   );
 }
