@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/free" element={<FreeBoardPage/>} />
-          <Route path="/post/:postId/:userId" element={<FreeDetailPage />} />
+          <Route path="/free/:postId/:userId" element={<FreeDetailPage />} />
           <Route path="/auth" element={<AuthBoardPage/>} />
           <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
           <Route path="/env" element={<EnvBoardPage/>} />
