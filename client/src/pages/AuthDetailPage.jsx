@@ -135,7 +135,15 @@ const AuthDetailPage = () => {
             <img src={post.imageUrl} alt = {`${post.postId}`} />
           </div>
           <div className='auth_detail_container_post'>
-
+            <div className="post_detail_header">
+              <div>
+                <h3 className="post_detail_title">{post.title}</h3>
+                <p>{user.grade} {user.userName}</p>
+              </div>
+              <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+            </div>
+            <p className='post_detail_content'>{post.body}</p>
+            {/* <p className='post_detail_content'>❤️{vote.voteCount}</p> */}
           </div>
         </div>
 
