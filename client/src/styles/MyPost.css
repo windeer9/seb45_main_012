@@ -7,7 +7,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  margin: 0 270px;
 }
 
 .my_post {
@@ -51,12 +51,31 @@ li {
  
 .post {
   display: flex;
-  flex: 1 1 650px;
+  flex: 1 1 auto;
   flex-direction: column;
-  height: 555px;
+  max-height: 550px;
+  overflow-y: auto;
   gap: 10px;
   margin-top: 20px;
+  margin-right: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin: 0 60px 0 0;
+  position: relative;
+  top: 18px;
+  gap: 5px;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
 }
 
 .post_info {
@@ -66,10 +85,10 @@ li {
   align-items: center;
 }
 
-.profile_image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.post_date {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
 }
 
 .user_info {
@@ -77,15 +96,50 @@ li {
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
   padding: 10px 0;
+  margin: 0 15px 0 0;
   border-bottom: 1px solid #D9D9D9;
 }
-.username {
 
+.profile_image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
+.user_name {
+  font-size: 15pt;
+}
+
+.post_content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 11pt;
+  height: auto;
+}
 
 .uploaded {
-  width: 250px;
+  width: 360px;
+}
+
+@media screen and (max-width: 768px) {
+  .uploaded {
+    width: 180px;
+  }
+}
+
+.post_writing {
+  display: flex;
+  flex-direction: row;
+  white-space: pre-wrap;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-right: 15px;
+}
+
+.no_image {
+  width: 100%;
 }
