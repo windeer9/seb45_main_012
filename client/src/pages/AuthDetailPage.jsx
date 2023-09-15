@@ -4,8 +4,7 @@ import '../styles/Button.css';
 import '../styles/BoardDetailPage.css';
 import NavBar from '../components/NavBar.jsx';
 import { getPost, getUser, getComment, postComment } from '../api/api.js';
-
-const FreeDetailPage = () => {
+const AuthDetailPage = () => {
   const { postId, userId } = useParams();
 
   const [post, setPost] = useState({});
@@ -128,49 +127,43 @@ const FreeDetailPage = () => {
 
   return (
     <>
-      <div><NavBar /></div>
-
+      <NavBar />
       <div className='page_container'>
-
-        <button className="custom_board_button cancel_button">자유 게시판</button>
-
-        <div className='free_detail_container'>
-          <div className="post_detail_header">
-            <div>
-              <h3 className="post_detail_title">{post.title}</h3>
-              <p>{user.grade} {user.userName}</p>
-            </div>
-            <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+        <button className="custom_board_button cancel_button">인증 게시판</button>
+        <div className='auth_detail_container'>
+          <div className='auth_detail_container_image'>
+            <img src={post.imageUrl} alt = {`${post.postId}`} />
           </div>
-          <p className='post_detail_content'>{post.body}</p>
-          {/* <p className='post_detail_content'>❤️{vote.voteCount}</p> */}
+          <div className='auth_detail_container_post'>
+
+          </div>
         </div>
+
+
         <div className='free_detail_container'>
-          <input
-            className='comment_input'
-            type="text"
-            placeholder="내용을 입력해주세요."
-            value={commentText}
-            onChange={handleCommentTextChange}
-          />
-          <button className='comment_button' onClick={handleSubmitComment}>
-            작성
-          </button>
-          {visibleComments.map((comment) => (
-            <div key={comment.commentId} className='post_detail_header'>
-              <div>
-                <p>
-                  {user.grade} {user.userName}
-                </p>
-                <p>{comment.body}</p>
+            <input
+              className='comment_input'
+              type="text"
+              placeholder="내용을 입력해주세요."
+              value={commentText}
+              onChange={handleCommentTextChange}
+            />
+            <button className='comment_button' onClick={handleSubmitComment}>
+              작성
+            </button>
+            {visibleComments.map((comment) => (
+              <div key={comment.id} className='post_detail_header'>
+                <div>
+                  <p>
+                    {user.grade} {user.userName}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-          <div ref={intersectionRef}></div>
-        </div>
+            ))}
+          </div>
       </div>
     </>
   );
-};
+}
 
-export default FreeDetailPage;
+export default AuthDetailPage;

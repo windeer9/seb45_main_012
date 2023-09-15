@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/AuthPostList.css';
 import { getAuthPosts } from '../api/api.js';
 
@@ -74,9 +75,13 @@ const AuthPostList = () => {
     <>
       <div className="auth_post_grid">
         {visibleAuthPosts.map((post, index) => (
-          <div className="auth_post_item_container" key={post.postId}>
+          <Link
+          to={`/auth/${post.postId}/${post.userId}`} // 경로 설정
+          key={post.postId}
+          className="auth_post_item_container"
+          >
             <img src={post.imageUrl} alt={`${post.postId}`} />
-          </div>
+          </Link>
         ))}
       </div>
       <div className="pagination">

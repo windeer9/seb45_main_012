@@ -48,10 +48,6 @@ export const postComment = (postId, userId, commentText) => {
   return instance.post(`/comment/${postId}/${userId}`, { body: commentText });
 };
 
-export const getPosts = (page) => {
-  return instance.get(`/post/free?page=${page}`);
-};
-
 export const postSignUp = (username, userId, password, password_question, password_answer) => {
   const formData = new FormData();
 

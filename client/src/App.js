@@ -6,6 +6,7 @@ import AllBoardPage from './pages/AllBoardPage.jsx';
 import FreeBoardPage from './pages/FreeBoardPage.jsx';
 import FreeDetailPage from './pages/FreeDetailPage.jsx';
 import AuthBoardPage from './pages/AuthBoardPage.jsx';
+import AuthDetailPage from './pages/AuthDetailPage.jsx';
 import EnvBoardPage from './pages/EnvBoardPage.jsx';
 
 // import Header from './components/header.jsx';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/free" element={<FreeBoardPage/>} />
           <Route path="/post/:postId/:userId" element={<FreeDetailPage />} />
           <Route path="/auth" element={<AuthBoardPage/>} />
+          <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
           <Route path="/env" element={<EnvBoardPage/>} />
         </Routes>
     </Router>
