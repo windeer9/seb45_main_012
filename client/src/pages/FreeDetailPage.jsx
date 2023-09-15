@@ -146,16 +146,19 @@ const FreeDetailPage = () => {
           {/* <p className='post_detail_content'>❤️{vote.voteCount}</p> */}
         </div>
         <div className='free_detail_container'>
-          <input
-            className='comment_input'
-            type="text"
-            placeholder="내용을 입력해주세요."
-            value={commentText}
-            onChange={handleCommentTextChange}
-          />
-          <button className='comment_button' onClick={handleSubmitComment}>
-            작성
-          </button>
+          <div className='detail_comment_container'>
+            <input
+              className='comment_input'
+              type="text"
+              placeholder="내용을 입력해주세요."
+              value={commentText}
+              onChange={handleCommentTextChange}
+            />
+            <button className='comment_button' onClick={handleSubmitComment}>
+              작성
+            </button>
+          </div>
+          
           {visibleComments.map((comment) => (
             <div key={comment.commentId} className='post_detail_header'>
               <div>

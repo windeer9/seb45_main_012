@@ -149,6 +149,7 @@ const AuthDetailPage = () => {
 
 
         <div className='free_detail_container'>
+        <div className='detail_comment_container'>
             <input
               className='comment_input'
               type="text"
@@ -159,13 +160,14 @@ const AuthDetailPage = () => {
             <button className='comment_button' onClick={handleSubmitComment}>
               작성
             </button>
+          </div>
             {visibleComments.map((comment) => (
               <div key={comment.id} className='post_detail_header'>
                 <div>
                   <p>
                     {user.grade} {user.userName}
                   </p>
-                  <p>{comment.body}</p>
+                                  <p>{comment.body}</p>
                 </div>
               </div>
             ))}
