@@ -22,6 +22,9 @@ const MyPageInfo = () => {
       reader.readAsDataURL(file);
     }
   };
+  const handleButtonClick = () => {
+    alert('서비스 준비중입니다.');
+  }
 
   return (
     <>
@@ -54,7 +57,12 @@ const MyPageInfo = () => {
               placeholder="닉네임"
             />
           </div>
-          <button className='custom_mypage_button confirm_button'>수정</button>
+          <button
+          className='custom_mypage_button confirm_button'
+          onClick={handleButtonClick}
+          >
+            수정
+          </button>
         </div>
 
         <div className='my_custom_container id_container'>
@@ -67,13 +75,23 @@ const MyPageInfo = () => {
               placeholder="아이디"
               />
             </div>
-            <button className='custom_mypage_button confirm_button'>수정</button>
+            <button
+            className='custom_mypage_button confirm_button'
+            onClick={handleButtonClick}
+            >
+            수정
+            </button>
         
           </div>
       
           <div className='my_custom_container'>
         <label htmlFor="pwInput" className="custom_label_pw">비밀번호</label>
-          <button className='custom_mypage_button confirm_button'>변경 페이지로 이동</button>        
+          <button
+          className='custom_mypage_button confirm_button'
+          onClick={handleButtonClick}
+          >
+            변경 페이지로 이동
+          </button>        
         </div>
         
       </div>
