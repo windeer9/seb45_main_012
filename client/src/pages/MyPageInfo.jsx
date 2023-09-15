@@ -23,18 +23,13 @@ const MyPageInfo = () => {
     }
   };
 
-  const handleImageChangeClick = () => {
-    // "이미지 변경" 버튼이 클릭되면 input[type="file"]를 클릭합니다.
-    const imageInput = document.getElementById('imageInput');
-    imageInput.click();
-  };
-
   return (
     <>
       <div><NavBar /></div>
       <div className='page_container'>
         <h4>내 정보</h4>
-        <div className='label_input_button_container'>
+        <div className='my_custom_container'>
+
           <div className="circle_container">
             <input
               type="file"
@@ -50,6 +45,7 @@ const MyPageInfo = () => {
               className="circle_image"
             />
           </div>
+
           <div className="input_container">
             <input
               type="text"
@@ -61,9 +57,25 @@ const MyPageInfo = () => {
           <button className='custom_mypage_button confirm_button'>수정</button>
         </div>
 
-        <div className='label_input_button_container'>
-          
+        <div className='my_custom_container id_container'>
+        <label htmlFor="idInput" className="custom_label_id">아이디</label>
+          <div className='input_container'>
+            <input
+              type="text"
+              id="idInput"
+              className="nickname_input"
+              placeholder="아이디"
+              />
+            </div>
+            <button className='custom_mypage_button confirm_button'>수정</button>
+        
+          </div>
+      
+          <div className='my_custom_container'>
+        <label htmlFor="pwInput" className="custom_label_pw">비밀번호</label>
+          <button className='custom_mypage_button confirm_button'>변경 페이지로 이동</button>        
         </div>
+        
       </div>
     </>
   );
