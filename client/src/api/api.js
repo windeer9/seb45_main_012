@@ -44,8 +44,6 @@ export const getPosts = (page) => {
   return instance.get(`/post/free?page=${page}`);
 };
 
-// export const postUser
-
 export const postSignUp = (username, userId, password, password_question, password_answer) => {
   const formData = new FormData();
 
