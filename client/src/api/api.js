@@ -44,6 +44,8 @@ export const getPosts = (page) => {
   return instance.get(`/post/free?page=${page}`);
 };
 
+
+
 export const postPosts = (type, title, body, open, img) => {
   const formData = new FormData();
 
@@ -97,4 +99,30 @@ export const postSignUp = (
     },
   });
 };
+
+export const getCustomerPost = (userId) => {
+  return instance.get(`/post/customer/${userId}`);
 }
+
+export const patchPost = (userId, postId, title, body, img) => {
+  const formData = new FormData();
+
+  const jsonData = {
+    title: title,
+    body: body,
+  };
+
+  formData.append(
+    "json",
+    new Blob([JSON.stringify(jsonData)], { type: "application/json" })
+  );
+
+  formData.append("image", img);
+
+  return instance.patch(`/post/${userId}/${postId}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+

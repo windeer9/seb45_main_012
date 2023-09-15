@@ -5,7 +5,7 @@ import SignUpPage from './pages/SignUpPage.jsx';
 import AllBoardPage from './pages/AllBoardPage.jsx';
 import FreeBoardPage from './pages/FreeBoardPage.jsx';
 import FreeDetailPage from './pages/FreeDetailPage.jsx';
-import Header from './components/header.jsx';
+import Header from './components/Header.jsx';
 import NavBar from './components/NavBar.jsx';
 import MyPageMain from './pages/MyPageMain.jsx';
 import { PostEditerWithImage, PostEditer } from './components/PostEditer.jsx';
@@ -16,13 +16,13 @@ import { ReEditFree, ReEditAuth } from './components/ReEdit.jsx';
 function App() {
   return (
     <div className="App">
-      <Router>
+      {/* <Router>
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/free" element={<FreeBoardPage/>} />
           <Route path="/post/:postId/:userId" element={<FreeDetailPage />} />
         </Routes>
-    </Router>
+    </Router> */}
       {/* <FreeDetailPage/> */}
       {/* <SignUpPage /> */}
       {/* <Header /> */}
