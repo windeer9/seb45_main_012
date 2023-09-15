@@ -165,6 +165,7 @@ const AuthDetailPage = () => {
                   <p>
                     {user.grade} {user.userName}
                   </p>
+                  <p>{comment.body}</p>
                 </div>
               </div>
             ))}

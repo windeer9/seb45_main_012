@@ -17,10 +17,11 @@
 .auth_detail_container{
     display: flex;
     gap: 20px;
+    width: 90%;
 }
 
 .auth_detail_container_image{
-    width: 41%;
+    width: 50%;
     height: 400px;
     margin: 10px 0 30px;
     border-radius: 15px;
@@ -35,7 +36,7 @@
 }
 
 .auth_detail_container_post {
-    width: 41%;
+    width: 50%;
     height: 400px;
     margin: 10px 0 30px;
     border-radius: 15px;
