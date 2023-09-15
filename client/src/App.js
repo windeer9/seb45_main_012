@@ -11,7 +11,7 @@ import EnvBoardPage from './pages/EnvBoardPage.jsx';
 
 // import Header from './components/header.jsx';
 // import NavBar from './components/NavBar.jsx';
-// import MyPageMain from 'pages/MyPageMain.jsx';
+import MyPageMain from 'pages/MyPageMain.jsx';
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           <Route path="/auth" element={<AuthBoardPage/>} />
           <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
           <Route path="/env" element={<EnvBoardPage/>} />
+          <Route path="/mypage/main" element={<MyPageMain />} />
         </Routes>
     </Router>
       {/* <FreeDetailPage/> */}
