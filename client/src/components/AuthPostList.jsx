@@ -80,8 +80,8 @@ const AuthPostList = () => {
         ))}
       </div>
       <div className="pagination">
-        {!isPrevButtonDisabled && <button onClick={() => handlePageClick(1)}>&lt;&lt;</button>}
-        {!isPrevButtonDisabled && <button onClick={() => handlePageClick(currentPage - 1)}>&lt;</button>}
+        {!isPrevButtonDisabled && visibleAuthPosts.length > 0 && <button onClick={() => handlePageClick(1)}>&lt;&lt;</button>}
+        {!isPrevButtonDisabled && visibleAuthPosts.length > 0 && <button onClick={() => handlePageClick(currentPage - 1)}>&lt;</button>}
         {getPageNumbers().map((pageNumber) => (
           <button
             key={pageNumber}
@@ -91,8 +91,8 @@ const AuthPostList = () => {
             {pageNumber}
           </button>
         ))}
-        {!isNextButtonDisabled && <button onClick={() => handlePageClick(currentPage + 1)}>&gt;</button>}
-        {!isNextButtonDisabled && (
+        {!isNextButtonDisabled && visibleAuthPosts.length > 0 && <button onClick={() => handlePageClick(currentPage + 1)}>&gt;</button>}
+        {!isNextButtonDisabled && visibleAuthPosts.length > 0 && (
           <button onClick={() => handlePageClick(Math.ceil(allAuthPosts.length / itemsPerPage))}>
             &gt;&gt;
           </button>
