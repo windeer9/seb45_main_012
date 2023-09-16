@@ -45,7 +45,7 @@ function ReEditFree() {
 
 
   return (
-    <div className="ReEditFree-container">
+    <div className="ReEditFree_container">
 
       <button onClick={handleGetPostData} >불러오기</button>
 
@@ -78,7 +78,7 @@ function ReEditAuth() {
 
   return (
     <>
-    
+      
     </>
   );
 }
