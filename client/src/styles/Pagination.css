@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.disabled {
+  color: lightgray;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0px 10px;
+}
+
+button {
+  border: none;
+  font-size: 10pt;
+  border-radius: 4px;
+  padding: 2px 4px;
+}

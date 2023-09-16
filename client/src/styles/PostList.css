@@ -24,6 +24,8 @@
 .post_title {
     font-weight: bold;
     font-size: 18px;
+    text-decoration: none;
+    color: #2B2B2B;
 }
 
 .post_content {

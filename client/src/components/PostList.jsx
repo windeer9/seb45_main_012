@@ -1,77 +1,90 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/PostList.css';
-import { getPosts } from '../api/api.js';
+import { Link } from 'react-router-dom';
+import { getAllPosts, getAlltypePosts } from '../api/api.js';
+import PropTypes from 'prop-types';
 
-// 2) API axios사용
-const PostList = () => {
+const PostList = (props) => {
+  const [allPosts, setAllPosts] = useState([]);
   const [visiblePosts, setVisiblePosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // 하여 초기데이터 5개 로딩
-  useEffect(() => {
-    // 초기 데이터 로딩
-    getPosts(1)
-      .then((res) => {
-        const initialPosts = res.data.slice(0, 5);
-        setVisiblePosts(initialPosts);
-        setCurrentPage(1);
-      })
-      .catch((error) => console.error('Error:', error));
-  }, []);
+  const intersectionRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 100
-        ) {
-          if (!isLoading) {
-            setIsLoading(true);
-            const nextPage = currentPage + 1;
-  
-            getPosts(nextPage)
-              .then((response) => {
-                const data = response.data;
-                if (data.length > 0) {
-                  setVisiblePosts((prevPosts) => [...prevPosts, ...data]);
-                  setCurrentPage(nextPage);
-                }
-                setIsLoading(false);
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-                setIsLoading(false);
-              });
-          }
-        }
-      };
+    if (props.type === 'all') {
+      getAllPosts()
+        .then((res) => {
+          const sortedData = res.data.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setAllPosts(sortedData);
+          setVisiblePosts(sortedData.slice(0, 10));
+        })
+        .catch((error) => console.error('Error:', error));
+    } else {
+      getAlltypePosts(props.type)
+        .then((res) => {
+          const sortedData = res.data.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setAllPosts(sortedData);
+          setVisiblePosts(sortedData.slice(0, 10));
+        })
+        .catch((error) => console.error('Error:', error));
+    }
+  }, [props.type]);
 
-    window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+  useEffect(() => {
+    const handleIntersect = (entries) => {
+      if (entries[0].isIntersecting) {
+        setLoading(true);
+        setTimeout(() => {
+          const endVisibleIndex = visiblePosts.length;
+          const newVisiblePosts = [...visiblePosts, ...allPosts.slice(endVisibleIndex, endVisibleIndex + 10)];
+          setVisiblePosts(newVisiblePosts);
+          setLoading(false);
+        }, );
+      }
     };
-  }, [currentPage, isLoading]);
-
-    return (
-      <div className="post_list_container">
-        {visiblePosts.map((post) => (
-          <div className="post_item" key={post.id}>
-            <div className="post_header">
-              <div className="post_title">
-                <Link to={`/post/${post.id}`} className="post_title">{post.title}</Link>
-              </div>
-              <div className="post_date">
-                {new Date(post.createdAt).toLocaleDateString()}
-              </div>
-            </div>
-            <div className="post_content">{post.body}</div>
-          </div>
-        ))}
-        {isLoading && <p>Loading...</p>}
-      </div>
-    );
-  };
   
-  export default PostList;
+    const observer = new IntersectionObserver(handleIntersect, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    });
+  
+    if (intersectionRef.current) {
+      observer.observe(intersectionRef.current);
+    }
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, [allPosts, visiblePosts]);
+  
+  return (
+    <div className="post_list_container">
+      {visiblePosts.map((post) => (
+        <div className="post_item" key={post.postId}>
+          <div className="post_header">
+            <Link to={`/post/${post.postId}/${post.userId}`} className="post_title">{post.title}</Link>
+            <div className="post_date">
+              {new Date(post.createdAt).toLocaleDateString()}
+            </div>
+          </div>
+          <div className="post_content">{post.body}</div>
+        </div>
+      ))}
+      {loading && <div>Loading...</div>}
+      <div ref={intersectionRef}></div>
+    </div>
+  );
+};
+
+PostList.propTypes = {
+  type: PropTypes.string.isRequired,
+};
+
+export default PostList;
