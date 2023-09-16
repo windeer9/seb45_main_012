@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-// import SignUpPage from './pages/SignUpPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
+import Login from './pages/LoginPage.jsx';
 import AllBoardPage from './pages/AllBoardPage.jsx';
 import FreeBoardPage from './pages/FreeBoardPage.jsx';
 import FreeDetailPage from './pages/FreeDetailPage.jsx';
@@ -16,6 +17,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<SignUpPage/>} />
           <Route path="/free" element={<FreeBoardPage/>} />
           <Route path="/post/:postId/:userId" element={<FreeDetailPage />} />
           <Route path="/mypage/info" element={<MyPageInfo/>} />

@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import NavBar from '../components/NavBar.jsx';
 import '../styles/Button.css';
 import '../styles/MyPageInfo.css';
+import jwtDecode from 'jwt-decode';
 
 const MyPageInfo = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+
+  // 아이디와 비밀번호를 정의합니다.
+  // 'mini', 'mini!1234'
+
+  //로그인 시 localStorge에 저장했던 memberId를 받아옵니다.
+  const accessToken = localStorage.getItem('accessToken');
+  const decodedToken = jwtDecode(accessToken);
+  const userId = decodedToken.userId;
+  console.log(userId);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
