@@ -4,14 +4,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightToBracket, faRightFromBracket, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
-// import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+
 
 const LogoutHeader = ( {fakeLogin}) => {
 
+  const [ isLoggedOut, setIsLoggedOut ] = useState(true);
+  
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem('accessToken');
+      setIsLoggedOut(true);
+    } catch (error) {
+      console.error('로그아웃 실패: ', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoggedOut) {
+      console.log('로그아웃 성공');
+    }
+  }, [isLoggedOut]);
+
   return (
     <>
-      <div className="header_container">
+      <header className="header_container">
         <div className="header_bar">
           <div className="logout_logo">
             {/* <Link to='/'> */}
@@ -25,13 +44,11 @@ const LogoutHeader = ( {fakeLogin}) => {
               {/* </Link> */}
             </div>
             <div className="header_icon">
-              {/* <Link to={'/logout'}> */}
-                <FontAwesomeIcon icon={faRightToBracket} className="header_icon" onClick={fakeLogin}/>
-              {/* </Link> */}
+                <FontAwesomeIcon icon={faRightToBracket} className="header_icon" onClick={handleLogout} />
             </div>
           </div>
         </div>
-      </div>
+      </header>
     </>
   )
 }
@@ -95,15 +112,7 @@ LoginHeader.propTypes = {
 }
 
 const Header = () => {
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-  
-  const fakeLogin = () => {
-    setIsLoggedIn(true);
-  }
 
-  const fakeLogout= () => {
-    setIsLoggedIn(false);
-  }
 
   // useEffect(() => {
   //   const cookie = Cookies.get('쿠키이름');
@@ -115,9 +124,9 @@ const Header = () => {
   //   }
   // }, []);
 
-  return (
-    (isLoggedIn) ? <LoginHeader fakeLogout={fakeLogout} /> : <LogoutHeader fakeLogin={fakeLogin}/> 
-  )
+  // return (
+  //   (isLoggedIn) ? <LoginHeader fakeLogout={fakeLogout} /> : <LogoutHeader fakeLogin={fakeLogin}/> 
+  // )
   
 }
 
