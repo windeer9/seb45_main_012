@@ -18,6 +18,13 @@ export const getAlltypePosts = (type_name) => {
 export const getPost = (postId) => {
   return instance.get(`/post/${postId}`);
 };
+export const getAuthPosts = () => {
+  return instance.get(`/post/type/auth`);
+}
+
+export const getEnvPosts = () => {
+  return instance.get(`/post/type/env`);
+}
 
 export const deletePost = (userId, postId) => {
   return instance.delete(`/post/${userId}/${postId}`);
@@ -35,17 +42,18 @@ export const getVote = (postId, voteId) => {
   return instance.get(`/vote/${postId}/${voteId}`);
 };
 
-export const getComment = (postId, userId) => {
-  return instance.get(`/comment/${postId}/${userId}`);
+export const patchVote = (postId, userId, voteId) => {
+  return instance.patch(`/vote/${postId}/${userId}/${voteId}`);
+}
+
+export const getComment = (postId) => {
+  return instance.get(`/comment/${postId}`);
 };
 
 export const postComment = (postId, userId, commentText) => {
   return instance.post(`/comment/${postId}/${userId}`, { body: commentText });
 };
 
-export const getPosts = (page) => {
-  return instance.get(`/post/free?page=${page}`);
-};
 
 export const postPosts = (type, title, body, open, img) => {
   const formData = new FormData();

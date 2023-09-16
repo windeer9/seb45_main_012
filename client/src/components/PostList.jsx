@@ -13,7 +13,7 @@ const PostList = (props) => {
 
   useEffect(() => {
     if (props.type === 'all') {
-      getAllPosts()
+      getAllPosts() //모든 게시글 가져오기
         .then((res) => {
           const sortedData = res.data.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
@@ -23,7 +23,7 @@ const PostList = (props) => {
         })
         .catch((error) => console.error('Error:', error));
     } else {
-      getAlltypePosts(props.type)
+      getAlltypePosts(props.type) //게시판 별 게시글 가져오기
         .then((res) => {
           const sortedData = res.data.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
@@ -69,7 +69,12 @@ const PostList = (props) => {
       {visiblePosts.map((post) => (
         <div className="post_item" key={post.postId}>
           <div className="post_header">
-            <Link to={`/post/${post.postId}/${post.userId}`} className="post_title">{post.title}</Link>
+          <Link
+            to={`/${post.type === 'free' ? 'free' : 'auth'}/${post.postId}/${post.userId}`}
+            className="post_title"
+          >
+            {post.title}
+          </Link>
             <div className="post_date">
               {new Date(post.createdAt).toLocaleDateString()}
             </div>
