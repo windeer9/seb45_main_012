@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import '../styles/PostEditer.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { postPosts } from "api/api.js";
+import { postPosts, postVote } from "api/api.js";
 
 function PostEditer() {
   const [formData, setFormData] = useState({
@@ -22,11 +22,18 @@ function PostEditer() {
     if (formData.title !== '' && formData.body !== '') {
       postPosts(formData.type, formData.title, formData.body, formData.open)
         .then((resp) => {
-
+          postVote(resp.data.postId)
+            .then((response)=>{
+              
+            })
+            .catch((error)=> {
+              
+            })  
         })
         .catch((err) => {
 
         });
+      
     } else {
       alert('제목과 내용을 모두 입력해주세요.');
     }
@@ -88,7 +95,13 @@ function PostEditerWithImage() {
     if (formData.title !== '' && formData.body !== '' && previewImage !== null) {
       postPosts(formData.type, formData.title, formData.body, formData.open, formData.img)
         .then((resp) => {
-
+          postVote(resp.data.postId)
+            .then((response)=>{
+              
+            })
+            .catch((error)=> {
+              
+            })  
         })
         .catch((err) => {
 
