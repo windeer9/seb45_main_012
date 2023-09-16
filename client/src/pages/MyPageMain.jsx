@@ -4,18 +4,19 @@ import '../styles/MyPageMain.css';
 import Pagination from 'components/Pagination.jsx';
 import jwtDecode from 'jwt-decode';
 import { instance } from 'api/api';
+import { Link } from 'react-router-dom';
 
 const MyPageMain = () => {
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
-  const memberId = decodedToken.memberId;
+  const userId = decodedToken.userId;
 
   const [ userData, setUserData ] = useState([]);
 
   useEffect(() => {
     async function getUserData() {
       try {
-        const res = await instance.get('/post/customer/' + memberId);
+        const res = await instance.get('/post/customer/10');
         const sortedUserData = res.data.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -99,12 +100,16 @@ const MyPageMain = () => {
         {currentPosts.map((post) => (
           <article className="post" key={post.id}>
             <div className='post_info'>
-              <h4 className="post_title">{post.title}</h4>
+              <h4 className="post_title">
+                <Link to={`/mypage/posts/${post.id}`}>
+                  {post.title} {console.log(post.id)}
+                </Link>
+              </h4>
               <div className='post_date'>{
                 new Date(post.createdAt).toISOString().split("T")[0].replace(/-/g, '.')
               }</div>
             </div>
-            <div className='post_content'>{post.body.slice(0, 50) + " ..."}</div>
+            <p className='post_content'>{post.body.slice(0, 50) + " ..."}</p>
           </article>
         ))}
         <Pagination
