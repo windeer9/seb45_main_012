@@ -1,0 +1,23 @@
+.page_container {
+    padding-top: 65px;
+    padding-left:280px;
+}
+
+.free_board_container{
+    width: 90%;
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.free_detail_container{
+    width: 90%;
+    height: 70%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

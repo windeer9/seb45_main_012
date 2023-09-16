@@ -21,6 +21,20 @@
     border-radius: 15px;
     font-weight: bold;
 }
+/* 게시글 버튼 */
+.custom_board_button {
+    width: 250px;
+    height: 79px;
+    display: inline-flex;
+    height: 50px;
+    padding: 23px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
 /* 확인 버튼 */
 .confirm_button {
     background-color: #8DC693;
