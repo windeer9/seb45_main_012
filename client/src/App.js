@@ -5,17 +5,9 @@ import './App.css';
 import AllBoardPage from './pages/AllBoardPage.jsx';
 import FreeBoardPage from './pages/FreeBoardPage.jsx';
 import FreeDetailPage from './pages/FreeDetailPage.jsx';
-<<<<<<< HEAD
-import Header from './components/header.jsx';
-import NavBar from './components/NavBar.jsx';
-import MyPageMain from './pages/MyPageMain.jsx';
-import { PostEditerWithImage, PostEditer } from './components/PostEditer.jsx';
-import EditerPage from './pages/EditerPage.jsx';
-=======
 // import Header from './components/header.jsx';
 // import NavBar from './components/NavBar.jsx';
 import MyPageMain from 'pages/MyPageMain.jsx';
->>>>>>> 1f4f1d752f80030d702dbcf42df97956a968ab46
 
 function App() {
   return (
@@ -34,10 +26,6 @@ function App() {
       {/* <NavBar /> */}
       {/* <FreeBoardPage/> */}
       {/* <MyPageMain /> */}
-      {/* <EditerPage /> */}
     </div>
   );
 }
-import { formToJSON } from 'axios';
-
-export default App;

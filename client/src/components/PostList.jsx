@@ -1,14 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/PostList.css';
-<<<<<<< HEAD
-import { getPosts } from 'api/api';
-import { Link } from 'react-router-dom';
-
-=======
 import { Link } from 'react-router-dom';
 import { getAllPosts, getAlltypePosts } from '../api/api.js';
 import PropTypes from 'prop-types';
->>>>>>> 1f4f1d752f80030d702dbcf42df97956a968ab46
 
 const PostList = (props) => {
   const [allPosts, setAllPosts] = useState([]);
