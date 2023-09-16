@@ -5,24 +5,22 @@ import './App.css';
 import AllBoardPage from './pages/AllBoardPage.jsx';
 import FreeBoardPage from './pages/FreeBoardPage.jsx';
 import FreeDetailPage from './pages/FreeDetailPage.jsx';
-<<<<<<< HEAD
-// import Header from './components/Header.jsx';
-=======
 import AuthBoardPage from './pages/AuthBoardPage.jsx';
 import AuthDetailPage from './pages/AuthDetailPage.jsx';
 import EnvBoardPage from './pages/EnvBoardPage.jsx';
-
-// import Header from './components/header.jsx';
->>>>>>> 054d3a38fecdedc05e9d18359daae2b6a59d9c6d
+import Header from './components/Header.jsx';
 // import NavBar from './components/NavBar.jsx';
 import MyPageMain from 'pages/MyPageMain.jsx';
+import LogIn from 'pages/LoginPage.jsx';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
+          <Route path="/login" element={<LogIn />} />
           <Route path="/free" element={<FreeBoardPage/>} />
           <Route path="/free/:postId/:userId" element={<FreeDetailPage />} />
           <Route path="/auth" element={<AuthBoardPage/>} />
@@ -31,12 +29,6 @@ function App() {
           <Route path="/mypage/main" element={<MyPageMain />} />
         </Routes>
     </Router>
-      {/* <FreeDetailPage/> */}
-      {/* <SignUpPage /> */}
-
-      {/* <NavBar /> */}
-      {/* <FreeBoardPage/> */}
-      {/* <MyPageMain /> */}
     </div>
   );
 }
