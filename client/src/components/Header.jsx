@@ -8,15 +8,45 @@ import { Link, useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
 
-const LogoutHeader = ( {fakeLogin}) => {
+const HeaderLoggedOut = () => {
 
-  const [ isLoggedOut, setIsLoggedOut ] = useState(true);
+  return (
+    <>
+      <header className="header_container">
+        <div className="header_bar">
+          <Link to='/' className="logout_logo">
+            <img src={require("../assets/logo.png")} alt="logo" />
+          </Link>
+          <div className='header_bar_user'>
+            <Link to='/login' className="header_icon">
+                <FontAwesomeIcon icon={faPencil} className="header_icon" />
+            </Link>
+            <Link to='/login' className="header_icon">
+                <FontAwesomeIcon icon={faRightToBracket} className="header_icon" />
+            </Link>
+          </div>
+        </div>
+      </header>
+    </>
+  )
+}
+
+const HeaderLoggedIn = () => {
+
+  // const accessToken = localStorage.getItem('accessToken');
+  // const decodedToken = jwtDecode(accessToken);
+  // const username = decodedToken.username;
+  const username = 'charlie';
+
+  const navigate = useNavigate();
+
+  const [ isLoggedOut, setIsLoggedOut ] = useState(false);
   
-
   const handleLogout = () => {
     try {
-      localStorage.removeItem('accessToken');
+      // localStorage.removeItem('accessToken');
       setIsLoggedOut(true);
+      // navigate('/');
     } catch (error) {
       console.error('로그아웃 실패: ', error);
     }
@@ -28,87 +58,31 @@ const LogoutHeader = ( {fakeLogin}) => {
     }
   }, [isLoggedOut]);
 
+
   return (
-    <>
-      <header className="header_container">
-        <div className="header_bar">
-          <div className="logout_logo">
-            {/* <Link to='/'> */}
-            <img src={require("../assets/logo.png")} alt="logo" />
-            {/* </Link> */}
-          </div>
-          <div className='header_bar_user'>
-            <div className="header_icon">
-              {/* <Link to={'/post/write'}> */}
-                <FontAwesomeIcon icon={faPencil} className="header_icon" />
-              {/* </Link> */}
-            </div>
-            <div className="header_icon">
-                <FontAwesomeIcon icon={faRightToBracket} className="header_icon" onClick={handleLogout} />
-            </div>
-          </div>
+    <header className="header_container">
+      <div className="header_bar">
+        <Link to='/' className="logo">
+          <img src={require("../assets/logo.png")} alt="logo" />
+        </Link>
+        <div className="search">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
-      </header>
-    </>
-  )
-}
-
-LogoutHeader.propTypes = {
-  fakeLogin: PropTypes.func.isRequired
-}
-
-const LoginHeader = ( {fakeLogout}) => {
-  
-  // localStorage.setItem('accessToken',)
-  // const accessToken = localStorage.getItem('accessToken');
-  // const decodedToken = jwtDecode(accessToken);
-  // const username = decodedToken.username;
-  const username = 'charlie';
-
-  return (
-    <>
-      <div className="header_container">
-        <div className="header_bar">
-          <div className="logo">
-            {/* <Link to='/'> */}
-            <img src={require("../assets/logo.png")} alt="logo" />
-            {/* </Link> */}
-          </div>
-          <div className="search">
-              {/* <Link to={'/search'}> */}
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              {/* </Link> */}
-          </div>
-          <div className='header_bar_user'>
-            <div className="profile">
-              <div className='user_info'>
-              {/* <Link to={'/member-id'}> */}
-                <img className="w55" src={require("../assets/user_shadow.png")} alt="user profile" />
-              {/* </Link> */}
-              </div>
-              <div className='user_info'>
-                {username} 님
-              </div>
-            </div>
-            <div className="header_icon">
-              {/* <Link to={'/post/write'}> */}
-                <FontAwesomeIcon icon={faPencil} className="header_icon" />
-              {/* </Link> */}
-            </div>
-            <div className="header_icon">
-              {/* <Link to={'/logout'}> */}
-                <FontAwesomeIcon icon={faRightFromBracket} className="header_icon" onClick={fakeLogout}/>
-              {/* </Link> */}
-            </div>
-          </div>
+        <div className='header_bar_user'>
+          <Link to='/mypage/posts' className="profile">
+            <img className="w55" src={require("../assets/user_shadow.png")} alt="user profile" />
+            {username} 님
+          </Link>
+          <Link to={'/posts/write'}>
+            <FontAwesomeIcon icon={faPencil} className="header_icon" />
+          </Link>
+        </div>
+        <div className="header_icon">
+          <FontAwesomeIcon icon={faRightFromBracket} className="header_icon" onClick={handleLogout}/>
         </div>
       </div>
-    </>
+    </header>
   )
-}
-
-LoginHeader.propTypes = {
-  fakeLogout: PropTypes.func.isRequired
 }
 
 const Header = () => {
@@ -131,3 +105,15 @@ const Header = () => {
 }
 
 export default Header;
+
+
+
+
+
+// LogoutHeader.propTypes = {
+//   fakeLogin: PropTypes.func.isRequired
+// }
+
+// LoginHeader.propTypes = {
+//   fakeLogout: PropTypes.func.isRequired
+// }
