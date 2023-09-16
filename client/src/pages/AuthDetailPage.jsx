@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import '../styles/Button.css';
 import '../styles/BoardDetailPage.css';
 import NavBar from '../components/NavBar.jsx';
-import { getPost, getUser, getComment, postComment } from '../api/api.js';
+import { getPost, getUser, getComment, postComment } from 'api/api.js';
 const AuthDetailPage = () => {
   const { postId, userId } = useParams();
 

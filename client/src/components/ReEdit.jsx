@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import '../styles/ReEdit.css';
-import { getCustomerPost, patchPost } from '../api/api.js';
+import { getCustomerPost, patchPost } from 'api/api.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { postPosts } from "api/api.js";
@@ -21,6 +21,7 @@ function ReEditFree() {
           title: resp.data[0].title,
           body: resp.data[0].body
         });
+        
       })
       .catch((err)=>{
         console.error(err);
@@ -104,6 +105,7 @@ function ReEditAuth() {
   }
 
   const handleGetPostData = () => {
+    
     getCustomerPost(10)
       .then((resp)=>{
         setFormData({
@@ -113,8 +115,8 @@ function ReEditAuth() {
           img: resp.data[51].imageUrl
           
         });
+        setPreviewImage(resp.data[51].imageUrl);
         
-
         console.log('성공', resp.data);
       })
       .catch((err)=>{
@@ -124,6 +126,8 @@ function ReEditAuth() {
 
   const [previewImage, setPreviewImage] = useState(null);
   const imageInputRef = useRef(null);
+
+
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -170,8 +174,8 @@ function ReEditAuth() {
               onChange={handleFileInputChange}
               ref={imageInputRef}
             />
-            {formData.img !== '' && <img src={formData.img} alt="미리보기" onClick={handleImageClick} aria-hidden="true" />}
-            <div className={`plus_image_icon ${formData.img !== '' ? 'clear' : ''}`} >
+            {previewImage && <img src={previewImage} alt="미리보기" onClick={handleImageClick} aria-hidden="true" />}
+            <div className={`plus_image_icon ${previewImage ? 'clear' : ''}`} >
               <FontAwesomeIcon className='plus_icon' icon={faPlus}/>이미지
             </div>
           </div>

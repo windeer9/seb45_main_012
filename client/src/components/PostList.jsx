@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/PostList.css';
 import { Link } from 'react-router-dom';
-import { getAllPosts, getAlltypePosts } from '../api/api.js';
+import { getAllPosts, getAlltypePosts } from 'api/api.js';
 import PropTypes from 'prop-types';
 
 const PostList = (props) => {
