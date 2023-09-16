@@ -13,3 +13,15 @@
 .post_complete_btn.wide.reEdit {
   width: fit-content;
 }
+
+.ReEditAuth_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post_editer_with_image.reEdit {
+  width: 75vw;
+}
