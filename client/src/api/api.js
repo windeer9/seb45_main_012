@@ -1,12 +1,7 @@
 import axios from "axios";
 
-<<<<<<< HEAD
-const instance = axios.create({
-  baseURL: "http://52.78.145.37:8080",
-=======
 export const instance = axios.create({
   baseURL: 'http://52.78.145.37:8080', //기본 URL
->>>>>>> 1f4f1d752f80030d702dbcf42df97956a968ab46
   timeout: 5000,
 });
 
@@ -33,6 +28,7 @@ export const getUser = (userId) => {
 export const postVote = (postId) => {
   return instance.post(`/vote/${postId}`);
 }
+
 export const getVote = (postId, voteId) => {
   return instance.get(`/vote/${postId}/${voteId}`);
 };
@@ -101,8 +97,6 @@ export const postSignUp = (
       "Content-Type": "multipart/form-data",
     },
   });
-<<<<<<< HEAD
 };
-=======
-}
->>>>>>> 1f4f1d752f80030d702dbcf42df97956a968ab46
+
+
