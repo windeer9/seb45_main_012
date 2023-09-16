@@ -13,6 +13,9 @@ export const getAlltypePosts = (type_name) => {
   return instance.get(`/post/type/${type_name}`);
 };
 
+export const getPost = (postId) => {
+  return instance.get(`/post/${postId}`);
+};
 export const getAuthPosts = () => {
   return instance.get(`/post/type/auth`);
 }
@@ -20,10 +23,6 @@ export const getAuthPosts = () => {
 export const getEnvPosts = () => {
   return instance.get(`/post/type/env`);
 }
-
-export const getPost = (postId) => {
-  return instance.get(`/post/${postId}`);
-};
 
 export const deletePost = (userId, postId) => {
   return instance.delete(`/post/${userId}/${postId}`);
@@ -40,6 +39,10 @@ export const getVote = (postId, voteId) => {
   return instance.get(`/vote/${postId}/${voteId}`);
 };
 
+export const patchVote = (postId, userId, voteId) => {
+  return instance.patch(`/vote/${postId}/${userId}/${voteId}`);
+}
+
 export const getComment = (postId) => {
   return instance.get(`/comment/${postId}`);
 };
@@ -47,6 +50,7 @@ export const getComment = (postId) => {
 export const postComment = (postId, userId, commentText) => {
   return instance.post(`/comment/${postId}/${userId}`, { body: commentText });
 };
+
 
 export const postSignUp = (username, userId, password, password_question, password_answer) => {
   const formData = new FormData();

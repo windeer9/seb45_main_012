@@ -3,7 +3,15 @@ import { useParams } from 'react-router-dom';
 import '../styles/Button.css';
 import '../styles/BoardDetailPage.css';
 import NavBar from '../components/NavBar.jsx';
-import { getPost, getUser, getComment, postComment } from '../api/api.js';
+import {
+  getPost,
+  getUser,
+  getComment,
+  postComment,
+  postVote,
+  getVote,
+  patchVote,
+} from '../api/api.js';
 
 const FreeDetailPage = () => {
   const { postId, userId } = useParams();
@@ -11,6 +19,7 @@ const FreeDetailPage = () => {
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [vote, setVote] = useState({});
+  const [liked, setLiked] = useState(false);
   const [commentText, setCommentText] = useState('');
 
   const [allComments, setAllComments] = useState([]);
@@ -36,7 +45,16 @@ const FreeDetailPage = () => {
     postComment(postId, userId, commentText)
       .then((response) => {
         console.log('댓글 작성 완료:', response.data);
-        window.location.reload();
+        // window.location.reload();
+        // 댓글 새로고침 보다 갱신이 더 자연스러워서 수정합니다.
+        getComment(postId, userId)
+          .then((response) => {
+            const sortedComments = response.data.sort((a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            setAllComments(sortedComments);
+            setVisibleComments(sortedComments.slice(0, 10));
+          })
       })
       .catch((error) => {
         console.error('댓글 작성 오류:', error);
@@ -84,6 +102,8 @@ const FreeDetailPage = () => {
     //   });
 
 
+
+
     // 댓글 데이터 가져오기
     getComment(postId, userId)
       .then((response) => {
@@ -98,6 +118,39 @@ const FreeDetailPage = () => {
       });
   }, []);
 
+  useEffect(() => {
+    //vote 생성부터
+    getVote(postId)
+      .then((response) => {
+        setVote(response.data);
+        console.log(response.data);
+      })
+  // 좋아요 정보 가져오기
+  //   getVote(postId)
+  //   .then((response) => {
+  //     setVoteInfo(response.data);
+  //     setLiked(response.data.voteType === 'Like');
+  //   })
+  //   .catch((error) => {
+  //     console.error('좋아요 정보 가져오기 오류:', error);
+  //   });
+  }, []);
+
+  const handleVoteClick = () => {
+    const newVoteType = liked ? 'Dislike' : 'Like';
+
+    // 좋아요 추가 또는 취소 API 호출
+  //   const voteId = voteInfo.voteId;
+  //   patchVote(postId, userId, voteId, { voteType: newVoteType })
+  //     .then((response) => {
+  //       setVoteInfo(response.data);
+  //       setLiked(newVoteType === 'Like');
+  //     })
+  //     .catch((error) => {
+  //       console.error('좋아요 추가 또는 취소 오류:', error);
+  //     });
+  };
+  
   useEffect(() => {
     const handleIntersect = (entries) => {
       if (entries[0].isIntersecting) {
@@ -143,6 +196,9 @@ const FreeDetailPage = () => {
             <p>{new Date(post.createdAt).toLocaleDateString()}</p>
           </div>
           <p className='post_detail_content'>{post.body}</p>
+          <button onClick={handleVoteClick}>
+            {liked ? `🤍 ${vote.voteCount}` : `❤️ ${vote.voteCount}`}
+          </button>
           {/* <p className='post_detail_content'>❤️{vote.voteCount}</p> */}
         </div>
         <div className='free_detail_container'>
