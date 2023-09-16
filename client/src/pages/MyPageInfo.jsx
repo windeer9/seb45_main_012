@@ -11,12 +11,14 @@ const MyPageInfo = () => {
   // 아이디와 비밀번호를 정의합니다.
   // 'mini', 'mini!1234'
 
-  //로그인 시 localStorge에 저장했던 memberId를 받아옵니다.
+  //로그인 시 localStorge에 저장했던 userId를 받아옵니다.
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
   const userId = decodedToken.userId;
   console.log(userId);
 
+  const res = await instance.get('/post/customer/' + userId);
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 

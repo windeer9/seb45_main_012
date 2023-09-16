@@ -8,24 +8,68 @@ import {
   getUser,
   getComment,
   postComment,
-  postVote,
   getVote,
   patchVote,
 } from '../api/api.js';
 
 const FreeDetailPage = () => {
-  const { postId, userId } = useParams();
+  const { postId, userId, voteId } = useParams();
 
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
+
   const [vote, setVote] = useState({});
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState({});
   const [commentText, setCommentText] = useState('');
 
   const [allComments, setAllComments] = useState([]);
   const [visibleComments, setVisibleComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+
   const intersectionRef = useRef(null);
+
+
+  useEffect(() => {
+    // 좋아요 상태 초기화
+    getVote(postId, voteId)
+      .then((response) => {
+        const voteData = response.data;
+        console.log(voteData);
+        console.log("liked: ", liked);
+        setVote(voteData);
+      })
+      .catch((error) => {
+        console.error('좋아요 정보 가져오기 오류:', error);
+      });
+  }, [postId, voteId, user.userId, liked]);
+
+
+  const handleVoteClick = async () => {
+    try {
+      // 만약 liked가 true인 경우, 좋아요를 취소해야 합니다.
+      // 그외의 경우에는 좋아요를 추가해야 합니다.
+      const voteType = liked ? 'Cancel' : 'Like';
+  
+      // API 요청 보내기
+      const response = await patchVote(postId, userId, voteId, { voteType: voteType });
+      console.log("API 보낸 후",response.data);
+      console.log("API 후 liked: ", liked);
+      // API 요청이 성공적으로 완료된 경우에만 UI를 업데이트합니다.
+      if (response.status === 200) {
+        // 좋아요 상태 업데이트
+        setLiked(!liked);
+  
+        // 좋아요 카운트 업데이트
+        const updatedVoteCount = liked ? vote.voteCount - 1 : vote.voteCount + 1;
+        setVote({ ...vote, voteCount: updatedVoteCount });
+      } else {
+        console.error('좋아요 버튼 기능 오류');
+      }
+    } catch (error) {
+      // 오류 처리
+      console.error('좋아요 오류', error);
+    }
+  };
+
 
   const handleCommentTextChange = (event) => {
     setCommentText(event.target.value);
@@ -40,14 +84,12 @@ const FreeDetailPage = () => {
       return;
     }
 
-    console.log('댓글 내용:', commentText);
-
     postComment(postId, userId, commentText)
       .then((response) => {
         console.log('댓글 작성 완료:', response.data);
         // window.location.reload();
         // 댓글 새로고침 보다 갱신이 더 자연스러워서 수정합니다.
-        getComment(postId, userId)
+        getComment(postId)
           .then((response) => {
             const sortedComments = response.data.sort((a, b) => {
               return new Date(b.createdAt) - new Date(a.createdAt);
@@ -74,38 +116,14 @@ const FreeDetailPage = () => {
     // 유저 데이터 가져오기
     getUser(userId)
       .then((response) => {
-        console.log(response.data);
         setUser(response.data);
       })
       .catch((error) => {
         console.error('유저 데이터 가져오기 오류:', error);
       });
 
-    // 투표 데이터 가져오기
-    // let voteId; // 변수를 함수 범위로 이동
-
-    // postVote(postId)
-    //   .then((response) => {
-    //     const voteData = response.data;
-    //     console.log("voteData: ", voteData);
-    //     voteId = voteData.voteId; // voteId를 할당
-    //     // 이제 voteId를 사용하여 getVote 함수 호출
-    //     return getVote(postId, voteId);
-    //   })
-    //   .then((response) => {
-    //     const voteData = response.data;
-    //     // const voteCount = voteData.voteCount;
-    //     setVote(voteData);
-    //   })
-    //   .catch((error) => {
-    //     console.error('투표 생성 또는 데이터 가져오기 오류:', error);
-    //   });
-
-
-
-
     // 댓글 데이터 가져오기
-    getComment(postId, userId)
+    getComment(postId)
       .then((response) => {
         const sortedComments = response.data.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
@@ -118,48 +136,14 @@ const FreeDetailPage = () => {
       });
   }, []);
 
-  useEffect(() => {
-    //vote 생성부터
-    getVote(postId)
-      .then((response) => {
-        setVote(response.data);
-        console.log(response.data);
-      })
-  // 좋아요 정보 가져오기
-  //   getVote(postId)
-  //   .then((response) => {
-  //     setVoteInfo(response.data);
-  //     setLiked(response.data.voteType === 'Like');
-  //   })
-  //   .catch((error) => {
-  //     console.error('좋아요 정보 가져오기 오류:', error);
-  //   });
-  }, []);
 
-  const handleVoteClick = () => {
-    const newVoteType = liked ? 'Dislike' : 'Like';
-
-    // 좋아요 추가 또는 취소 API 호출
-  //   const voteId = voteInfo.voteId;
-  //   patchVote(postId, userId, voteId, { voteType: newVoteType })
-  //     .then((response) => {
-  //       setVoteInfo(response.data);
-  //       setLiked(newVoteType === 'Like');
-  //     })
-  //     .catch((error) => {
-  //       console.error('좋아요 추가 또는 취소 오류:', error);
-  //     });
-  };
-  
   useEffect(() => {
     const handleIntersect = (entries) => {
       if (entries[0].isIntersecting) {
-        setIsLoading(true);
         setTimeout(() => {
           const endVisibleIndex = visibleComments.length;
           const newVisibleComments = [...visibleComments, ...allComments.slice(endVisibleIndex, endVisibleIndex + 10)];
           setVisibleComments(newVisibleComments);
-          setIsLoading(false);
         },);
       }
     };
@@ -196,10 +180,9 @@ const FreeDetailPage = () => {
             <p>{new Date(post.createdAt).toLocaleDateString()}</p>
           </div>
           <p className='post_detail_content'>{post.body}</p>
-          <button onClick={handleVoteClick}>
-            {liked ? `🤍 ${vote.voteCount}` : `❤️ ${vote.voteCount}`}
+          <button onClick={handleVoteClick} className='vote_button'>
+            {liked ? `❤️ ${vote.voteCount}` : `🤍 ${vote.voteCount}`}
           </button>
-          {/* <p className='post_detail_content'>❤️{vote.voteCount}</p> */}
         </div>
         <div className='free_detail_container'>
           <div className='detail_comment_container'>
