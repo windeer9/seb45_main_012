@@ -7,9 +7,9 @@ import { instance } from 'api/api';
 import { Link } from 'react-router-dom';
 
 const MyPageMain = () => {
-  const accessToken = localStorage.getItem('accessToken');
-  const decodedToken = jwtDecode(accessToken);
-  const userId = decodedToken.userId;
+  // const accessToken = localStorage.getItem('accessToken');
+  // const decodedToken = jwtDecode(accessToken);
+  // const userId = decodedToken.userId;
 
   const [ userData, setUserData ] = useState([]);
 
@@ -98,11 +98,11 @@ const MyPageMain = () => {
       </ul>
       <section className='posts_container'>
         {currentPosts.map((post) => (
-          <article className="post" key={post.id}>
+          <article className="post" key={post.postId}>
             <div className='post_info'>
               <h4 className="post_title">
-                <Link to={`/mypage/posts/${post.id}`}>
-                  {post.title} {console.log(post.id)}
+                <Link to={`/mypage/posts/${post.postId}`}>
+                  {post.title}
                 </Link>
               </h4>
               <div className='post_date'>{
