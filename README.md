@@ -13,7 +13,6 @@
 | :---: | :---: | :---: | :---: | :---: |
 | <img alt="이민주" src="" height="100" width="100"> | <img alt="박지민" src="" height="100" width="100"> | <img alt="정윤민" src="" height="100" width="100"> | <img alt="김정희" src="" height="100" width="100"> | <img alt="윤다윗" src="" height="100" width="100"> |
 | [@min](https://github.com/matchaing) |    [@jumpm9239](https://github.com/jumpm9239) | [@yuumni](https://github.com/yuumni) | [@gomiming](https://github.com/wjdgml) | [@windeer9](https://github.com/windeer9) |
-|<p align="left">- 디자인 담당<br/>- 네비게이션 바<br/>- 게시글 리스트 조회 <br/>- 상세 게시글 조회<br/>- 마이페이지 정보수정<br/>- 회원탈퇴 <br/> - 모달 구현 <br/></p>|<p align="left">- 헤더 구현 <br/>- 로그인/로그아웃 <br/>- 마이페이지 메인 <br/>- 마이페이지 게시글 조회 </p>|<p align="left">-게시글 작성 <br/>- 게시글 수정 <br/>- 회원가입 <br/>- 4 <br/>- 5 <br/>- 6 </p>|<p align="left">- 1 <br/>- 2 <br/>- 3 <br/>- 4 <br/>- 5 <br/>- 6 </p>|<p align="left">- 배포환경 구축 <br/>- 2 <br/>- 3 <br/>- 4 <br/>- 5 <br/>- 6 </p>|
 
 
 
