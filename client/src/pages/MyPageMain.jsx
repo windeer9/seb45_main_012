@@ -7,16 +7,17 @@ import { instance } from 'api/api';
 import { Link } from 'react-router-dom';
 
 const MyPageMain = () => {
-  // const accessToken = localStorage.getItem('accessToken');
-  // const decodedToken = jwtDecode(accessToken);
-  // const userId = decodedToken.userId;
+
+  const accessToken = localStorage.getItem('accessToken');
+  const decodedToken = jwtDecode(accessToken);
+  const userId = decodedToken.userId;
 
   const [ userData, setUserData ] = useState([]);
 
   useEffect(() => {
     async function getUserData() {
       try {
-        const res = await instance.get('/post/customer/10');
+        const res = await instance.get('/post/customer/' + userId);
         const sortedUserData = res.data.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -53,6 +54,7 @@ const MyPageMain = () => {
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName)
   }
+  
   const postsPerPage = 5;
   const startPostIndex = ( currentPage - 1 ) * postsPerPage;
   const endPostIndex = Math.min(startPostIndex + postsPerPage);
@@ -123,6 +125,5 @@ const MyPageMain = () => {
     </main>
   )
 }
-
 
 export default MyPageMain;
