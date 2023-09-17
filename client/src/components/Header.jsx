@@ -43,6 +43,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
   const [ userName, setUserName ] = useState('');
 
   useEffect(() => {
+
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
       const userName = decodedToken.userName;
@@ -95,12 +96,16 @@ const Header = () => {
   useEffect(() => {
     if (accessToken) {
       setIsLoggedIn(true)
-    } else {
-      setIsLoggedIn(false);
+      return;
     }
-  }, [accessToken]);
+
+    setIsLoggedIn(false)
+    }
+  , [accessToken]);
+
 
   const navigate = useNavigate();
+
   const handleLogout = () => {
     try {
       localStorage.removeItem('accessToken');
