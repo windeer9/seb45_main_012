@@ -27,7 +27,7 @@ function App() {
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignUpPage/>} />
-          <Route path="/post" element={<EditerPage/>} />
+          <Route path="/posts/write" element={<EditerPage/>} />
 
           <Route path="/free" element={<FreeBoardPage/>} />
           <Route path="/free/:postId/:userId/:voteId" element={<FreeDetailPage />} />
