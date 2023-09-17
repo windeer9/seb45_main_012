@@ -18,11 +18,13 @@ const LoginFunc = async ( id, password ) => {
     console.log(accessToken[0], '로그인 성공')
     localStorage.setItem('accessToken', accessToken);
     axios.defaults.headers.common['Authorization'] = `Bearer${accessToken}`;
+    return true;
     }
-
   catch (err) {
-    console.log('err message: ', err)
+    console.log('err message: ', err);
+    return false;
   }
+
 }
 
 export default LoginFunc;

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightToBracket, faRightFromBracket, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const HeaderLoggedOut = ( { isLoggedIn, handleLogout } ) => {
+const HeaderLoggedOut = ( { isLoggedIn } ) => {
   if (isLoggedIn) {
     return null;
   }
@@ -32,7 +32,6 @@ const HeaderLoggedOut = ( { isLoggedIn, handleLogout } ) => {
 
 HeaderLoggedOut.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  handleLogout: PropTypes.func.isRequired
 }
 
 
@@ -115,7 +114,7 @@ const Header = () => {
   return (
     <div>
       <HeaderLoggedIn handleLogout={handleLogout} isLoggedIn={isLoggedIn} />
-      <HeaderLoggedOut handleLogout={handleLogout} isLoggedIn={isLoggedIn} />
+      <HeaderLoggedOut isLoggedIn={isLoggedIn} />
     </div>
   )
 }
