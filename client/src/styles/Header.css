@@ -31,12 +31,6 @@ img {
   max-width: 260px;
 }
 
-.disabled {
-  opacity: 0; 
-  pointer-events: none;
-  cursor: not-allowed;
-}
-
 .search {
   display: flex;
   flex-direction: row;

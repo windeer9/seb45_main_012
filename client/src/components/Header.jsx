@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightToBracket, faRightFromBracket, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
+
 const HeaderLoggedOut = ( { isLoggedIn } ) => {
+
   if (isLoggedIn) {
     return null;
   }
@@ -40,9 +42,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
   const accessToken = localStorage.getItem('accessToken');
   const [ userName, setUserName ] = useState('');
 
-
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
       const userName = decodedToken.userName;
@@ -50,6 +50,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
     }
   }, [accessToken]);
   
+
   if (!isLoggedIn) {
     return null;
   }
@@ -64,7 +65,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <div className='header_bar_user'>
-          <Link to='/mypage/posts' className="profile">
+          <Link to='/mypage/main' className="profile">
             <img className="w55 user_info" src={require("../assets/user_shadow.png")} alt="user profile" />
             <span className="user_info">{userName} 님</span>
           </Link>
@@ -88,11 +89,18 @@ HeaderLoggedIn.propTypes = {
 
 const Header = () => {
 
-  const accessToken = localStorage.getItem('accessToken')
+  const accessToken = localStorage.getItem('accessToken');
   const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (accessToken) {
+      setIsLoggedIn(true)
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [accessToken]);
 
+  const navigate = useNavigate();
   const handleLogout = () => {
     try {
       localStorage.removeItem('accessToken');
@@ -102,14 +110,6 @@ const Header = () => {
       console.error('로그아웃 실패: ', error);
     }
   };
-
-  useEffect(() => {
-    if (accessToken) {
-      setIsLoggedIn(true)
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [accessToken]);
 
   return (
     <div>
