@@ -4,10 +4,7 @@
     padding: 20px;
     box-sizing: border-box;
     border-right: 5px solid #FAFAFA;
-    /* z-index: 1000; */
     position: fixed;
-    
-    /* left: 0; */
   }
 
   /* 게시판, 마이페이지 */
