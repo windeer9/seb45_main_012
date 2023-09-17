@@ -1,0 +1,39 @@
+.page_container.editCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+  padding-bottom: 20vh;
+}
+
+.board_btn_container {
+  width: 95%;
+}
+.free_board_btn {
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  margin: 0 30px 30px 0;
+  background-color: #8DC693;
+  border: 1px solid #8DC693;
+  font-weight: 700;
+  color: #fff;
+}
+
+.free_board_btn.unselected {
+  background-color: #fff;
+  color: #000;
+}
+
+.photo_board_btn {
+  width: 200px;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid #8DC693;
+  font-weight: 700;
+}
+
+.photo_board_btn.selected {
+  background-color: #8DC693;
+  color: #fff;
+}
