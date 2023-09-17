@@ -30,7 +30,8 @@ const MyPost = ( ) => {
 
   const date = new Date(post.createdAt);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-  const dayOfWeek = daysOfWeek[date.getDay()];
+  const dayOfWeek = daysOfWeek[date.getDay()] + "요일";
+  const displayDate = date.toISOString().split("T")[0].replace(/-/g, '.');
 
   return (
     <>
@@ -60,11 +61,7 @@ const MyPost = ( ) => {
           <div className='post_info'>
             <h2>{post.title}</h2>
             <div className='post_date'>{
-              `${date
-                .toISOString()
-                .split("T")[0]
-                .replace(/-/g, '.')
-              } ${dayOfWeek}요일`
+              `${displayDate} ${dayOfWeek}`
             }
             </div>
           </div>
