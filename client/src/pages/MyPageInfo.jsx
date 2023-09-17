@@ -17,7 +17,7 @@ const MyPageInfo = () => {
   const userId = decodedToken.userId;
   console.log(userId);
 
-  const res = await instance.get('/post/customer/' + userId);
+  // const res = await instance.get('/post/customer/' + userId);
   
   const handleImageChange = (e) => {
     const file = e.target.files[0];
