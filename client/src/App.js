@@ -5,6 +5,10 @@ import './App.css';
 import AllBoardPage from './pages/AllBoardPage.jsx';
 import FreeBoardPage from './pages/FreeBoardPage.jsx';
 import FreeDetailPage from './pages/FreeDetailPage.jsx';
+import AuthBoardPage from './pages/AuthBoardPage.jsx';
+import AuthDetailPage from './pages/AuthDetailPage.jsx';
+import EnvBoardPage from './pages/EnvBoardPage.jsx';
+
 // import Header from './components/header.jsx';
 // import NavBar from './components/NavBar.jsx';
 import MyPageMain from 'pages/MyPageMain.jsx';
@@ -16,7 +20,10 @@ function App() {
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/free" element={<FreeBoardPage/>} />
-          <Route path="/post/:postId/:userId" element={<FreeDetailPage />} />
+          <Route path="/free/:postId/:userId" element={<FreeDetailPage />} />
+          <Route path="/auth" element={<AuthBoardPage/>} />
+          <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
+          <Route path="/env" element={<EnvBoardPage/>} />
           <Route path="/mypage/main" element={<MyPageMain />} />
         </Routes>
     </Router>
