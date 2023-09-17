@@ -12,6 +12,7 @@ import Header from './components/Header.jsx';
 // import NavBar from './components/NavBar.jsx';
 import MyPageMain from 'pages/MyPageMain.jsx';
 import LogIn from 'pages/LoginPage.jsx';
+import SignUpPage from 'pages/SignUpPage.jsx';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
           <Route path="/env" element={<EnvBoardPage/>} />
           <Route path="/mypage/main" element={<MyPageMain />} />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
     </Router>
     </div>
