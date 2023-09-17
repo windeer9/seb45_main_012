@@ -20,6 +20,7 @@ const FreeDetailPage = () => {
 
   const [vote, setVote] = useState({});
   // 해당 게시글에 이미 좋아요를 했었는지 여부를 저장하는 상태
+  // 새로고침했을때 이전 기록을 로컬스토리지에서 가져오는 변수
   const [alreadyLiked, setAlreadyLiked] = useState(false); 
 
   // 좋아요 버튼 클릭 여부를 저장하는 상태
@@ -70,6 +71,7 @@ const FreeDetailPage = () => {
           ...vote, // 이전 vote 객체 내용을 그대로 유지
           voteCount: updatedVoteCount, // voteCount만 업데이트
         });
+        console.log(liked);
         console.log(vote.voteCount);
 
         // 이미 좋아요를 한 상태였다면 좋아요를 해제하고, 그 반대의 경우에는 좋아요를 활성화합니다.
@@ -82,7 +84,7 @@ const FreeDetailPage = () => {
         setLiked(!liked);
 
         // 로컬 스토리지에 좋아요 상태 저장
-        localStorage.setItem(`alreadyLikeState_${postId}_${userId}`, JSON.stringify(alreadyLiked));
+        localStorage.setItem(`alreadyLikeState_${postId}_${userId}`, alreadyLiked);//JSON.stringify(alreadyLiked));
       } else {
         console.error('좋아요 버튼 기능 오류');
       }
@@ -202,7 +204,7 @@ const FreeDetailPage = () => {
           <p className='post_detail_content'>{post.body}</p>
           <button onClick={handleVoteClick} className='vote_button'>
             {/* liked가 true(이미 눌려진 상태면)취소, false면 좋아요  */}
-            {liked ? `❤️ ${vote.voteCount}` : `🤍 ${vote.voteCount}`}
+            {liked ? `❤️ ${vote.voteCount -1 }` : `🤍 ${vote.voteCount -1}`}
           </button>
         </div>
         <div className='free_detail_container'>
