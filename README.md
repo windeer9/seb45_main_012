@@ -11,7 +11,7 @@
 ## 👨‍👩‍👧‍👦 Team
 | 이민주<br>(FE, 팀장) | 박지민<br>(FE) | 정윤민<br>(FE) | 김정희<br>(BE, 부팀장) | 윤다윗<br>(BE) |
 | :---: | :---: | :---: | :---: | :---: |
-| <img alt="이민주" src="" height="100" width="100"> | <img alt="박지민" src="" height="100" width="100"> | <img alt="정윤민" src="" height="100" width="100"> | <img alt="김정희" src="" height="100" width="100"> | <img alt="윤다윗" src="" height="100" width="100"> |
+| <img alt="이민주" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/e28e8da1-6e30-4dd0-bc2e-04b4400b2d78" height="100" width="100"> | <img alt="박지민" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/5b242c5f-7b34-4bb3-902c-9390724f085d" height="100" width="100"> | <img alt="정윤민" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/885c39e1-9979-4e1f-bd57-16d39d6f3745" height="100" width="100"> | <img alt="김정희" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/4fdedba6-5051-4f8c-9122-4b9ba748c27d" height="100" width="100"> | <img alt="윤다윗" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/d46dec85-fd00-4276-a0ad-532401a71f90" height="100" width="100"> |
 | [@min](https://github.com/matchaing) |    [@jumpm9239](https://github.com/jumpm9239) | [@yuumni](https://github.com/yuumni) | [@gomiming](https://github.com/wjdgml) | [@windeer9](https://github.com/windeer9) |
 
 
