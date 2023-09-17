@@ -15,8 +15,16 @@
   color: #2B2B2B;
   margin: 10px 0;
   width: 100%;
-  height: 32px;
+  height: auto;
   padding: 20px;
+}
+.post_detail_content_auth{
+  color: #2B2B2B;
+  margin: 10px 0;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  height: 210px;
 }
 .vote_button {
   padding: 15px;

@@ -79,7 +79,9 @@ const PostList = (props) => {
               {new Date(post.createdAt).toLocaleDateString()}
             </div>
           </div>
-          <div className="post_content">{post.body}</div>
+          <div className="post_content">
+          {post.body.length > 90 ? `${post.body.slice(0, 90)}...` : post.body}
+          </div>
         </div>
       ))}
       {loading && <div>Loading...</div>}

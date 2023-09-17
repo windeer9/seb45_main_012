@@ -19,7 +19,12 @@ const FreeDetailPage = () => {
   const [user, setUser] = useState({});
 
   const [vote, setVote] = useState({});
-  const [liked, setLiked] = useState({});
+  // 해당 게시글에 이미 좋아요를 했었는지 여부를 저장하는 상태
+  const [alreadyLiked, setAlreadyLiked] = useState(false); 
+
+  // 좋아요 버튼 클릭 여부를 저장하는 상태
+  const [liked, setLiked] = useState(alreadyLiked);
+
   const [commentText, setCommentText] = useState('');
 
   const [allComments, setAllComments] = useState([]);
@@ -27,49 +32,64 @@ const FreeDetailPage = () => {
 
   const intersectionRef = useRef(null);
 
-
   useEffect(() => {
-    // 좋아요 상태 초기화
-    getVote(postId, voteId)
+    // 로컬 스토리지에서 사용자의 좋아요 여부를 가져옴
+    const savedLikeState = localStorage.getItem(`alreadyLikeState_${postId}_${userId}`);
+    // 로컬 스토리지에 저장된 값이 있는 경우 해당 값을 사용하여 already에 상태를 설정
+    if (savedLikeState !== null) {
+      setAlreadyLiked(JSON.parse(savedLikeState));
+    }
+
+    // 페이지 로드 시 서버에서 투표 정보를 가져옴
+    getVote(postId, userId)
       .then((response) => {
-        const voteData = response.data;
-        console.log(voteData);
-        console.log("liked: ", liked);
-        setVote(voteData);
+        if (response.status === 200) {
+          const voteData = response.data;
+          console.log(voteData);
+
+          // 서버에서 가져온 투표 정보를 vote 상태에 저장
+          setVote(voteData);
+        }
       })
       .catch((error) => {
-        console.error('좋아요 정보 가져오기 오류:', error);
+        console.error('투표 정보 가져오기 오류:', error);
       });
-  }, [postId, voteId, user.userId, liked]);
-
+  }, [postId, userId]);
 
   const handleVoteClick = async () => {
     try {
-      // 만약 liked가 true인 경우, 좋아요를 취소해야 합니다.
-      // 그외의 경우에는 좋아요를 추가해야 합니다.
-      const voteType = liked ? 'Cancel' : 'Like';
-  
-      // API 요청 보내기
-      const response = await patchVote(postId, userId, voteId, { voteType: voteType });
-      console.log("API 보낸 후",response.data);
-      console.log("API 후 liked: ", liked);
+      // API 요청 보내기 (patchVote 함수를 사용하여 요청 보냄)
+      const response = await patchVote(postId, userId, voteId);
+      console.log("patch한후: ", response.data);
+
       // API 요청이 성공적으로 완료된 경우에만 UI를 업데이트합니다.
       if (response.status === 200) {
-        // 좋아요 상태 업데이트
-        setLiked(!liked);
-  
-        // 좋아요 카운트 업데이트
+        // const updatedVoteCount = response.data.voteCount;
         const updatedVoteCount = liked ? vote.voteCount - 1 : vote.voteCount + 1;
-        setVote({ ...vote, voteCount: updatedVoteCount });
+        setVote({
+          ...vote, // 이전 vote 객체 내용을 그대로 유지
+          voteCount: updatedVoteCount, // voteCount만 업데이트
+        });
+        console.log(vote.voteCount);
+
+        // 이미 좋아요를 한 상태였다면 좋아요를 해제하고, 그 반대의 경우에는 좋아요를 활성화합니다.
+        if (alreadyLiked) {
+          setAlreadyLiked(false);
+        } else {
+          setAlreadyLiked(true);
+        }
+
+        setLiked(!liked);
+
+        // 로컬 스토리지에 좋아요 상태 저장
+        localStorage.setItem(`alreadyLikeState_${postId}_${userId}`, JSON.stringify(alreadyLiked));
       } else {
         console.error('좋아요 버튼 기능 오류');
       }
     } catch (error) {
-      // 오류 처리
       console.error('좋아요 오류', error);
     }
   };
-
 
   const handleCommentTextChange = (event) => {
     setCommentText(event.target.value);
@@ -181,6 +201,7 @@ const FreeDetailPage = () => {
           </div>
           <p className='post_detail_content'>{post.body}</p>
           <button onClick={handleVoteClick} className='vote_button'>
+            {/* liked가 true(이미 눌려진 상태면)취소, false면 좋아요  */}
             {liked ? `❤️ ${vote.voteCount}` : `🤍 ${vote.voteCount}`}
           </button>
         </div>

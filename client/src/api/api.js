@@ -42,8 +42,12 @@ export const getVote = (postId, voteId) => {
   return instance.get(`/vote/${postId}/${voteId}`);
 };
 
-export const patchVote = (postId, userId, voteId, data) => {
-  return instance.patch(`/vote/${postId}/${userId}/${voteId}`, data);
+// export const patchVote = (postId, userId, voteId, data) => {
+//   return instance.patch(`/vote/${postId}/${userId}/${voteId}`, data);
+// }
+
+export const patchVote = (postId, userId, voteId) => {
+  return instance.patch(`/vote/${postId}/${userId}/${voteId}`);
 }
 
 export const getComment = (postId) => {
