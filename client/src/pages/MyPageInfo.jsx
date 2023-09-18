@@ -93,7 +93,7 @@ const MyPageInfo = () => {
     <>
       <div><NavBar /></div>
       <div className='page_container'>
-        <h4>내 정보</h4>
+        <h3 className='my_info'>내 정보</h3>
         <div className='my_custom_container'>
 
           <div className="circle_container">
