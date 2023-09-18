@@ -9,29 +9,36 @@ const MyPost = ( ) => {
   
   const { postId } = useParams();
   const [ post, setPost ] = useState({});
+  console.log(postId);
 
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
   const userName = decodedToken.userName;
+  console.log(userName);
 
   useEffect(() => {
     async function getPost() {
       try {
         const res = await instance.get('/post/' + postId);
+        console.log(res.data.createdAt);
         setPost(res.data);
       }
-      catch ( err ) {
+      catch (err) {
         console.log('err: ', err);
       }
     }
 
     getPost();
+    
   }, [postId]);
-
+  console.log(post)
   const date = new Date(post.createdAt);
+  console.log(date);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = daysOfWeek[date.getDay()] + "요일";
-  const displayDate = date.toISOString().split("T")[0].replace(/-/g, '.');
+  console.log(dayOfWeek);
+  const displayDate = date.toLocaleDateString();
+  console.log(displayDate)
 
   return (
     <>
