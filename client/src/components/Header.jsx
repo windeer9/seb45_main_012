@@ -43,6 +43,11 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
 
   const accessToken = localStorage.getItem('accessToken');
   const [ userName, setUserName ] = useState('');
+  const dispatch = useDispatch();
+
+  const handleLogoClick = () => {
+    dispatch(setActiveMenu('전체 글 보기'));
+  };
 
   useEffect(() => {
 
@@ -61,7 +66,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
   return (
     <header className="header_container">
       <div className="header_bar">
-        <Link to='/' className="logo">
+        <Link to='/' className="logo" onClick={handleLogoClick}>
           <img src={require("../assets/logo.png")} alt="logo" />
         </Link>
         <div className="search">
