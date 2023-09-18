@@ -65,7 +65,7 @@ const MyPageMain = () => {
     <>
     <NavBar />
       <main className="page_container">
-        <h2 className="my_posts">내가 쓴 글</h2>
+        <h3 className="my_posts">내가 쓴 글</h3>
         <ul>
           <li>
             <button
@@ -101,7 +101,7 @@ const MyPageMain = () => {
             </button>
           </li>
         </ul>
-        <section className='posts_container'>
+        <section className='mypage_posts_container'>
           {currentPosts.map((post) => (
             <article className="post" key={post.postId}>
               <div className='post_info'>

@@ -73,7 +73,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <div className='header_bar_user'>
-          <Link to='/mypage/main' className="profile">
+          <Link to='/mypage/main' className="profile" style={{ textDecoration: 'none' }}>
             <img className="w55 user_info" src={require("../assets/user_shadow.png")} alt="user profile" />
             <span className="user_info">{userName} 님</span>
           </Link>
