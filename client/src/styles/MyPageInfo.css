@@ -67,4 +67,8 @@
 .leave_button{
   margin: 20px 17px 17px 17px;
   font-size: 7px;
+  text-align: left !important;
+}
+.my_info{
+  margin-top: 35px;
 }

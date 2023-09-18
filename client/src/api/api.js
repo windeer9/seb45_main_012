@@ -18,6 +18,10 @@ export const getAlltypePosts = (type_name) => {
 export const getPost = (postId) => {
   return instance.get(`/post/${postId}`);
 };
+export const deletePost = (userId, postId) => {
+  return instance.delete(`/post/${userId}/${postId}`);
+};
+
 export const getAuthPosts = () => {
   return instance.get(`/post/type/auth`);
 }
@@ -25,10 +29,6 @@ export const getAuthPosts = () => {
 export const getEnvPosts = () => {
   return instance.get(`/post/type/env`);
 }
-
-export const deletePost = (userId, postId) => {
-  return instance.delete(`/post/${userId}/${postId}`);
-};
 
 export const getUser = (userId) => {
   return instance.get(`/user/${userId}`);
@@ -137,5 +137,9 @@ export const patchPost = (userId, postId, title, body, img) => {
       "Content-Type": "multipart/form-data",
     },
   });
+}
+
+export const patchUserInform = (userId, userName, password, passwordQuestion, passwordAnswer) => {
+
 }
 
