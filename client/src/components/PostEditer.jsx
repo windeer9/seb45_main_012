@@ -3,16 +3,23 @@ import '../styles/PostEditer.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { postPosts, postVote } from "api/api.js";
-import { useParams } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
-function PostEditer() {
-  const { userId } = useParams();
+function PostEditer(  ) {
+
+  const accessToken = localStorage.getItem('accessToken');
+  const decodedToken = jwtDecode(accessToken);
+  const userId = decodedToken.userId;
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     type: 'free',
     title: '',
     body: '',
-    open: 'true'
+    open: 'true',
+    img: ''
   });
 
   const handleInputChange = (e) => {
@@ -23,11 +30,11 @@ function PostEditer() {
   const handleCreatePost = () => {
 
     if (formData.title !== '' && formData.body !== '') {
-      postPosts(formData.type, formData.title, formData.body, formData.open, userId)
+      postPosts(formData.type, formData.title, formData.body, formData.open, formData.img, userId)
         .then((resp) => {
           postVote(resp.data.postId)
             .then((response)=>{
-              
+              navigate('/');
             })
             .catch((error)=> {
               
@@ -56,7 +63,12 @@ function PostEditer() {
 
 
 function PostEditerWithImage() {
-  const { userId } = useParams();
+
+  const accessToken = localStorage.getItem('accessToken');
+  const decodedToken = jwtDecode(accessToken);
+  const userId = decodedToken.userId;
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     type: 'auth',
@@ -102,7 +114,7 @@ function PostEditerWithImage() {
         .then((resp) => {
           postVote(resp.data.postId)
             .then((response)=>{
-              
+              navigate('/');
             })
             .catch((error)=> {
               

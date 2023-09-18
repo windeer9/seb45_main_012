@@ -6,7 +6,7 @@ import '../styles/Login.css';
 const LogIn = () => {
     
   const navigate = useNavigate();
-
+  
   const [ id, setId ] = useState("");
   const [ password, setPassword ] = useState("");
 
