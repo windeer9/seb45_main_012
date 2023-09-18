@@ -5,12 +5,14 @@
 }
 
 .header_container {
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100vw;
   padding: 15px 0px;
+  background-color: #FAFAFA;
 }
 
 .header_bar {

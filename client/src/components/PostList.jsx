@@ -70,7 +70,7 @@ const PostList = (props) => {
         <div className="post_item" key={post.postId}>
           <div className="post_header">
           <Link
-            to={`/${post.type === 'free' ? 'free' : 'auth'}/${post.postId}/${post.userId}/${post.voteId}`}
+            to={post.type === 'free' ? `/free/${post.postId}/${post.userId}/${post.voteId}` : `/auth/${post.postId}/${post.userId}`}
             className="post_title"
           >
             {post.title}
