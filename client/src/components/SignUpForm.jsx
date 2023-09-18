@@ -57,7 +57,7 @@ function SignUpForm() {
         navigate('/');
       })
       .catch((err) => {
-        
+        alert('이미 사용중인 회원정보 입니다.');
       });
 
     } else {
