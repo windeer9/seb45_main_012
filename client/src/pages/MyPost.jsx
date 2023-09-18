@@ -16,7 +16,6 @@ const MyPost = ( ) => {
   const decodedToken = jwtDecode(accessToken);
   const userId = decodedToken.userId;
   const userName = decodedToken.userName;
-  const userId = decodedToken.userId;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -96,7 +95,7 @@ const MyPost = ( ) => {
               <button className='edit_button'>수정</button>
             </Link>
             <span>|</span>
-            <button className='delete button' onClick={handleDeleteButton}>삭제</button>
+            <button className='delete_button' onClick={handleDeleteButton}>삭제</button>
           </div>
           <div className='each_post_info'>
             <h2>{post.title}</h2>

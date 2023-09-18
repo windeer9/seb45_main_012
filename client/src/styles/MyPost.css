@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   padding-left: 280px;
+  padding-top: 120px;
   color: #2B2B2B;
-  padding-top: 50px;
   width: 90%;
   height: auto;
 }
@@ -17,7 +17,7 @@
 .my_post {
   display: flex;
   flex-direction: row;
-  margin: 70px 0px 15px;
+  margin: 35px 0px 15px;
 }
 
 ul {
@@ -58,7 +58,7 @@ li {
   display: flex;
   flex: 0 1 auto;
   flex-direction: column;
-  width: 90%;
+  width: auto;
   max-height: 550px;
   overflow-y: auto;
   gap: 10px;
@@ -107,7 +107,7 @@ li {
   justify-content: left;
   align-items: center;
   gap: 10px;
-  padding: 10px 15px;
+  padding: 10px 15px 10px;
   border-bottom: 1px solid #D9D9D9;
 }
 

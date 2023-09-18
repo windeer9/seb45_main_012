@@ -64,7 +64,7 @@ const MyPageMain = () => {
   return (
     <>
     <NavBar />
-      <main className="page_container">
+      <main className="mypage_main_container">
         <h3 className="my_posts">내가 쓴 글</h3>
         <ul>
           <li>
