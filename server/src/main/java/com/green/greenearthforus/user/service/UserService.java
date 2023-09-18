@@ -39,6 +39,12 @@ public class UserService {
     public User createUser(UserPostDto userPostDto, MultipartFile image) {
 
         User user = mapper.userPostDtoToUser(userPostDto);
+
+        Optional<User> checkUser = userRepository.findAll().stream()
+                .filter(finderuser -> finderuser.getUserUseId().equals(user.getUserUseId()))
+                .findFirst();
+        if(checkUser.isPresent()) throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
+
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);//password 인코딩 후 저장.
         user.setCreatedAt(LocalDateTime.now());

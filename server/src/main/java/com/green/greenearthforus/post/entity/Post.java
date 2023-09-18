@@ -21,7 +21,7 @@ public class Post {
     @Column(name = "post_id")
     private Long postId;
 
-    @Column
+    @Column(length = 1000)
     private String body;
 
     @Column
