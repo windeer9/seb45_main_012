@@ -1,11 +1,11 @@
-.my_custom_container{
+.my_custom_container_username {
+  margin-top: 20px;
   display: flex;
-  flex-direction: row;
   align-items: center;
 }
 
 .id_container{
-  margin-top: 110px;
+
 }
 
 .circle_container {
@@ -37,6 +37,8 @@
   font-weight: bold;
   font-size: 13px;
   margin: 20px;
+  width: 100px;
+  border: 1px solid
 }
 .custom_label_pw{
   font-weight: bold;
@@ -67,4 +69,21 @@
 .leave_button{
   margin: 20px 17px 17px 17px;
   font-size: 7px;
+}
+
+.my_custom_container.password_container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.current_password_inform {
+  display: flex;
+}
+
+.forward_password_inform {
+  display: flex;
+  
 }

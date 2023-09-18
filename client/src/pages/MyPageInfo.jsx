@@ -22,6 +22,12 @@ const MyPageInfo = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!accessToken);
   const decodedToken = jwtDecode(accessToken);
   const userId = decodedToken.userId;
+  const userName = decodedToken.userName;
+  
+
+  const [formData, setFormData] = useState({
+    userName: userName
+  });
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -59,7 +65,11 @@ const MyPageInfo = () => {
     }
   };
 
-  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -93,8 +103,10 @@ const MyPageInfo = () => {
     <>
       <div><NavBar /></div>
       <div className='page_container'>
-        <h4>내 정보</h4>
-        <div className='my_custom_container'>
+
+        <h3>내 정보</h3>
+
+        <div className='my_custom_container_username'>
 
           <div className="circle_container">
             <input
@@ -104,12 +116,12 @@ const MyPageInfo = () => {
               accept="image/*"
               onChange={handleImageChange}
             />
-            <div></div>
             <img
-              src={previewImageUrl}
+              src={previewImageUrl === '' ? require("../assets/user_shadow.png") : previewImageUrl}
               alt=""
               className="circle_image"
             />
+            
           </div>
 
           <div className="input_container">
@@ -117,7 +129,9 @@ const MyPageInfo = () => {
               type="text"
               id="nicknameInput"
               className="nickname_input"
-              placeholder="닉네임"
+              placeholder="이름"
+              value={formData.userName}
+              onChange={handleInputChange}
             />
           </div>
           <button
@@ -126,37 +140,57 @@ const MyPageInfo = () => {
           >
             수정
           </button>
+
         </div>
 
-        <div className='my_custom_container id_container'>
-        <label htmlFor="idInput" className="custom_label_id">아이디</label>
-          <div className='input_container'>
-            <input
-              type="text"
-              id="idInput"
-              className="nickname_input"
-              placeholder="아이디"
-              />
-            </div>
-            <button
-            className='custom_mypage_button confirm_button'
-            onClick={handleButtonClick}
-            >
-            수정
-            </button>
+
         
+        <div className='my_custom_container password_container'>
+          <div className='current_password_inform'>
+
+            <label htmlFor="idInput" className="custom_label_id">현재 비밀번호</label>
+            <div className='input_container'>
+              <input
+                type="text"
+                id="idInput"
+                className="nickname_input"
+                placeholder="아이디"
+                
+                // onChange={handleInputChange}
+                />
+            </div>
+
           </div>
-      
-          <div className='my_custom_container'>
-        <label htmlFor="pwInput" className="custom_label_pw">비밀번호</label>
+          <div className='forward_password_inform'>
+          
+            <label htmlFor="idInput" className="custom_label_id">새로운 비밀번호</label>
+            <div className='input_container'>
+              <input
+                type="text"
+                id="idInput"
+                className="nickname_input"
+                placeholder="아이디"
+                
+                // onChange={handleInputChange}
+                />
+            </div>
+
+          </div>
+          
+          
+
           <button
           className='custom_mypage_button confirm_button'
           onClick={handleButtonClick}
           >
-            변경 페이지로 이동
+          수정
           </button>
-              
+
         </div>
+
+          
+      
+        
         <button className='leave_button' onClick={handleOpenModal}>회원탈퇴</button>
         {showModal && (
           <Modal

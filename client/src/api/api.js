@@ -139,3 +139,7 @@ export const patchPost = (userId, postId, title, body, img) => {
   });
 }
 
+export const patchUserInform = (userId, userName, password, passwordQuestion, passwordAnswer) => {
+
+}
+
