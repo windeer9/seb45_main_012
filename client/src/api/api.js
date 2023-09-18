@@ -59,7 +59,7 @@ export const postComment = (postId, userId, commentText) => {
 };
 
 
-export const postPosts = (type, title, body, open, img) => {
+export const postPosts = (type, title, body, open, img, userId) => {
   const formData = new FormData();
 
   const jsonData = {
@@ -75,7 +75,7 @@ export const postPosts = (type, title, body, open, img) => {
   );
   formData.append("image", img);
 
-  return instance.post(`/post/10`, formData, {
+  return instance.post(`/post/${userId}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -113,4 +113,29 @@ export const postSignUp = (
   });
 };
 
+export const getCustomerPost = (userId) => {
+  return instance.get(`/post/customer/${userId}`);
+}
+
+export const patchPost = (userId, postId, title, body, img) => {
+  const formData = new FormData();
+
+  const jsonData = {
+    title: title,
+    body: body,
+  };
+
+  formData.append(
+    "json",
+    new Blob([JSON.stringify(jsonData)], { type: "application/json" })
+  );
+
+  formData.append("image", img);
+
+  return instance.patch(`/post/${userId}/${postId}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
 
