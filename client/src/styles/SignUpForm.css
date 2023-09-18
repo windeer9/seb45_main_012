@@ -108,6 +108,9 @@
   top: 29px;
   left: 7px;
   background-color: #fff;
+  gap: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .select_box li {
