@@ -202,10 +202,9 @@ const FreeDetailPage = () => {
             <p>{new Date(post.createdAt).toLocaleDateString()}</p>
           </div>
           <p className='post_detail_content'>{post.body}</p>
-          <button onClick={handleVoteClick} className='vote_button'>
-            {/* liked가 true(이미 눌려진 상태면)취소, false면 좋아요  */}
+          {/* <button onClick={handleVoteClick} className='vote_button'>
             {liked ? `❤️ ${vote.voteCount -1 }` : `🤍 ${vote.voteCount -1}`}
-          </button>
+          </button> */}
         </div>
         <div className='free_detail_container'>
           <div className='detail_comment_container'>

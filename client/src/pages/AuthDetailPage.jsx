@@ -200,9 +200,9 @@ const AuthDetailPage = () => {
               <p>{new Date(post.createdAt).toLocaleDateString()}</p>
             </div>
             <p className='post_detail_content_auth'>{post.body}</p>
-            <button onClick={handleVoteClick} className='vote_button'>
+            {/* <button onClick={handleVoteClick} className='vote_button'>
               {liked ? `❤️ ${vote.voteCount}` : `🤍 ${vote.voteCount}`}
-            </button>
+            </button> */}
           </div>
         </div>
 
