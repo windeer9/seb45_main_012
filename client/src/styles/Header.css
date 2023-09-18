@@ -6,32 +6,32 @@
 }
 
 .header_container {
+  position: fixed;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   width: 100vw;
   padding: 15px 0px;
-  position: fixed;
-  z-index: 2;
+  justify-content: flex-start;
+  margin-left: 10px;
+  padding: 20px;
+  background-color: #FAFAFA;
 }
 
 .header_bar {
   display: flex;
   flex-direction: row;
-  width: 80vw;
+  width: 88vw;
   justify-content: center;
   align-items: center;
 }
 
 .logo {
-  display: flex;
-  flex-direction: row;
   flex: 1 1 auto;
 }
 
 img {
-  max-width: 260px;
+  max-width: 230px;
 }
 
 .search {
@@ -64,7 +64,7 @@ img {
 }
 
 .w55 {
-  max-width: 55px;
+  max-width: 40px;
 }
 
 .logout_logo {
@@ -79,7 +79,7 @@ img {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: rgb(43 43 43);
 }
 

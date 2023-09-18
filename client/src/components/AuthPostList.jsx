@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/AuthPostList.css';
-import { getAuthPosts } from '../api/api.js';
+import { getAuthPosts } from 'api/api.js';
 
 const AuthPostList = () => {
   const [allAuthPosts, setAllAuthPosts] = useState([]);

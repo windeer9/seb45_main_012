@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectActiveMenu, setActiveMenu } from '../store/menuSlice.js';
 import '../styles/NavBar.css';
 
-const NavBar = () => {
+const NavBar = ( ) => {
   const activeMenu = useSelector(selectActiveMenu);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const accessToken = localStorage.getItem('accessToken');
+  const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
+  
+
+  useEffect(() => {
+    if (accessToken) {
+      setIsLoggedIn(true)
+      return;
+    }
+
+    setIsLoggedIn(false)
+    }
+  , [accessToken]);
 
   const BOARD_MENU = {
     ALL: '전체 글 보기',
@@ -50,8 +64,11 @@ const NavBar = () => {
           {menuName}
         </button>
       ))}
-      <div className="text_menu_big">마이 페이지</div>
-      {Object.values(MY_MENU).map((menuName) => (
+      {/* isLoggedIn이 true일 때만 MY_MENU 렌더링합니다. */}
+      {isLoggedIn && (
+        <div className="text_menu_big">마이 페이지</div>
+      )}
+      {isLoggedIn && Object.values(MY_MENU).map((menuName) => (
         <button
           key={menuName}
           className={`menu_button ${activeMenu === menuName ? 'active' : ''}`}
@@ -62,6 +79,6 @@ const NavBar = () => {
       ))}
     </div>
   );
-};
+}
 
 export default NavBar;

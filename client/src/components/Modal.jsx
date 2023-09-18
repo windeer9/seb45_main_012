@@ -24,9 +24,9 @@ const Modal = ({ content, onCancel, onConfirm }) => {
   };
 
   Modal.propTypes = {
-    content: PropTypes.node.isRequired, // node 타입으로 content prop을 받음
-    onCancel: PropTypes.func.isRequired, // 함수 타입으로 onCancel prop을 받음
-    onConfirm: PropTypes.func.isRequired, // 함수 타입으로 onConfirm prop을 받음
+    content: PropTypes.node.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onConfirm: PropTypes.func.isRequired, 
   };
 
 export default Modal;

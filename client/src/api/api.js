@@ -18,6 +18,10 @@ export const getAlltypePosts = (type_name) => {
 export const getPost = (postId) => {
   return instance.get(`/post/${postId}`);
 };
+export const deletePost = (userId, postId) => {
+  return instance.delete(`/post/${userId}/${postId}`);
+};
+
 export const getAuthPosts = () => {
   return instance.get(`/post/type/auth`);
 }
@@ -26,13 +30,13 @@ export const getEnvPosts = () => {
   return instance.get(`/post/type/env`);
 }
 
-export const deletePost = (userId, postId) => {
-  return instance.delete(`/post/${userId}/${postId}`);
-};
-
 export const getUser = (userId) => {
   return instance.get(`/user/${userId}`);
 };
+
+export const deleteUser = (userId) => {
+  return instance.delete(`/user/${userId}`);
+}
 
 export const postVote = (postId) => {
   return instance.post(`/vote/${postId}`);
@@ -55,7 +59,7 @@ export const postComment = (postId, userId, commentText) => {
 };
 
 
-export const postPosts = (type, title, body, open, img) => {
+export const postPosts = (type, title, body, open, img, userId) => {
   const formData = new FormData();
 
   const jsonData = {
@@ -71,7 +75,7 @@ export const postPosts = (type, title, body, open, img) => {
   );
   formData.append("image", img);
 
-  return instance.post(`/post/10`, formData, {
+  return instance.post(`/post/${userId}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -109,4 +113,33 @@ export const postSignUp = (
   });
 };
 
+export const getCustomerPost = (userId) => {
+  return instance.get(`/post/customer/${userId}`);
+}
+
+export const patchPost = (userId, postId, title, body, img) => {
+  const formData = new FormData();
+
+  const jsonData = {
+    title: title,
+    body: body,
+  };
+
+  formData.append(
+    "json",
+    new Blob([JSON.stringify(jsonData)], { type: "application/json" })
+  );
+
+  formData.append("image", img);
+
+  return instance.patch(`/post/${userId}/${postId}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+
+export const patchUserInform = (userId, userName, password, passwordQuestion, passwordAnswer) => {
+
+}
 
