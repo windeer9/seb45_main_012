@@ -25,14 +25,14 @@ li {
   list-style: none;
 }
 
-button {
+.custom_button {
   background-color: white;
   border: 1px solid #8DC693;
   color: #2B2B2B;
   cursor: pointer;
 }
 
-button.active {
+.custom_button.active {
   background-color: #8DC693;
   color: white;
 }
@@ -54,7 +54,7 @@ button.active {
   gap: 5px;
   flex: 0 1 auto;
   padding: 0 15px 10px;
-  margin-left: 20px;
+  margin: 0 20px;
   border-bottom: 1px solid #D9D9D9;
   box-shadow: none !important;
 }

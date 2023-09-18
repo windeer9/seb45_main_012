@@ -9,18 +9,15 @@ const MyPost = ( ) => {
   
   const { postId } = useParams();
   const [ post, setPost ] = useState({});
-  console.log(postId);
 
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
   const userName = decodedToken.userName;
-  console.log(userName);
 
   useEffect(() => {
     async function getPost() {
       try {
         const res = await instance.get('/post/' + postId);
-        console.log(res.data.createdAt);
         setPost(res.data);
       }
       catch (err) {
@@ -31,14 +28,10 @@ const MyPost = ( ) => {
     getPost();
     
   }, [postId]);
-  console.log(post)
   const date = new Date(post.createdAt);
-  console.log(date);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = daysOfWeek[date.getDay()] + "요일";
-  console.log(dayOfWeek);
   const displayDate = date.toLocaleDateString();
-  console.log(displayDate)
 
   return (
     <>
@@ -57,17 +50,17 @@ const MyPost = ( ) => {
             </div>
           </li>
         </ul>
-        <div className="buttons">
+        <article className="each_post">
+          <div className="buttons">
             <Link to={`/mypage/posts/${postId}/edit`} aria-label="edit page">
-              <button className='edit button'>수정</button>
+              <button className='edit_button'>수정</button>
             </Link>
             <span>|</span>
-            <button className='delete button'>삭제</button>
+            <button className='delete_button'>삭제</button>
           </div>
-        <article className="post">
-          <div className='post_info'>
+          <div className='each_post_info'>
             <h2>{post.title}</h2>
-            <div className='post_date'>{
+            <div className='each_post_date'>{
               `${displayDate} ${dayOfWeek}`
             }
             </div>

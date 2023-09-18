@@ -91,7 +91,7 @@ const MyPageMain = () => {
           </li>
           <li>
             <button
-              className={`custom_button ${selectedButton === viewType.CLOSE ? 'active' : ''}`}
+              className={`custom_button ${selectedButton === viewType.PRIVATE ? 'active' : ''}`}
               onClick={() => {
                 handleButtonClick(viewType.PRIVATE)
                 handleFilterChange('private');
