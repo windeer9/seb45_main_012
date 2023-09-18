@@ -29,6 +29,19 @@ const AuthDetailPage = () => {
 
   const intersectionRef = useRef(null);
 
+  const accessToken = localStorage.getItem('accessToken');
+  const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
+  
+  useEffect(() => {
+    if (accessToken) {
+      setIsLoggedIn(true)
+      return;
+    }
+
+    setIsLoggedIn(false)
+    }
+  , [accessToken]);
+
   useEffect(() => {
     // 로컬 스토리지에서 사용자의 좋아요 여부를 가져옴
     const savedLikeState = localStorage.getItem(`alreadyLikeState_${postId}_${userId}`);
@@ -208,7 +221,8 @@ const AuthDetailPage = () => {
 
 
         <div className='free_detail_container'>
-        <div className='detail_comment_container'>
+        {isLoggedIn && (
+          <div className='detail_comment_container'>
             <input
               className='comment_input'
               type="text"
@@ -219,7 +233,8 @@ const AuthDetailPage = () => {
             <button className='comment_button' onClick={handleSubmitComment}>
               작성
             </button>
-          </div>
+            </div>
+          )}     
             {visibleComments.map((comment) => (
               <div key={comment.id} className='post_detail_header'>
                 <div>
