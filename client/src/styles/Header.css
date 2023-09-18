@@ -8,29 +8,29 @@
   position: fixed;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   width: 100vw;
   padding: 15px 0px;
+  justify-content: flex-start;
+  margin-left: 10px;
+  padding: 20px;
   background-color: #FAFAFA;
 }
 
 .header_bar {
   display: flex;
   flex-direction: row;
-  width: 80vw;
+  width: 88vw;
   justify-content: center;
   align-items: center;
 }
 
 .logo {
-  display: flex;
-  flex-direction: row;
   flex: 1 1 auto;
 }
 
 img {
-  max-width: 260px;
+  max-width: 230px;
 }
 
 .search {
