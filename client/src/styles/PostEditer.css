@@ -1,6 +1,6 @@
 /* PostEditer */
 .editer_wrapper.wide {
-  width: 95%;
+  width: 85%;
   height: 60vh;
 }
 
@@ -12,13 +12,13 @@
 
 /* PostEditerWithImage */
 .post_editer_with_image {
-  width: 95%;
+  width: 85%;
   height: 90%;
   display: flex;
   gap: 30px;
 }
 
-.image_upload_form {
+.image_upload {
   width: 45%;
   height: 60vh;
   border: 1px solid #9e9e9e;
@@ -29,30 +29,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .plus_image_icon {
   position: absolute;
+
 }
 
 .plus_image_icon.clear {
   opacity: 0;
+
 }
 
-.image_upload_form > img {
-  width: 100%;
+.image_upload > img.uploade_img {
   height: 100%;
   border-radius: 10px;
-  cursor: pointer;
+  width: 100%;
+  max-width: none;
 }
 
-.image_upload_form > input {
+.image_upload > input {
   width: 100%;
   height: 100%;
   border-radius: 10px;
   cursor: pointer;
   opacity: 0;
-  z-index: 2;
+  position: absolute;
 }
 
 .plus_icon {
