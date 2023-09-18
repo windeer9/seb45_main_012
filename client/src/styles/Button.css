@@ -23,6 +23,18 @@
     font-weight: bold;
 }
 
+/* 마이페이지 버튼 */
+.custom_mypage_button{
+    display: inline-flex;
+    height: 50px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
 /* 확인 버튼 */
 .confirm_button {
     background-color: #8DC693;

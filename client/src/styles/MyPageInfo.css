@@ -1,0 +1,70 @@
+.my_custom_container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.id_container{
+  margin-top: 110px;
+}
+
+.circle_container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; 
+  background-color: lightgray; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  position: relative;
+  margin: 10px;
+}
+
+.circle_input {
+  width: 100%;
+  height: 100%;
+  opacity: 0; 
+  position: absolute;
+}
+
+.circle_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.custom_label_id{
+  font-weight: bold;
+  font-size: 13px;
+  margin: 20px;
+}
+.custom_label_pw{
+  font-weight: bold;
+  font-size: 13px;
+  margin: 20px 27px 20px 20px;
+}
+
+.input_container {
+  width: 250px;
+  height: 50px;
+  margin-left: 20px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 40px;
+}
+
+.nickname_input {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  border: 1px solid #8DC693;
+  font-size: 15px;
+  padding: 10px;
+  color: #838383;
+}
+
+.leave_button{
+  margin: 20px 17px 17px 17px;
+  font-size: 7px;
+}

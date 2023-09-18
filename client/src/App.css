@@ -1,9 +1,10 @@
 .page_container {
-  padding-top: 65px;
+  padding-top: 120px;
   padding-left:280px;
 }
 
-.auth_board_container{
+.auth_board_container,
+.env_board_container{
   width: 85%;
   height: 400px;
   margin-top: 10px;
