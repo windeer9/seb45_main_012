@@ -64,7 +64,7 @@ const MyPageMain = () => {
   return (
     <>
     <NavBar />
-      <main className="page_container">
+      <main className="mypage_main_container">
         <h3 className="my_posts">내가 쓴 글</h3>
         <ul>
           <li>
@@ -91,7 +91,7 @@ const MyPageMain = () => {
           </li>
           <li>
             <button
-              className={`custom_button ${selectedButton === viewType.CLOSE ? 'active' : ''}`}
+              className={`custom_button ${selectedButton === viewType.PRIVATE ? 'active' : ''}`}
               onClick={() => {
                 handleButtonClick(viewType.PRIVATE)
                 handleFilterChange('private');
@@ -105,16 +105,16 @@ const MyPageMain = () => {
           {currentPosts.map((post) => (
             <article className="post" key={post.postId}>
               <div className='post_info'>
-                <h4 className="post_title">
+                <div className="post_title">
                   <Link to={`/mypage/posts/${post.postId}`}>
                     {post.title}
                   </Link>
-                </h4>
+                </div>
                 <div className='post_date'>{
                   new Date(post.createdAt).toLocaleDateString()
                 }</div>
               </div>
-              <p className='post_content'>{post.body.slice(0, 50) + " ..."}</p>
+              <p className='mypage_post_content'>{ post.body }</p>
             </article>
           ))}
           <Pagination
