@@ -16,8 +16,10 @@ import Header from './components/Header.jsx';
 
 import MyPageMain from 'pages/MyPageMain.jsx';
 import MyPageInfo from './pages/MyPageInfo.jsx';
+import MyPost from 'pages/MyPost.jsx';
 
 function App() {
+  
   return (
     <div className="App">
       <Router>
@@ -36,8 +38,9 @@ function App() {
 
           <Route path="/mypage/main" element={<MyPageMain />} />
           <Route path="/mypage/info" element={<MyPageInfo/>} />
+          <Route path="mypage/posts/:postId" element={<MyPost />} />
         </Routes>
-    </Router>
+      </Router>
     </div>
   );
 }
