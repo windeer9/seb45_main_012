@@ -3,8 +3,11 @@ import '../styles/PostEditer.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { postPosts, postVote } from "api/api.js";
+import { useParams } from 'react-router-dom';
 
 function PostEditer() {
+  const { userId } = useParams();
+
   const [formData, setFormData] = useState({
     type: 'free',
     title: '',
@@ -20,7 +23,7 @@ function PostEditer() {
   const handleCreatePost = () => {
 
     if (formData.title !== '' && formData.body !== '') {
-      postPosts(formData.type, formData.title, formData.body, formData.open)
+      postPosts(formData.type, formData.title, formData.body, formData.open, userId)
         .then((resp) => {
           postVote(resp.data.postId)
             .then((response)=>{
@@ -53,6 +56,8 @@ function PostEditer() {
 
 
 function PostEditerWithImage() {
+  const { userId } = useParams();
+
   const [formData, setFormData] = useState({
     type: 'auth',
     title: '',
@@ -93,7 +98,7 @@ function PostEditerWithImage() {
 
   const handleCreatePost = () => {
     if (formData.title !== '' && formData.body !== '' && previewImage !== null) {
-      postPosts(formData.type, formData.title, formData.body, formData.open, formData.img)
+      postPosts(formData.type, formData.title, formData.body, formData.open, formData.img, userId)
         .then((resp) => {
           postVote(resp.data.postId)
             .then((response)=>{

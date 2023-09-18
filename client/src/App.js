@@ -8,11 +8,13 @@ import FreeDetailPage from './pages/FreeDetailPage.jsx';
 // import Header from './components/header.jsx';
 // import NavBar from './components/NavBar.jsx';
 import MyPageMain from 'pages/MyPageMain.jsx';
+import EditerPage from 'pages/EditerPage.jsx';
 
 function App() {
   return (
     <div className="App">
       <Router>
+      <EditerPage />
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/free" element={<FreeBoardPage/>} />
@@ -26,6 +28,7 @@ function App() {
       {/* <NavBar /> */}
       {/* <FreeBoardPage/> */}
       {/* <MyPageMain /> */}
+      
     </div>
   );
 }

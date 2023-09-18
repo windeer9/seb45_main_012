@@ -45,7 +45,7 @@ export const getPosts = (page) => {
   return instance.get(`/post/free?page=${page}`);
 };
 
-export const postPosts = (type, title, body, open, img) => {
+export const postPosts = (type, title, body, open, img, userId) => {
   const formData = new FormData();
 
   const jsonData = {
@@ -61,7 +61,7 @@ export const postPosts = (type, title, body, open, img) => {
   );
   formData.append("image", img);
 
-  return instance.post(`/post/10`, formData, {
+  return instance.post(`/post/${userId}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
