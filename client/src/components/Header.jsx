@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/Header.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setActiveMenu } from '../store/menuSlice.js';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -41,6 +43,11 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
 
   const accessToken = localStorage.getItem('accessToken');
   const [ userName, setUserName ] = useState('');
+  const dispatch = useDispatch();
+
+  const handleLogoClick = () => {
+    dispatch(setActiveMenu('전체 글 보기'));
+  };
 
   useEffect(() => {
 
@@ -59,7 +66,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
   return (
     <header className="header_container">
       <div className="header_bar">
-        <Link to='/' className="logo">
+        <Link to='/' className="logo" onClick={handleLogoClick}>
           <img src={require("../assets/logo.png")} alt="logo" />
         </Link>
         <div className="search">
@@ -90,6 +97,7 @@ HeaderLoggedIn.propTypes = {
 
 const Header = () => {
 
+  const dispatch = useDispatch();
   const accessToken = localStorage.getItem('accessToken');
   const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
 
@@ -110,7 +118,9 @@ const Header = () => {
     try {
       localStorage.removeItem('accessToken');
       setIsLoggedIn(false);
+      dispatch(setActiveMenu('전체 글 보기'));
       navigate('/');
+
     } catch (error) {
       console.error('로그아웃 실패: ', error);
     }

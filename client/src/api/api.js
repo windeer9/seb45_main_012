@@ -34,6 +34,10 @@ export const getUser = (userId) => {
   return instance.get(`/user/${userId}`);
 };
 
+export const deleteUser = (userId) => {
+  return instance.delete(`/user/${userId}`);
+}
+
 export const postVote = (postId) => {
   return instance.post(`/vote/${postId}`);
 }

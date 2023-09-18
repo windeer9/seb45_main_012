@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import LoginFunc from '../auth/LoginFunc.js';
+import { useDispatch } from 'react-redux';
+import { setActiveMenu } from '../store/menuSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 const LogIn = () => {
-    
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   
   const [ id, setId ] = useState("");
@@ -23,6 +25,7 @@ const LogIn = () => {
     try {
       const result = await LoginFunc(id, password);
       if (result) {
+        dispatch(setActiveMenu('전체 글 보기'));
         navigate('/');
       }
     }

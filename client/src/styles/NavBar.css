@@ -1,5 +1,6 @@
 .navbar {
     background-color:white;
+    margin-top:93px;
     width: 253px;
     padding: 20px;
     box-sizing: border-box;
@@ -13,7 +14,7 @@
     font-size: 19px;
     font-weight: bold;
     margin-left: 40px;
-    margin-top: 40px;
+    /* margin-top: 40px; */
     line-height: 60px;
   }
   
