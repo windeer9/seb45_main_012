@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/MyPost.css';
-import { instance } from 'api/api';
+import { instance, deletePost } from 'api/api.js';
 import jwtDecode from 'jwt-decode';
 import NavBar from 'components/NavBar.jsx';
-import { useParams , Link } from 'react-router-dom';
+import { useNavigate , useParams , Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setActiveMenu } from '../store/menuSlice.js';
 
 const MyPost = ( ) => {
-  
   const { postId } = useParams();
   const [ post, setPost ] = useState({});
-  console.log(postId);
 
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
   const userName = decodedToken.userName;
-  console.log(userName);
+  const userId = decodedToken.userId;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleDeleteButton = () => {
+    deletePost(userId, postId)
+      .then(()=>{
+        dispatch(setActiveMenu('내가 쓴 글'));
+        navigate('/mypage/main');
+      })
+      .catch((error) => {
+        console.error('게시글 삭제 오류:', error);
+      });
+  }
 
   useEffect(() => {
     async function getPost() {
@@ -62,7 +76,7 @@ const MyPost = ( ) => {
               <button className='edit button'>수정</button>
             </Link>
             <span>|</span>
-            <button className='delete button'>삭제</button>
+            <button className='delete button' onClick={handleDeleteButton}>삭제</button>
           </div>
         <article className="post">
           <div className='post_info'>
