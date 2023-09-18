@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import '../styles/SignUpForm.css';
 import { postSignUp } from 'api/api.js';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpForm() {
+  const navigate = useNavigate();
   const [view, setView] = useState(false);
   const [selected, setSelected] = useState("기억에 남는 추억의 장소는?");
   const [formData, setFormData] = useState({
@@ -52,10 +54,10 @@ function SignUpForm() {
 
       postSignUp(formData.username, formData.userid, formData.password, selected, formData.passwordConfirm)
       .then((resp) => {
-        console.log('회원가입 완료!!');
+        navigate('/');
       })
       .catch((err) => {
-        console.error('회원가입 실패...');
+        
       });
 
     } else {

@@ -27,7 +27,7 @@ import LogIn from 'pages/LoginPage.jsx';
 function App() {
   return (
     <div className="App">
-      {/* <Router>
+      
       <Router>
         <Header />
         <Routes>
@@ -41,15 +41,15 @@ function App() {
           <Route path="/mypage/main" element={<MyPageMain />} />
           <Route path="/signup" element={<SignUpPage />} />
         </Routes>
-    </Router> */}
+    </Router>
       {/* <FreeDetailPage/> */}
       {/* <SignUpPage /> */}
       {/* <Header /> */}
       {/* <NavBar /> */}
       {/* <FreeBoardPage/> */}
       {/* <MyPageMain /> */}
-      <ReEditAuth/>
-      <ReEditFree/>
+      {/* <ReEditAuth/>
+      <ReEditFree/> */}
     </div>
   );
 }
