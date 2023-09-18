@@ -8,14 +8,17 @@ import { instance } from 'api/api';
 const MyPageMain = () => {
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
-  const memberId = decodedToken.memberId;
+  const userId = decodedToken.userId;
 
   const [ userData, setUserData ] = useState([]);
 
   useEffect(() => {
     async function getUserData() {
       try {
-        const res = await instance.get('/post/customer/' + memberId);
+        console.log(userId)
+        const res = await instance.get('/post/customer/' + userId);
+        console.log(res.status);
+        console.log(res.data);
         const sortedUserData = res.data.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });

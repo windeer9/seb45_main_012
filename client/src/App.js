@@ -13,6 +13,7 @@ import Header from './components/Header.jsx';
 import MyPageMain from 'pages/MyPageMain.jsx';
 import LogIn from 'pages/LoginPage.jsx';
 import SignUpPage from 'pages/SignUpPage.jsx';
+import EditerPage from 'pages/EditerPage.jsx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/free" element={<FreeBoardPage/>} />
+          <Route path="/posts/write" element={<EditerPage />} />
           <Route path="/free/:postId/:userId" element={<FreeDetailPage />} />
           <Route path="/auth" element={<AuthBoardPage/>} />
           <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
