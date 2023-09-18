@@ -5,13 +5,15 @@
 }
 
 .container {
+  padding-left:280px;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  justify-content: LEFT;
+  align-items:baseline ;
 }
 
 .my_posts {
-  margin: 20px 0px 15px;
+  margin: 0 0 15px;
 }
 
 ul {
