@@ -109,7 +109,7 @@ const MyPageMain = () => {
                 </Link>
               </h4>
               <div className='post_date'>{
-                new Date(post.createdAt).toISOString().split("T")[0].replace(/-/g, '.')
+                new Date(post.createdAt).toLocaleDateString()
               }</div>
             </div>
             <p className='post_content'>{post.body.slice(0, 50) + " ..."}</p>
