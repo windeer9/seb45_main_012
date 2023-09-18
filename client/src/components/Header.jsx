@@ -18,7 +18,7 @@ const HeaderLoggedOut = ( { isLoggedIn } ) => {
   return (
     <header className="header_container">
       <div className="header_bar">
-        <Link to='/' className="logout_logo">
+        <Link to='/' className="header_logo">
           <img src={require("../assets/logo.png")} alt="logo" />
         </Link>
         <div className='header_bar_user'>
@@ -66,16 +66,16 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
   return (
     <header className="header_container">
       <div className="header_bar">
-        <Link to='/' className="logo" onClick={handleLogoClick}>
+        <Link to='/' className="header_logo" onClick={handleLogoClick}>
           <img src={require("../assets/logo.png")} alt="logo" />
         </Link>
         <div className="search">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <div className='header_bar_user'>
-          <Link to='/mypage/main' className="profile" style={{ textDecoration: 'none' }}>
-            <img className="w55 user_info" src={require("../assets/user_shadow.png")} alt="user profile" />
-            <span className="user_info">{userName} 님</span>
+          <Link to='/mypage/main' className="header_profile">
+            <img className="header_user_picture" src={require("../assets/user_shadow.png")} alt="user profile" />
+            <div className="header_user_name">{userName} 님</div>
           </Link>
           <Link to={'/posts/write'}>
             <FontAwesomeIcon icon={faPencil} className="header_icon" />
