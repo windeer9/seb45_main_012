@@ -8,13 +8,12 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightToBracket, faRightFromBracket, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-
 const HeaderLoggedOut = ( { isLoggedIn } ) => {
 
   if (isLoggedIn) {
     return null;
   }
-
+  
   return (
     <header className="header_container">
       <div className="header_bar">
@@ -58,7 +57,6 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
     }
   }, [accessToken]);
   
-
   if (!isLoggedIn) {
     return null;
   }
@@ -111,7 +109,6 @@ const Header = () => {
     }
   , [accessToken]);
 
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -120,7 +117,6 @@ const Header = () => {
       setIsLoggedIn(false);
       dispatch(setActiveMenu('전체 글 보기'));
       navigate('/');
-
     } catch (error) {
       console.error('로그아웃 실패: ', error);
     }
@@ -133,6 +129,5 @@ const Header = () => {
     </div>
   )
 }
-
 
 export default Header;
