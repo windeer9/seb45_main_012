@@ -10,7 +10,7 @@ import {
   postComment,
   getVote,
   patchVote,
-} from '../api/api.js';
+} from 'api/api.js';
 
 const FreeDetailPage = () => {
   const { postId, userId, voteId } = useParams();
