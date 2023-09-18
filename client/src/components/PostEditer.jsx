@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import '../styles/PostEditer.css';
+import { useDispatch } from 'react-redux';
+import { setActiveMenu } from '../store/menuSlice.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { postPosts, postVote } from "api/api.js";
@@ -12,6 +14,7 @@ function PostEditer(  ) {
   const decodedToken = jwtDecode(accessToken);
   const userId = decodedToken.userId;
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -34,6 +37,7 @@ function PostEditer(  ) {
         .then((resp) => {
           postVote(resp.data.postId)
             .then((response)=>{
+              dispatch(setActiveMenu('전체 글 보기'));
               navigate('/');
             })
             .catch((error)=> {
@@ -69,6 +73,7 @@ function PostEditerWithImage() {
   const userId = decodedToken.userId;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     type: 'auth',
@@ -114,6 +119,7 @@ function PostEditerWithImage() {
         .then((resp) => {
           postVote(resp.data.postId)
             .then((response)=>{
+              dispatch(setActiveMenu('전체 글 보기'));
               navigate('/');
             })
             .catch((error)=> {

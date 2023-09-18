@@ -1,43 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/MyPost.css';
-import { instance } from 'api/api';
+import { instance, deletePost } from 'api/api.js';
 import jwtDecode from 'jwt-decode';
 import NavBar from 'components/NavBar.jsx';
-import { useParams , Link } from 'react-router-dom';
+import { useNavigate , useParams , Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setActiveMenu } from '../store/menuSlice.js';
 
 const MyPost = ( ) => {
-  
   const { postId } = useParams();
   const [ post, setPost ] = useState({});
 
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
   const userName = decodedToken.userName;
+  const userId = decodedToken.userId;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleDeleteButton = () => {
+    deletePost(userId, postId)
+      .then(()=>{
+        dispatch(setActiveMenu('내가 쓴 글'));
+        navigate('/mypage/main');
+      })
+      .catch((error) => {
+        console.error('게시글 삭제 오류:', error);
+      });
+  }
 
   useEffect(() => {
     async function getPost() {
       try {
         const res = await instance.get('/post/' + postId);
+        console.log(res.data.createdAt);
         setPost(res.data);
       }
-      catch ( err ) {
+      catch (err) {
         console.log('err: ', err);
       }
     }
 
     getPost();
+    
   }, [postId]);
-
+  console.log(post)
   const date = new Date(post.createdAt);
+  console.log(date);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = daysOfWeek[date.getDay()] + "요일";
-  const displayDate = date.toISOString().split("T")[0].replace(/-/g, '.');
+  console.log(dayOfWeek);
+  const displayDate = date.toLocaleDateString();
+  console.log(displayDate)
 
   return (
     <>
       <NavBar />
-      <main className="container">
-        <h2 className="my_post">내가 쓴 글</h2>
+      <main className="post_container">
+        <h3 className="my_post">내가 쓴 글</h3>
         <ul>
           <li>
             <div className={`openOrNot ${post.open === "true" ? 'active' : ''}`}>
@@ -55,7 +76,7 @@ const MyPost = ( ) => {
               <button className='edit button'>수정</button>
             </Link>
             <span>|</span>
-            <button className='delete button'>삭제</button>
+            <button className='delete button' onClick={handleDeleteButton}>삭제</button>
           </div>
         <article className="post">
           <div className='post_info'>

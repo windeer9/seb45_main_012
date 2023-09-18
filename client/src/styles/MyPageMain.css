@@ -4,19 +4,22 @@
   padding: 0;
 }
 
-.container {
+.page_container {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  justify-content: LEFT;
+  width: 90%;
 }
 
 .my_posts {
-  margin: 20px 0px 15px;
+  margin: 0 0 15px;
+  margin-top: 35px;
 }
 
 ul {
   display: flex;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 li {
@@ -35,14 +38,14 @@ button.active {
   color: white;
 }
 
-.posts_container {
-  width: 650px;
-  height: 555px;
+.mypage_posts_container {
+  width: 100%;
+  height: auto;
   display: flex;
   flex: 0 1 0;
   flex-direction: column;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -51,8 +54,10 @@ button.active {
   flex-direction: column;
   gap: 5px;
   flex: 0 1 auto;
-  padding: 0px 0px 5px 15px;
+  padding: 0 15px 10px;
+  margin-left: 20px;
   border-bottom: 1px solid #D9D9D9;
+  box-shadow: none !important;
 }
 
 .post_info {
@@ -63,11 +68,10 @@ button.active {
 
 .post_date {
   position: relative;
-  right: 25px;
 }
 
 .posts_container > article:first-child {
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .posts_container > article:last-child {
