@@ -106,7 +106,7 @@ const MyPageMain = () => {
             <article className="post" key={post.postId}>
               <div className='post_info'>
                 <div className="post_title">
-                  <Link to={`/mypage/${userId}/posts/${post.postId}`}>
+                  <Link to={`/mypage/posts/${post.postId}`}>
                     {post.title}
                   </Link>
                 </div>
