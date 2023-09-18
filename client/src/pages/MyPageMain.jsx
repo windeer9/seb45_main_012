@@ -101,7 +101,7 @@ const MyPageMain = () => {
             </button>
           </li>
         </ul>
-        <section className='posts_container'>
+        <section className='mypage_posts_container'>
           {currentPosts.map((post) => (
             <article className="post" key={post.postId}>
               <div className='post_info'>

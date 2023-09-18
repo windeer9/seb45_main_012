@@ -10,14 +10,14 @@
   padding-left: 280px;
   color: #2B2B2B;
   padding-top: 50px;
-  width: 90%;
+  width: 103%;
   height: auto;
 }
 
 .my_post {
   display: flex;
   flex-direction: row;
-  margin: 70px 0px 15px;
+  margin: 103px 0px 15px;
 }
 
 ul {

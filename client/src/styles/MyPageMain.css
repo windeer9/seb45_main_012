@@ -13,6 +13,7 @@
 
 .my_posts {
   margin: 0 0 15px;
+  margin-top: 35px;
 }
 
 ul {
@@ -37,8 +38,8 @@ button.active {
   color: white;
 }
 
-.posts_container {
-  width: 90%;
+.mypage_posts_container {
+  width: 100%;
   height: auto;
   display: flex;
   flex: 0 1 0;

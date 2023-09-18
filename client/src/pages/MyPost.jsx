@@ -58,7 +58,7 @@ const MyPost = ( ) => {
     <>
       <NavBar />
       <main className="post_container">
-        <h2 className="my_post">내가 쓴 글</h2>
+        <h3 className="my_post">내가 쓴 글</h3>
         <ul>
           <li>
             <div className={`openOrNot ${post.open === "true" ? 'active' : ''}`}>

@@ -63,7 +63,7 @@ img {
 }
 
 .w55 {
-  max-width: 55px;
+  max-width: 40px;
 }
 
 .logout_logo {
@@ -78,7 +78,7 @@ img {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: rgb(43 43 43);
 }
 
