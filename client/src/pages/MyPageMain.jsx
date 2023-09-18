@@ -114,7 +114,7 @@ const MyPageMain = () => {
                   new Date(post.createdAt).toLocaleDateString()
                 }</div>
               </div>
-              <p className='post_content'>{ post.body.length >= 50 ? post.body.slice(0, 50) + '...' : post.body}</p>
+              <p className='mypage_post_content'>{ post.body }</p>
             </article>
           ))}
           <Pagination

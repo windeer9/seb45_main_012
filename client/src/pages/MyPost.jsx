@@ -38,7 +38,7 @@ const MyPost = ( ) => {
         setPost(res.data);
       }
       catch (err) {
-        console.log('err: ', err);
+        console.error('err: ', err);
       }
     }
 
@@ -46,13 +46,10 @@ const MyPost = ( ) => {
     
   }, [postId]);
 
-
   useEffect(() => {
     async function getUserData() {
       try {
-        console.log(userId);
         const res = await instance.get('/user/' + userId);
-        console.log(res.data);
         setUserData(res.data);
       } catch (err) {
         console.error('getUserData err: ', err);
@@ -63,19 +60,17 @@ const MyPost = ( ) => {
 
   }, [userId]);
 
+  const userPicture = userData.imageUrl || require("../assets/user_shadow.png");
+
   const date = new Date(post.createdAt);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = daysOfWeek[date.getDay()] + "요일";
   const displayDate = date.toLocaleDateString();
 
-  const userPicture = userData.imageUrl || require("../assets/user_shadow.png");
-  console.log(userPicture);
-
-
   return (
     <>
       <NavBar />
-      <main className="post_container">
+      <main className="my_post_container">
         <h3 className="my_post">내가 쓴 글</h3>
         <ul>
           <li>
@@ -106,12 +101,12 @@ const MyPost = ( ) => {
           </div>
           <div className='user_info'>
             <img
-              className='profile_image' 
+              className='each_profile_image' 
               src={userPicture}
               alt="profile" />
             <div className='user_name'>{userName}</div>
           </div>
-          <div className='post_content'>
+          <div className='each_post_content'>
             {post.imageUrls && (
               <img className="uploaded" src={post.imageUrls} alt="uploded_image" />
             )}

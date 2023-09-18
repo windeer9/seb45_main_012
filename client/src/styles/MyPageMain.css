@@ -10,6 +10,7 @@
   justify-content: LEFT;
   width: 91%;
   padding: 120px 0 0 280px;
+  margin-bottom: 50px;
 }
 
 .my_posts {
@@ -53,10 +54,9 @@ li {
   flex-direction: column;
   gap: 5px;
   flex: 0 1 auto;
-  padding: 10px 15px 10px;
+  padding: 25px 15px 25px;
   margin: 0 20px;
   border-bottom: 1px solid #D9D9D9;
-  box-shadow: none !important;
 }
 
 .post_info {
@@ -67,6 +67,12 @@ li {
 
 .post_title {
   font-size: 15pt;
+}
+
+.mypage_post_content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .posts_container > article:first-child {
