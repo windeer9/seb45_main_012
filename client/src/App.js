@@ -37,7 +37,7 @@ function App() {
 
           <Route path="/mypage/main" element={<MyPageMain />} />
           <Route path="/mypage/info" element={<MyPageInfo/>} />
-          <Route path="mypage/posts/:postId" element={<MyPost />} />
+          <Route path="mypage/:userId/posts/:postId" element={<MyPost />} />
         </Routes>
       </Router>
     </div>

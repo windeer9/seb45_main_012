@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/MyPost.css';
-import { instance } from 'api/api';
+import { instance } from 'api/api.js';
 import jwtDecode from 'jwt-decode';
 import NavBar from 'components/NavBar.jsx';
 import { useParams , Link } from 'react-router-dom';
@@ -9,9 +9,11 @@ const MyPost = ( ) => {
   
   const { postId } = useParams();
   const [ post, setPost ] = useState({});
+  const [ userData, setUserData ] = useState({});
 
   const accessToken = localStorage.getItem('accessToken');
   const decodedToken = jwtDecode(accessToken);
+  const userId = decodedToken.userId;
   const userName = decodedToken.userName;
 
   useEffect(() => {
@@ -28,10 +30,32 @@ const MyPost = ( ) => {
     getPost();
     
   }, [postId]);
+
+
+  useEffect(() => {
+    async function getUserData() {
+      try {
+        console.log(userId);
+        const res = await instance.get('/user/' + userId);
+        console.log(res.data);
+        setUserData(res.data);
+      } catch (err) {
+        console.error('getUserData err: ', err);
+      }
+    }
+
+    getUserData();
+
+  }, [userId]);
+
   const date = new Date(post.createdAt);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = daysOfWeek[date.getDay()] + "요일";
   const displayDate = date.toLocaleDateString();
+
+  const userPicture = userData.imageUrl || require("../assets/user_shadow.png");
+  console.log(userPicture);
+
 
   return (
     <>
@@ -67,8 +91,8 @@ const MyPost = ( ) => {
           </div>
           <div className='user_info'>
             <img
-              className='profile_image'
-              src={post.propfileImage}
+              className='profile_image' 
+              src={userPicture}
               alt="profile" />
             <div className='user_name'>{userName}</div>
           </div>

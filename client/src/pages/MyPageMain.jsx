@@ -105,16 +105,16 @@ const MyPageMain = () => {
           {currentPosts.map((post) => (
             <article className="post" key={post.postId}>
               <div className='post_info'>
-                <h4 className="post_title">
-                  <Link to={`/mypage/posts/${post.postId}`}>
+                <div className="post_title">
+                  <Link to={`/mypage/${userId}/posts/${post.postId}`}>
                     {post.title}
                   </Link>
-                </h4>
+                </div>
                 <div className='post_date'>{
                   new Date(post.createdAt).toLocaleDateString()
                 }</div>
               </div>
-              <p className='post_content'>{post.body.slice(0, 50) + " ..."}</p>
+              <p className='post_content'>{ post.body.length >= 50 ? post.body.slice(0, 50) + '...' : post.body}</p>
             </article>
           ))}
           <Pagination
