@@ -139,14 +139,14 @@ function PostEditerWithImage() {
   return (
     <div className="post_editer_with_image">
 
-      <div className="image_upload_form" >
+      <div className="image_upload" >
         <input
           type="file"
           accept="image/*"
           onChange={handleFileInputChange}
           ref={imageInputRef}
         />
-        {previewImage && <img src={previewImage} alt="미리보기" onClick={handleImageClick} aria-hidden="true" />}
+        {previewImage && <img className='uploade_img' src={previewImage} alt="미리보기" onClick={handleImageClick} aria-hidden="true" />}
         <div className={`plus_image_icon ${previewImage ? 'clear' : ''}`} >
           <FontAwesomeIcon className='plus_icon' icon={faPlus}/>이미지
         </div>

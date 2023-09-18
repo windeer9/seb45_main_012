@@ -1,13 +1,10 @@
 .page_container.editCenter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 10vh;
-  padding-bottom: 20vh;
+  padding-top: 150px;
+  margin-left: 40px;
 }
 
 .board_btn_container {
-  width: 95%;
+  width: 85%;
 }
 .free_board_btn {
   width: 200px;
