@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/Header.css";
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setActiveMenu } from '../store/menuSlice.js';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -90,6 +92,7 @@ HeaderLoggedIn.propTypes = {
 
 const Header = () => {
 
+  const dispatch = useDispatch();
   const accessToken = localStorage.getItem('accessToken');
   const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
 
@@ -110,7 +113,9 @@ const Header = () => {
     try {
       localStorage.removeItem('accessToken');
       setIsLoggedIn(false);
+      dispatch(setActiveMenu('전체 글 보기'));
       navigate('/');
+
     } catch (error) {
       console.error('로그아웃 실패: ', error);
     }
