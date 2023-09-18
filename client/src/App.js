@@ -20,19 +20,26 @@ import { ReEditFree, ReEditAuth } from './components/ReEdit.jsx';
 
 
 
+import Header from './components/Header.jsx';
+// import NavBar from './components/NavBar.jsx';
+import LogIn from 'pages/LoginPage.jsx';
 
 function App() {
   return (
     <div className="App">
       {/* <Router>
+      <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
+          <Route path="/login" element={<LogIn />} />
           <Route path="/free" element={<FreeBoardPage/>} />
           <Route path="/free/:postId/:userId" element={<FreeDetailPage />} />
           <Route path="/auth" element={<AuthBoardPage/>} />
           <Route path="/auth/:postId/:userId" element={<AuthDetailPage/>} />
           <Route path="/env" element={<EnvBoardPage/>} />
           <Route path="/mypage/main" element={<MyPageMain />} />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
     </Router> */}
       {/* <FreeDetailPage/> */}
