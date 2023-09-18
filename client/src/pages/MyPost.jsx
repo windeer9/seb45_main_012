@@ -43,7 +43,7 @@ const MyPost = ( ) => {
   return (
     <>
       <NavBar />
-      <main className="container">
+      <main className="post_container">
         <h2 className="my_post">내가 쓴 글</h2>
         <ul>
           <li>

@@ -62,68 +62,71 @@ const MyPageMain = () => {
   const currentPosts = filteredPosts.slice(startPostIndex, endPostIndex);
 
   return (
-    <main className="container">
-      <h2 className="my_posts">내가 쓴 글</h2>
-      <ul>
-        <li>
-          <button
-            className={`custom_button ${selectedButton === viewType.ALL ? 'active' : ''}`}
-            onClick={() => {
-              handleButtonClick(viewType.ALL);
-              handleFilterChange('all');
-            }}
-            >
-            {viewType.ALL}
-          </button>
-        </li>
-        <li>
-          <button
-            className={`custom_button ${selectedButton === viewType.PUBLIC ? 'active' : ''}`}
-            onClick={() => {
-              handleButtonClick(viewType.PUBLIC);
-              handleFilterChange('public');
-            }}
-            >
-            {viewType.PUBLIC}
-          </button>
-        </li>
-        <li>
-          <button
-            className={`custom_button ${selectedButton === viewType.CLOSE ? 'active' : ''}`}
-            onClick={() => {
-              handleButtonClick(viewType.PRIVATE)
-              handleFilterChange('private');
-            }}
-            >
-            {viewType.PRIVATE}
-          </button>
-        </li>
-      </ul>
-      <section className='posts_container'>
-        {currentPosts.map((post) => (
-          <article className="post" key={post.postId}>
-            <div className='post_info'>
-              <h4 className="post_title">
-                <Link to={`/mypage/posts/${post.postId}`}>
-                  {post.title}
-                </Link>
-              </h4>
-              <div className='post_date'>{
-                new Date(post.createdAt).toLocaleDateString()
-              }</div>
-            </div>
-            <p className='post_content'>{post.body.slice(0, 50) + " ..."}</p>
-          </article>
-        ))}
-        <Pagination
-          posts={filteredPosts}
-          postsPerPage={postsPerPage}
-          pagesPerGroup={5}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </section>
-    </main>
+    <>
+    <NavBar />
+      <main className="page_container">
+        <h2 className="my_posts">내가 쓴 글</h2>
+        <ul>
+          <li>
+            <button
+              className={`custom_button ${selectedButton === viewType.ALL ? 'active' : ''}`}
+              onClick={() => {
+                handleButtonClick(viewType.ALL);
+                handleFilterChange('all');
+              }}
+              >
+              {viewType.ALL}
+            </button>
+          </li>
+          <li>
+            <button
+              className={`custom_button ${selectedButton === viewType.PUBLIC ? 'active' : ''}`}
+              onClick={() => {
+                handleButtonClick(viewType.PUBLIC);
+                handleFilterChange('public');
+              }}
+              >
+              {viewType.PUBLIC}
+            </button>
+          </li>
+          <li>
+            <button
+              className={`custom_button ${selectedButton === viewType.CLOSE ? 'active' : ''}`}
+              onClick={() => {
+                handleButtonClick(viewType.PRIVATE)
+                handleFilterChange('private');
+              }}
+              >
+              {viewType.PRIVATE}
+            </button>
+          </li>
+        </ul>
+        <section className='posts_container'>
+          {currentPosts.map((post) => (
+            <article className="post" key={post.postId}>
+              <div className='post_info'>
+                <h4 className="post_title">
+                  <Link to={`/mypage/posts/${post.postId}`}>
+                    {post.title}
+                  </Link>
+                </h4>
+                <div className='post_date'>{
+                  new Date(post.createdAt).toLocaleDateString()
+                }</div>
+              </div>
+              <p className='post_content'>{post.body.slice(0, 50) + " ..."}</p>
+            </article>
+          ))}
+          <Pagination
+            posts={filteredPosts}
+            postsPerPage={postsPerPage}
+            pagesPerGroup={5}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </section>
+      </main>
+    </>
   )
 }
 

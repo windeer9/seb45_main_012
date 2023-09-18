@@ -4,17 +4,20 @@
   padding: 0;
 }
 
-.container {
+.post_container {
   display: flex;
   flex-direction: column;
-  padding-left: 270px;
+  padding-left: 280px;
   color: #2B2B2B;
+  padding-top: 50px;
+  width: 90%;
+  height: auto;
 }
 
 .my_post {
   display: flex;
   flex-direction: row;
-  margin: 75px 0px 15px;
+  margin: 70px 0px 15px;
 }
 
 ul {
@@ -32,7 +35,7 @@ li {
 }
 
 .openOrNot {
-  display: flex;
+  display: inline-flex;
   height: 50px;
   padding: 23px 30px;
   justify-content: center;
@@ -43,6 +46,7 @@ li {
   background-color: white;
   border: 1px solid #8DC693;
   color: #2B2B2B;
+  font-size: 11pt;
 }
 
 .openOrNot.active {
@@ -54,6 +58,7 @@ li {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+  width: 81%;
   max-height: 550px;
   overflow-y: auto;
   gap: 10px;
@@ -67,7 +72,7 @@ li {
   flex-direction: row;
   justify-content: right;
   align-items: center;
-  margin-right: 40px;
+  width: 81%;
   position: relative;
   top: 18px;
   gap: 5px;
