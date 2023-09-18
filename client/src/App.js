@@ -12,9 +12,7 @@ import FreeDetailPage from './pages/FreeDetailPage.jsx';
 import AuthBoardPage from './pages/AuthBoardPage.jsx';
 import AuthDetailPage from './pages/AuthDetailPage.jsx';
 import EnvBoardPage from './pages/EnvBoardPage.jsx';
-
-// import Header from './components/header.jsx';
-// import NavBar from './components/NavBar.jsx';
+import Header from './components/Header.jsx';
 
 import MyPageMain from 'pages/MyPageMain.jsx';
 import MyPageInfo from './pages/MyPageInfo.jsx';
@@ -23,6 +21,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<AllBoardPage/>} />
           <Route path="/login" element={<Login/>} />
@@ -39,12 +38,6 @@ function App() {
           <Route path="/mypage/info" element={<MyPageInfo/>} />
         </Routes>
     </Router>
-      {/* <FreeDetailPage/> */}
-      {/* <SignUpPage /> */}
-      {/* <Header /> */}
-      {/* <NavBar /> */}
-      {/* <FreeBoardPage/> */}
-      {/* <MyPageMain /> */}
     </div>
   );
 }
