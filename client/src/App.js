@@ -12,6 +12,7 @@ import FreeDetailPage from './pages/FreeDetailPage.jsx';
 import AuthBoardPage from './pages/AuthBoardPage.jsx';
 import AuthDetailPage from './pages/AuthDetailPage.jsx';
 import EnvBoardPage from './pages/EnvBoardPage.jsx';
+
 import Header from './components/Header.jsx';
 
 import MyPageMain from 'pages/MyPageMain.jsx';
