@@ -1,0 +1,51 @@
+/* 버튼 공통 스타일*/
+.custom_button {
+    display: inline-flex;
+    height: 50px;
+    padding: 23px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+/* 게시글 버튼 */
+.custom_board_button {
+    width: 250px;
+    height: 79px;
+    display: inline-flex;
+    height: 50px;
+    padding: 23px 30px;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+/* 마이페이지 버튼 */
+.custom_mypage_button{
+    display: inline-flex;
+    height: 50px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+/* 확인 버튼 */
+.confirm_button {
+    background-color: #8DC693;
+    border: none;
+    color: white;
+    margin-right: 20px;
+}
+/* 취소 버튼 */
+.cancel_button {
+    border: 1px solid #9E9E9E;
+    background-color: #FAFAFA;
+    color: #2B2B2B;
+}
