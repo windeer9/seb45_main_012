@@ -44,9 +44,7 @@
 
 | 자유게시판 글 조회 | 인증게시판 글 조회 |
 | :---: | :---: |
-| <img alt="쟈유 게시판 글 조회" src="https://github.com/codestates-seb/seb45_main_012/assets/129942171/02ad629f-384a-4790-ba27-e0c1a18c4a85" height="200" width="370"> | <img alt="인증게시판 글 조회" src="https://github.com/codestates-seb/seb45_main_012/assets/129942171/a1967936-d3da-41f1-afb9-688d790707d9" height="200" width="370">
- | 
-
+| <img alt="쟈유 게시판 글 조회" src="https://github.com/codestates-seb/seb45_main_012/assets/129942171/02ad629f-384a-4790-ba27-e0c1a18c4a85" height="200" width="370"> | <img alt="인증게시판 글 조회" src="https://github.com/codestates-seb/seb45_main_012/assets/129942171/a1967936-d3da-41f1-afb9-688d790707d9" height="200" width="370">| 
 
 | 글 작성 | 글 삭제 |
 | :---: | :---: |
