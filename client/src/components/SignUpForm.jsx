@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import '../styles/SignUpForm.css';
+import { postSignUp } from 'api/api.js';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpForm() {
+  const navigate = useNavigate();
   const [view, setView] = useState(false);
   const [selected, setSelected] = useState("기억에 남는 추억의 장소는?");
   const [formData, setFormData] = useState({
@@ -49,7 +52,14 @@ function SignUpForm() {
     if (validMessage === '사용가능한 패스워드 입니다' && formData.username !== '' && formData.userid !== '' && formData.password !== '' && formData.passwordConfirm !== '') {
       setShowWarning(false);
 
-      // 회원가입 로직 추가 예정
+      postSignUp(formData.username, formData.userid, formData.password, selected, formData.passwordConfirm)
+      .then((resp) => {
+        navigate('/');
+      })
+      .catch((err) => {
+        alert('이미 사용중인 회원정보 입니다.');
+      });
+
     } else {
       setShowWarning(true);
     }
@@ -115,15 +125,15 @@ function SignUpForm() {
 
             <div className="password_confirm_Q">
               <div className="password_confirm_Q_title">비밀번호 확인 질문</div>
-              <div className="select_box" onClick={handleDropdown}>
+              <div className="select_box" onClick={handleDropdown} aria-hidden="true">
                 <div className="arrow_before" style={view ? {transform: 'rotate(-45deg)'} : {transform: 'rotate(45deg)'}}></div>
                 <div className="arrow_after" style={view ? {transform: 'rotate(45deg)'} : {transform: 'rotate(-45deg)'}}></div>
               {selected}
               {view &&
                 <ul>
-                  <li onClick={handleSelectedMessagePlace}>기억에 남는 추억의 장소는?</li>
-                  <li onClick={handleSelectedMessagePet}>반려동물의 이름은?</li>
-                  <li onClick={handleSelectedMessageDate}>추억하고 싶은 날짜가 있다면?</li>
+                  <li onClick={handleSelectedMessagePlace} aria-hidden="true">기억에 남는 추억의 장소는?</li>
+                  <li onClick={handleSelectedMessagePet} aria-hidden="true">반려동물의 이름은?</li>
+                  <li onClick={handleSelectedMessageDate} aria-hidden="true">추억하고 싶은 날짜가 있다면?</li>
                 </ul>
               }
               </div>
@@ -143,11 +153,13 @@ function SignUpForm() {
 
           </div>
 
-          <div 
+          <button 
             className="signup_complete" 
             onClick={handleSubmit}
+            aria-hidden="true"
           >회원가입
-          </div>
+          </button>
+
           {showWarning && 
           <div style={{fontSize: 11, color: 'red', fontWeight: 550, width: 200, marginTop: 5, textAlign: 'left'}}>
             모든 입력을 채워주세요

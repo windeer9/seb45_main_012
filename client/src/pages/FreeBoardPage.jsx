@@ -11,7 +11,7 @@ const FreeBoardPage = () => {
           
       <button className="custom_board_button confirm_button">자유 게시판</button>
           <div className='free_board_container'>
-              <PostList/>
+              <PostList type="free"/>
           </div>
       </div>
   </>
