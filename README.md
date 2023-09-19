@@ -9,11 +9,6 @@
 </div>
 </br>
 
-<div align="center">
-<h4> 🔗 배포링크 </h4>
-  [그린어스포어스]
-</div>
-
 
 ## 목표 및 기능
 - 사용자들은 친환경 실천 행동을 기록하고 공유할 수 있습니다.
@@ -91,7 +86,7 @@
 
 
 ## 🔗 문서 링크
-- [배포 링크]()
+- [배포 링크](http://greenearthforus.s3-website.ap-northeast-2.amazonaws.com/)
 - [사용자 요구사항 정의서](https://docs.google.com/spreadsheets/d/1-EhLigT0xg3varDAZvskDa4ugKFa9cJZ4IHyxITaIss/edit#gid=0)
 - [화면 정의서](https://www.figma.com/file/tJlXF9MCUwHAFcIELZyzTZ/%EA%B7%B8%EB%A6%B0%EC%96%B4%EC%8A%A4%ED%8F%AC%EC%96%B4%EC%8A%A4_%ED%99%94%EB%A9%B4?type=design&node-id=0-1&mode=design&t=QbGaRFGwq0Ii7jOt-0)
 - [API 명세서](https://documenter.getpostman.com/view/27563962/2s9Y5YSiFo)
