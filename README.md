@@ -42,6 +42,12 @@
 | :---: | :---: |
 | <img alt="자유게시판" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/cd4f0228-f79e-423a-8d7c-2b1bfb1aee15" height="200" width="370"> | <img alt="인증게시판" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/b9b6e0d4-85f4-4f68-9235-30459e371791" height="200" width="370"> | 
 
+| 자유게시판 글 조회 | 인증게시판 글 조회 |
+| :---: | :---: |
+| <img alt="쟈유 게시판 글 조회" src="https://github.com/codestates-seb/seb45_main_012/assets/129942171/02ad629f-384a-4790-ba27-e0c1a18c4a85" height="200" width="370"> | <img alt="인증게시판 글 조회" src="https://github.com/codestates-seb/seb45_main_012/assets/129942171/a1967936-d3da-41f1-afb9-688d790707d9" height="200" width="370">
+ | 
+
+
 | 글 작성 | 글 삭제 |
 | :---: | :---: |
 | <img alt="글작성" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/b5748bc9-538b-4cbb-8202-2fa37a490c83" height="200" width="370"> | <img alt="글삭제" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/8ef48f6b-dcc2-46e2-a178-c3df3d8bbb63" height="200" width="370"> | 
