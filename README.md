@@ -23,6 +23,12 @@
 | [@matchaing](https://github.com/matchaing) |    [@jumpm9239](https://github.com/jumpm9239) | [@yuumni](https://github.com/yuumni) | [@wjdgml](https://github.com/wjdgml) | [@windeer9](https://github.com/windeer9) |
 </br>
 
+## 🔗 배포링크
+- [배포 링크](http://greenearthforus.s3-website.ap-northeast-2.amazonaws.com/)
+- Test ID : test1
+- Test PW : @testpassword1
+</br>
+
 ## 🪄 Pages Preview
 | 메인: 비로그인 | 메인: 로그인 |
 | :---: | :---: |
