@@ -27,16 +27,17 @@ public class CustomAuthorityUtils {
     }
 
     public List<GrantedAuthority> createAuthorities(List<String> roles){
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_"+role))
-                .collect(Collectors.toList());
+//        return roles.stream()
+//                .map(role -> new SimpleGrantedAuthority("ROLE_"+role))
+//                .collect(Collectors.toList());
+        return USER_ROLES;
     }
 
-//    public List<String> createRoles(String id){
-//        if(id.equals(adminId)){
-//            return ADMIN_ROLES_STRING;
-//        }
-//        return USER_ROLES_STRING;
-//    }
+    public List<String> createRoles(String id){
+        if(id.equals(adminId)){
+            return ADMIN_ROLES_STRING;
+        }
+        return USER_ROLES_STRING;
+    }
 
 }
