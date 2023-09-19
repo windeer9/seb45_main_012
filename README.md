@@ -63,9 +63,11 @@
 ### 서버 실행
 - 백엔드 서버를 실행하려면 해당 디렉토리로 이동한 후, Maven 또는 Gradle을 사용하여 프로젝트를 빌드하고 실행하세요.
 - 프론트엔드 서버를 실행하려면 해당 디렉토리로 이동한 후, `npm start` 또는 `yarn start`를 사용하세요.
+</br>
 
 ## 🪄 Pages Preview
 
+</br>
 
 ## 🔗 문서 링크
 - [배포 링크]()
@@ -73,17 +75,19 @@
 - [화면 정의서](https://www.figma.com/file/tJlXF9MCUwHAFcIELZyzTZ/%EA%B7%B8%EB%A6%B0%EC%96%B4%EC%8A%A4%ED%8F%AC%EC%96%B4%EC%8A%A4_%ED%99%94%EB%A9%B4?type=design&node-id=0-1&mode=design&t=QbGaRFGwq0Ii7jOt-0)
 - [API 명세서](https://documenter.getpostman.com/view/27563962/2s9Y5YSiFo)
 - [테이블 명세서](https://docs.google.com/spreadsheets/d/1-EhLigT0xg3varDAZvskDa4ugKFa9cJZ4IHyxITaIss/edit#gid=1825846224)
-
+</br>
 
 ## 👨‍👩‍👧‍👦 Team
 | 이민주<br>(FE, 팀장) | 박지민<br>(FE) | 정윤민<br>(FE) | 김정희<br>(BE, 부팀장) | 윤다윗<br>(BE) |
 | :---: | :---: | :---: | :---: | :---: |
 | <img alt="이민주" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/e28e8da1-6e30-4dd0-bc2e-04b4400b2d78" height="100" width="100"> | <img alt="박지민" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/5b242c5f-7b34-4bb3-902c-9390724f085d" height="100" width="100"> | <img alt="정윤민" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/885c39e1-9979-4e1f-bd57-16d39d6f3745" height="100" width="100"> | <img alt="김정희" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/4fdedba6-5051-4f8c-9122-4b9ba748c27d" height="100" width="100"> | <img alt="윤다윗" src="https://github.com/codestates-seb/seb45_main_012/assets/69198709/d46dec85-fd00-4276-a0ad-532401a71f90" height="100" width="100"> |
 | [@matchaing](https://github.com/matchaing) |    [@jumpm9239](https://github.com/jumpm9239) | [@yuumni](https://github.com/yuumni) | [@wjdgml](https://github.com/wjdgml) | [@windeer9](https://github.com/windeer9) |
+</br>
 
 ## 업데이트 로그
 ### v1.0.0 - 2023-09-19
 - 최초 배포
+</br>
 
 ## 앞으로의 개발 계획
 아직 구현되지 않은 기능이 몇 있습니다. 다음과 같은 부분이 추가로 개발이 필요합니다:
