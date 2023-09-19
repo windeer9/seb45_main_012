@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -58,6 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("userId", user.getUserId());
         claims.put("userName", user.getUserName());
         claims.put("userUserId", user.getUserUseId());
+        claims.put("password", user.getPassword());
         claims.put("roles", user.getRole());
 
         String subject = user.getUserName();
