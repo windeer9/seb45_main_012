@@ -31,19 +31,19 @@
 ## 🪄 Pages Preview
 | 메인: 비로그인 | 메인: 로그인 |
 | :---: | :---: |
-| <img alt="메인비로그인" src="https://im3.ezgif.com/tmp/ezgif-3-85fd7843e2.gif" height="200" width="380"> | <img alt="메인로그인" src="https://im3.ezgif.com/tmp/ezgif-3-3ab0edfc22.gif" height="200" width="380"> | 
+| <img alt="메인비로그인" src="https://im3.ezgif.com/tmp/ezgif-3-85fd7843e2.gif" height="200" width="370"> | <img alt="메인로그인" src="https://im3.ezgif.com/tmp/ezgif-3-3ab0edfc22.gif" height="200" width="370"> | 
 
 | 회원가입 | 로그인 |
 | :---: | :---: |
-| <img alt="회원가입" src="https://im3.ezgif.com/tmp/ezgif-3-d7f0cae289.gif" height="200" width="380"> | <img alt="로그인" src="https://im3.ezgif.com/tmp/ezgif-3-bb8f6fda6d.gif" height="200" width="370"> | 
+| <img alt="회원가입" src="https://im3.ezgif.com/tmp/ezgif-3-d7f0cae289.gif" height="200" width="370"> | <img alt="로그인" src="https://im3.ezgif.com/tmp/ezgif-3-bb8f6fda6d.gif" height="200" width="370"> | 
 
 | 자유게시판 | 인증게시판 |
 | :---: | :---: |
-| <img alt="자유게시판" src="https://im3.ezgif.com/tmp/ezgif-3-cb348580da.gif" height="200" width="380"> | <img alt="인증게시판" src="https://im3.ezgif.com/tmp/ezgif-3-0c893be4f6.gif" height="200" width="380"> | 
+| <img alt="자유게시판" src="https://im3.ezgif.com/tmp/ezgif-3-cb348580da.gif" height="200" width="370"> | <img alt="인증게시판" src="https://im3.ezgif.com/tmp/ezgif-3-0c893be4f6.gif" height="200" width="370"> | 
 
 | 글 작성 | 글 삭제 |
 | :---: | :---: |
-| <img alt="글작성" src="https://im3.ezgif.com/tmp/ezgif-3-036d749da1.gif" height="200" width="380"> | <img alt="글삭제" src="https://im3.ezgif.com/tmp/ezgif-3-e65f3f95cb.gif" height="200" width="380"> | 
+| <img alt="글작성" src="https://im3.ezgif.com/tmp/ezgif-3-036d749da1.gif" height="200" width="370"> | <img alt="글삭제" src="https://im3.ezgif.com/tmp/ezgif-3-e65f3f95cb.gif" height="200" width="370"> | 
 
 | 내 정보 페이지 | 회원탈퇴 |
 | :---: | :---: |
