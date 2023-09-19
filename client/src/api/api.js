@@ -3,7 +3,9 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 export const instance = axios.create({
-  baseURL: 'http://ec2-52-78-145-37.ap-northeast-2.compute.amazonaws.com',
+
+  baseURL: 'http://ec2-52-78-145-37.ap-northeast-2.compute.amazonaws.com:8080',
+
   timeout: 5000,
 });
 
