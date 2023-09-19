@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 export const instance = axios.create({
-  baseURL: 'http://52.78.145.37:8080', //기본 URL
+  baseURL: 'http://ec2-52-78-145-37.ap-northeast-2.compute.amazonaws.com',
   timeout: 5000,
 });
 
