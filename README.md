@@ -47,7 +47,7 @@
 
 | 내 정보 페이지 | 회원탈퇴 |
 | :---: | :---: |
-| <img alt="내정보" src="https://im3.ezgif.com/tmp/ezgif-3-7cc4a97676.gif" height="200" width="380"> | <img alt="회원탈퇴" src="https://im3.ezgif.com/tmp/ezgif-3-79cf456848.gif" height="200" width="380"> | 
+| <img alt="내정보" src="https://im3.ezgif.com/tmp/ezgif-3-7cc4a97676.gif" height="200" width="370"> | <img alt="회원탈퇴" src="https://im3.ezgif.com/tmp/ezgif-3-79cf456848.gif" height="200" width="370"> | 
 </br>
 
 ## 🔧 Tech Stack
