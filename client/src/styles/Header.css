@@ -28,8 +28,7 @@
   flex-direction: row;
   flex: 1 1 auto;
 }
-
-img {
+.header_logo img {
   max-width: 230px;
 }
 
