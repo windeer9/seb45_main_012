@@ -54,50 +54,51 @@ public class VoteService {
     }
 
     public VoteDto.Response updateVote(long userId, long voteId) {
+//
+//        VoteDto.Response response;
+//        User user = userService.getUser(userId);
+//        Vote findVote = findVerifiedVote(voteId);
+//        long count = findVote.getVoteCount();
+//        Optional<VoteUser> findVoteUser;
+//
+//        if (user.getVoteUsers() != null && findVote.getVoteUsers() != null) {
+//            findVoteUser = user.getVoteUsers().stream()
+//                    .filter(voteUser -> voteUser.getVote().getVoteId() == findVote.getVoteId())
+//                    .findFirst();
+//                if(findVoteUser.isPresent()) {
+//                    if (findVoteUser.get().getIsLike() == null || !(findVoteUser.get().getIsLike())) {
+//                        findVoteUser.get().setIsLike(true);
+//                        findVote.getVoteUsers().add(findVoteUser.get());
+//                        user.getVoteUsers().add(findVoteUser.get());
+//                        findVote.setVoteCount(count + 1);
+//                    } else {
+//                        findVoteUser.get().setIsLike(false);
+//                        findVote.getVoteUsers().add(findVoteUser.get());
+//                        user.getVoteUsers().add(findVoteUser.get());
+//                        findVote.setVoteCount(count - 1);
+//                    }
+//                }else{
+//                    VoteUser voteUser = new VoteUser();
+//                    voteUser.setUser(user);
+//                    voteUser.setVote(findVote);
+//                    voteUser.setIsLike(true);
+//                    findVote.getVoteUsers().add(voteUser);
+//                    user.getVoteUsers().add(voteUser);
+//                    findVote.setVoteCount(count + 1);
+//                }
+//        } else {
+//            VoteUser voteUser = new VoteUser();
+//            voteUser.setUser(user);
+//            voteUser.setVote(findVote);
+//            voteUser.setIsLike(true);
+//            findVote.getVoteUsers().add(voteUser);
+//            user.getVoteUsers().add(voteUser);
+//            findVote.setVoteCount(count + 1);
+//        }
+//        userRepository.save(user);
+//        response = mapper.voteToVoteResponseDto(voteRepository.save(findVote));
 
-        VoteDto.Response response;
-        User user = userService.getUser(userId);
-        Vote findVote = findVerifiedVote(voteId);
-        long count = findVote.getVoteCount();
-        Optional<VoteUser> findVoteUser;
-
-        if (user.getVoteUsers() != null && findVote.getVoteUsers() != null) {
-            findVoteUser = user.getVoteUsers().stream()
-                    .filter(voteUser -> voteUser.getVote().getVoteId() == findVote.getVoteId())
-                    .findFirst();
-                if(findVoteUser.isPresent()) {
-                    if (findVoteUser.get().getIsLike() == null || !(findVoteUser.get().getIsLike())) {
-                        findVoteUser.get().setIsLike(true);
-                        findVote.getVoteUsers().add(findVoteUser.get());
-                        user.getVoteUsers().add(findVoteUser.get());
-                        findVote.setVoteCount(count + 1);
-                    } else {
-                        findVoteUser.get().setIsLike(false);
-                        findVote.getVoteUsers().add(findVoteUser.get());
-                        user.getVoteUsers().add(findVoteUser.get());
-                        findVote.setVoteCount(count - 1);
-                    }
-                }else{
-                    VoteUser voteUser = new VoteUser();
-                    voteUser.setUser(user);
-                    voteUser.setVote(findVote);
-                    voteUser.setIsLike(true);
-                    findVote.getVoteUsers().add(voteUser);
-                    user.getVoteUsers().add(voteUser);
-                    findVote.setVoteCount(count + 1);
-                }
-        } else {
-            VoteUser voteUser = new VoteUser();
-            voteUser.setUser(user);
-            voteUser.setVote(findVote);
-            voteUser.setIsLike(true);
-            findVote.getVoteUsers().add(voteUser);
-            user.getVoteUsers().add(voteUser);
-            findVote.setVoteCount(count + 1);
-        }
-        userRepository.save(user);
-        response = mapper.voteToVoteResponseDto(voteRepository.save(findVote));
-        return response;
+        return null;
     }
 
     public Vote findVoteCount(long voteId){
