@@ -99,18 +99,20 @@ public class UserService {
         userRepository.delete(existing);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
 //        userRepository.deleteAll();
 //        userRepository.deleteById(63L);
-        List<User> duplicateUsers = entityManager.createQuery(
-                        "SELECT u FROM User u " +
-                                "WHERE u.userId IN (" +
-                                "    SELECT userId FROM User GROUP BY userId HAVING COUNT(userId) > 1" +
-                                ")", User.class)
-                .getResultList();
-       for(User user : duplicateUsers){
-           userRepository.delete(user);
-       }
+//        List<User> duplicateUsers = entityManager.createQuery(
+//                        "SELECT u FROM User u " +
+//                                "WHERE u.userId IN (" +
+//                                "    SELECT userId FROM User GROUP BY userId HAVING COUNT(userId) > 1" +
+//                                ")", User.class)
+//                .getResultList();
+//       for(User user : duplicateUsers){
+//           userRepository.delete(user);
+//    }
+        userRepository.deleteByUserId(63L);
+
     }
 
 
