@@ -59,7 +59,7 @@ public class VoteController {
                                     @PathVariable("user_id") long userId,
                                     @PathVariable("vote_id") long voteId
                                     ){
-        postService.getPost(postId);   //post가 유효한지 확인하는 로직
+//        postService.getPost(postId);   //post가 유효한지 확인하는 로직
 
         VoteDto.Response response = voteService.updateVote(userId, voteId);
         response.setUserId(userId);
@@ -70,7 +70,7 @@ public class VoteController {
     public ResponseEntity<VoteDto.Response> getVote(@PathVariable("post_id") long postId,
                                   @PathVariable("vote_id") long voteId){
 
-        postService.getPost(postId);   //post가 유효한지 확인하는 로직
+//        postService.getPost(postId);   //post가 유효한지 확인하는 로직
         Vote findVote = voteService.findVoteCount(voteId);
         VoteDto.Response response = mapper.voteToVoteResponseDto(findVote);
         response.setPostId(postId);
@@ -82,8 +82,8 @@ public class VoteController {
                                      @PathVariable("user_id") long userId,
                                      @PathVariable("vote_id") long voteId){
 
-        postService.getPost(postId);   //post가 유효한지 확인하는 로직
-        userService.getUser(userId);
+//        postService.getPost(postId);   //post가 유효한지 확인하는 로직
+//        userService.getUser(userId);
 
         voteService.deleteVote(voteId);
         return ResponseEntity.noContent().build();

@@ -42,13 +42,13 @@ public class VoteService {
     }
 
     public VoteDto.Response createVote(long postId) {
-        Post findPost = postRepository.findById(postId)
-                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.VOTE_NOT_FOUND));//post가 유효한지 확인하는 로직
+//        Post findPost = postRepository.findById(postId)
+//                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.VOTE_NOT_FOUND));//post가 유효한지 확인하는 로직
 
 //        if (findPost.getVote() != null) throw new BusinessLogicException(ExceptionCode.VOTE_EXISTS);
 
         Vote vote = new Vote();
-        vote.setPost(findPost);
+//        vote.setPost(findPost);
 
         return mapper.voteToVoteResponseDto(voteRepository.save(vote));
     }
