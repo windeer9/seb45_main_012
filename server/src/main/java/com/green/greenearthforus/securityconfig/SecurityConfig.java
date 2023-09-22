@@ -82,7 +82,7 @@ public class SecurityConfig{
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "'http://greenearthforus.s3-website.ap-northeast-2.amazonaws.com"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://greenearthforus.s3-website.ap-northeast-2.amazonaws.com"));
         configuration.setAllowedOriginPatterns(List.of("http://greenearthforus.**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
