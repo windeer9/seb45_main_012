@@ -39,12 +39,12 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        String authorization = request.getHeader("accessToken");
-        return authorization == null || !authorization.startsWith("Bearer");
+        String authorization = request.getHeader("Authorization");
+        return authorization == null || !authorization.startsWith("Bearer ");
     }
 
     private Map<String, Object> verifyJws(HttpServletRequest request){
-        String jws = request.getHeader("accessToken").replace("Bearer", "");
+        String jws = request.getHeader("Authorization").replace("Bearer ", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
         return jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();

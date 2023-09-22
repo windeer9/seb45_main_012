@@ -28,10 +28,10 @@ public class CustomAuthorityUtils {
 
     public List<GrantedAuthority> createAuthorities(List<String> roles){
 
-//        return roles.stream()
-//                .map(role -> new SimpleGrantedAuthority("ROLE_"+role))
-//                .collect(Collectors.toList());
-        return USER_ROLES;
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_"+role))
+                .collect(Collectors.toList());
+//        return USER_ROLES;
     }
 
     public List<String> createRoles(String id){
