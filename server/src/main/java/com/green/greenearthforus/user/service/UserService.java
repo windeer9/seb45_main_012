@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.green.greenearthforus.user.entity.User.Role.USER;
 import static com.green.greenearthforus.user.entity.User.UserGrade.LAND;
@@ -95,7 +97,11 @@ public class UserService {
 
     public void deleteAll(){
 //        userRepository.deleteAll();
-        userRepository.deleteById(63L);
+//        userRepository.deleteById(63L);
+       List<User> find = userRepository.findDuplicateUsers();
+       for(User user : find){
+           userRepository.delete(user);
+       }
     }
 
 
