@@ -166,8 +166,8 @@ public class PostService {
     }
 
     public void deleteAll(){
-//        postsRepository.deleteAll();
-        postsRepository.deleteById(149L);
+        postsRepository.deleteAll();
+//        postsRepository.deleteById(149L);
     }
 
 
