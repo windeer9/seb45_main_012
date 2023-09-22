@@ -9,8 +9,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PostMapper {
     Post postResponseDtoToPost(PostResponseDto responseDto);
-    @Mapping(source = "user.userId", target = "userId")
-    @Mapping(source = "vote.voteId", target = "voteId")
+//    @Mapping(source = "user.userId", target = "userId")
+//    @Mapping(source = "vote.voteId", target = "voteId")
     PostResponseDto postToPostResponseDto(Post post);
     Post postPostDtoToPost(PostPostDto postPostDto);
 }
