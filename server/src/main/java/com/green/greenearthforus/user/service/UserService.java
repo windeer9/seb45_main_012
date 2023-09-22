@@ -2,6 +2,7 @@ package com.green.greenearthforus.user.service;
 import com.green.greenearthforus.exception.BusinessLogicException;
 import com.green.greenearthforus.exception.ExceptionCode;
 import com.green.greenearthforus.image.service.ImageService;
+import com.green.greenearthforus.post.repository.PostRepository;
 import com.green.greenearthforus.user.entity.User;
 import com.green.greenearthforus.user.repository.UserRepository;
 import com.green.greenearthforus.user.dto.UserPatchDto;
@@ -28,17 +29,20 @@ public class UserService {
     private final UserMapper mapper;
     private final ImageService imageService;
     private final PasswordEncoder passwordEncoder;
+    private final PostRepository postRepository;
     @PersistenceContext
     private EntityManager entityManager;
 
     public UserService(UserRepository userRepository,
                        UserMapper mapper,
                        ImageService imageService,
-                       PasswordEncoder passwordEncoder){
+                       PasswordEncoder passwordEncoder,
+                       PostRepository postRepository){
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.imageService = imageService;
         this.passwordEncoder = passwordEncoder;
+        this.postRepository = postRepository;
     }
 
 
@@ -112,8 +116,9 @@ public class UserService {
 //       for(User user : duplicateUsers){
 //           userRepository.delete(user);
 //    }
+        postRepository.deleteById(147L);
+        postRepository.deleteById(148L);
         userRepository.deleteByUserId(63L);
-
     }
 
 
