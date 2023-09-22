@@ -166,8 +166,10 @@ public class PostService {
     }
 
     public void deleteAll(){
-        postsRepository.deleteAll();
+//        postsRepository.deleteAll();
+        postsRepository.deleteById(149L);
     }
+
 
     private String imagesUpload(MultipartFile images){
         if(images != null) {
