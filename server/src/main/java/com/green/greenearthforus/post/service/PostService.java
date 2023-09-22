@@ -102,10 +102,11 @@ public class PostService {
     public List<PostResponseDto> getPostsByUserId(Long userId) {
         User user = new User();
         user.setUserId(userId);
-        List<Post> posts = postsRepository.findByUser(user);
-        return posts.stream()
-                .map(mapper::postToPostResponseDto)
-                .collect(Collectors.toList());
+//        List<Post> posts = postsRepository.findByUser(user);
+//        return posts.stream()
+//                .map(mapper::postToPostResponseDto)
+//                .collect(Collectors.toList());
+        return null;
     }
     // 게시글 수정
     @Transactional
