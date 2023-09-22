@@ -9,6 +9,7 @@ import com.green.greenearthforus.user.dto.UserPostDto;
 import com.green.greenearthforus.user.mapper.UserMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
@@ -98,7 +99,7 @@ public class UserService {
         User existing = getUser(userId);
         userRepository.delete(existing);
     }
-
+    @Transactional
     public void deleteAll() {
 //        userRepository.deleteAll();
 //        userRepository.deleteById(63L);
