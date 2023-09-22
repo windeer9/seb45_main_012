@@ -32,13 +32,13 @@ public class CalendarService {
     }
 
     public CalendarDto.Response createCalendar(long userId) {
-        User user = userService.getUser(userId);
+//        User user = userService.getUser(userId);
 //        if(user.getCalendar() !=null){
 //            throw new BusinessLogicException(ExceptionCode.CALENDAR_EXISTS);
 //        }
 
         Calendar createdCalendar = new Calendar();
-        createdCalendar.setUser(user);
+//        createdCalendar.setUser(user);
         List<LocalDate> date = new ArrayList<>();
         createdCalendar.setStampedDates(date);
 
@@ -46,7 +46,7 @@ public class CalendarService {
     }
 
     public CalendarDto.Response updateCalendar(CalendarDto.Patch calendar, long userId, long calendarId) {
-        userService.getUser(userId);
+//        userService.getUser(userId);
         Calendar findCalendar = findVerifiedCalendar(calendarId);
 
         Optional.ofNullable(calendar.getBody())

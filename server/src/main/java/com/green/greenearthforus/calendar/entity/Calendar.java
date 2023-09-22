@@ -29,12 +29,12 @@ public class Calendar {
     @ElementCollection
     private List<LocalDate> stampedDates;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> post;
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Post> post;
 
 
 }
