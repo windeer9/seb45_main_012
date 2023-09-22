@@ -32,13 +32,13 @@ public class CalendarService {
     }
 
     public CalendarDto.Response createCalendar(long userId) {
-//        User user = userService.getUser(userId);
-//        if(user.getCalendar() !=null){
-//            throw new BusinessLogicException(ExceptionCode.CALENDAR_EXISTS);
-//        }
+        User user = userService.getUser(userId);
+        if(user.getCalendar() !=null){
+            throw new BusinessLogicException(ExceptionCode.CALENDAR_EXISTS);
+        }
 
         Calendar createdCalendar = new Calendar();
-//        createdCalendar.setUser(user);
+        createdCalendar.setUser(user);
         List<LocalDate> date = new ArrayList<>();
         createdCalendar.setStampedDates(date);
 
@@ -46,7 +46,7 @@ public class CalendarService {
     }
 
     public CalendarDto.Response updateCalendar(CalendarDto.Patch calendar, long userId, long calendarId) {
-//        userService.getUser(userId);
+        userService.getUser(userId);
         Calendar findCalendar = findVerifiedCalendar(calendarId);
 
         Optional.ofNullable(calendar.getBody())
@@ -80,19 +80,19 @@ public class CalendarService {
 
         User user = userService.getUser(userId);
         Calendar find;
-//        if (user.getCalendar() != null) {
-//            find = findVerifiedCalendar(user.getCalendar().getCalendarId());
-//        } else {
-//            find = mapper.calendarResponseDtoToCalendar(createCalendar(userId));
-//        }
-//        if (find != null) {
-//            List<LocalDate> stampedDate = find.getStampedDates();
-//            if (stampedDate == null) {
-//                stampedDate = new ArrayList<>();
-//                find.setStampedDates(stampedDate);
-//            }
-//            stampedDate.add(LocalDate.now());
-//        }
+        if (user.getCalendar() != null) {
+            find = findVerifiedCalendar(user.getCalendar().getCalendarId());
+        } else {
+            find = mapper.calendarResponseDtoToCalendar(createCalendar(userId));
+        }
+        if (find != null) {
+            List<LocalDate> stampedDate = find.getStampedDates();
+            if (stampedDate == null) {
+                stampedDate = new ArrayList<>();
+                find.setStampedDates(stampedDate);
+            }
+            stampedDate.add(LocalDate.now());
+        }
     }
 
 

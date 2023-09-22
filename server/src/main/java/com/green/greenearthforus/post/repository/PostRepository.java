@@ -12,7 +12,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByType(String typeName);
 
-//    List<Post> findByUser(User user);
+    List<Post> findByUser(User user);
 
 
 }

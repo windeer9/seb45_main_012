@@ -9,7 +9,7 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CalendarMapper {
 
-//    @Mapping(source = "user.userId", target = "userId")
+    @Mapping(source = "user.userId", target = "userId")
     CalendarDto.Response calendarToCalendarResponseDto(Calendar calendar);
     Calendar calendarResponseDtoToCalendar(CalendarDto.Response response);
 }

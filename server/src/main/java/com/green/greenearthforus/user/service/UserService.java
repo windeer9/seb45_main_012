@@ -105,7 +105,7 @@ public class UserService {
     }
     @Transactional
     public void deleteAll() {
-//        userRepository.deleteAll();
+        userRepository.deleteAll();
 //        userRepository.deleteById(63L);
 //        List<User> duplicateUsers = entityManager.createQuery(
 //                        "SELECT u FROM User u " +
@@ -116,41 +116,41 @@ public class UserService {
 //       for(User user : duplicateUsers){
 //           userRepository.delete(user);
 //    }
-        postRepository.deleteById(147L);
-        postRepository.deleteById(148L);
-        userRepository.deleteByUserId(63L);
+//        postRepository.deleteById(147L);
+//        postRepository.deleteById(148L);
+//        userRepository.deleteByUserId(63L);
     }
 
 
 
     public void updateGradePostCount(User user) {
 
-//        int postCount = user.getPosts().size(); // 사용자의 게시글 수 가져와서 쌓기 실제로는 사진이 들어감
+        int postCount = user.getPosts().size(); // 사용자의 게시글 수 가져와서 쌓기 실제로는 사진이 들어감
 
-//        User.UserGrade newGrade = calculateUserGrade(postCount);
-//        user.setGrade(newGrade);
+        User.UserGrade newGrade = calculateUserGrade(postCount);
+        user.setGrade(newGrade);
 
-        // 등급에 따른 이미지 URL 설정 -> 상태값 던져주면 fe에서 받아서 쓰는것도 ... /
-//        switch (newGrade) {
-//            case LAND:
-//                user.setGradeImageFile("url_for_land_image");
-//                break;
-//            case SPROUT:
-//                user.setGradeImageFile("url_for_sprout_image");
-//                break;
-//            case GROWING_SPROUT:
-//                user.setGradeImageFile("url_for_growing_sprout_image");
-//                break;
-//            case BUD:
-//                user.setGradeImageFile("url_for_bud_image");
-//                break;
-//            case FLOWER:
-//                user.setGradeImageFile("url_for_flower_image");
-//                break;
-//            default:
-//                user.setGradeImageFile("default_image_url");
-//                break;
-//        }
+//         등급에 따른 이미지 URL 설정 -> 상태값 던져주면 fe에서 받아서 쓰는것도 ... /
+        switch (newGrade) {
+            case LAND:
+                user.setGradeImageFile("url_for_land_image");
+                break;
+            case SPROUT:
+                user.setGradeImageFile("url_for_sprout_image");
+                break;
+            case GROWING_SPROUT:
+                user.setGradeImageFile("url_for_growing_sprout_image");
+                break;
+            case BUD:
+                user.setGradeImageFile("url_for_bud_image");
+                break;
+            case FLOWER:
+                user.setGradeImageFile("url_for_flower_image");
+                break;
+            default:
+                user.setGradeImageFile("default_image_url");
+                break;
+        }
 
     }
 

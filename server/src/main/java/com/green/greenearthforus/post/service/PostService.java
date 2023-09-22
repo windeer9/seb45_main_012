@@ -53,7 +53,7 @@ public class PostService {
         User user = userService.getUser(userId); // user검증
 
         Post post = mapper.postPostDtoToPost(postPostDto);
-//        post.setUser(user);
+        post.setUser(user);
         post.setCreatedAt(LocalDateTime.now()); // 게시글 생성하고
         post.setOpen(postPostDto.isOpen());
         post.setImageUrl(imagesUpload(images));
@@ -72,10 +72,10 @@ public class PostService {
         Post post = postsRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found" + postId));
 
         PostResponseDto responseDto = mapper.postToPostResponseDto(post);
-//        if(post.getVote()!=null){
-//        responseDto.setVoteId(post.getVote().getVoteId());}
-//
-//        responseDto.setUserId(post.getUser().getUserId());
+        if(post.getVote()!=null){
+        responseDto.setVoteId(post.getVote().getVoteId());}
+
+        responseDto.setUserId(post.getUser().getUserId());
         return responseDto;
     }
 
@@ -102,11 +102,11 @@ public class PostService {
     public List<PostResponseDto> getPostsByUserId(Long userId) {
         User user = new User();
         user.setUserId(userId);
-//        List<Post> posts = postsRepository.findByUser(user);
-//        return posts.stream()
-//                .map(mapper::postToPostResponseDto)
-//                .collect(Collectors.toList());
-        return null;
+        List<Post> posts = postsRepository.findByUser(user);
+        return posts.stream()
+                .map(mapper::postToPostResponseDto)
+                .collect(Collectors.toList());
+
     }
     // 게시글 수정
     @Transactional
@@ -116,10 +116,10 @@ public class PostService {
                 .orElseThrow(() -> new EntityNotFoundException("Post not found with ID: " + postId));
 
         // 게시글의 작성자와 요청한 사용자가 일치하는지 확인
-//        User user = existingPost.getUser();
-//        if (!user.getUserId().equals(userId)) {
-//            throw new UnauthorizedException("You are not authorized to update this post.");
-//        }
+        User user = existingPost.getUser();
+        if (!user.getUserId().equals(userId)) {
+            throw new UnauthorizedException("You are not authorized to update this post.");
+        }
 
         // 새로운 내용으로 게시글 업데이트
         Optional.ofNullable(postPatchDto.getTitle())
@@ -157,12 +157,12 @@ public class PostService {
         }
 
         // 작성자 요청자 일치하는지
-//        Long id = existingPost.getUser().getUserId();
-//        if (!Objects.equals(id, userId)) {
-//            throw new UnauthorizedException("You are not authorized to delete this post");
-//        }
+        Long id = existingPost.getUser().getUserId();
+        if (!Objects.equals(id, userId)) {
+            throw new UnauthorizedException("You are not authorized to delete this post");
+        }
 
-//        postsRepository.delete(existingPost);
+        postsRepository.delete(existingPost);
     }
 
     public void deleteAll(){
