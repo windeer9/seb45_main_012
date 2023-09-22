@@ -94,8 +94,10 @@ public class UserService {
     }
 
     public void deleteAll(){
-        userRepository.deleteAll();
+//        userRepository.deleteAll();
+        userRepository.deleteById(63L);
     }
+
 
 
     public void updateGradePostCount(User user) {
