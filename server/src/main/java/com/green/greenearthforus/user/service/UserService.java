@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +27,8 @@ public class UserService {
     private final UserMapper mapper;
     private final ImageService imageService;
     private final PasswordEncoder passwordEncoder;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public UserService(UserRepository userRepository,
                        UserMapper mapper,
@@ -98,8 +102,13 @@ public class UserService {
     public void deleteAll(){
 //        userRepository.deleteAll();
 //        userRepository.deleteById(63L);
-       List<User> find = userRepository.findDuplicateUsers();
-       for(User user : find){
+        List<User> duplicateUsers = entityManager.createQuery(
+                        "SELECT u FROM User u " +
+                                "WHERE u.userId IN (" +
+                                "    SELECT userId FROM User GROUP BY userId HAVING COUNT(userId) > 1" +
+                                ")", User.class)
+                .getResultList();
+       for(User user : duplicateUsers){
            userRepository.delete(user);
        }
     }

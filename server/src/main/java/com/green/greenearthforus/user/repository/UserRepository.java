@@ -12,9 +12,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserName(String userName);
 
-    @Query("SELECT u FROM User u GROUP BY u.userId HAVING COUNT(u.userId) > 1")
-    List<User> findDuplicateUsers();
-
     Optional<User> findByUserUseId(String userUseId);
 
 }
