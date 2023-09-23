@@ -87,7 +87,8 @@ public class SecurityConfig{
         configuration.setAllowedOriginPatterns(List.of("http://greenearthforus.**"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.addAllowedHeader("Authorization");
+        configuration.addAllowedHeader("Content-Type");
         configuration.addExposedHeader("Authorization");
         configuration.addExposedHeader("Refresh");
         configuration.setAllowCredentials(true);
