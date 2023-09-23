@@ -85,8 +85,9 @@ public class SecurityConfig{
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://greenearthforus.s3-website.ap-northeast-2.amazonaws.com"));
         configuration.setAllowedOriginPatterns(List.of("http://greenearthforus.**"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         configuration.addExposedHeader("Authorization");
         configuration.addExposedHeader("Refresh");
         configuration.setAllowCredentials(true);
