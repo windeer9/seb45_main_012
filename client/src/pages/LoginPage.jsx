@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginFunc from '../auth/LoginFunc.js';
+import { postLogin } from 'api/api.js';
 import { useDispatch } from 'react-redux';
 import { setActiveMenu } from '../store/menuSlice.js';
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ const LogIn = () => {
     e.preventDefault();
     
     try {
-      const result = await LoginFunc(id, password);
+      const result = await postLogin(id, password);
       if (result === true) {
         dispatch(setActiveMenu('전체 글 보기'));
         navigate('/');

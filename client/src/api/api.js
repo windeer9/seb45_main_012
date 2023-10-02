@@ -141,3 +141,49 @@ export const patchPost = (userId, postId, title, body, img) => {
   });
 }
 
+export const patchUserInform = (userId, userName, password, passwordQuestion, passwordAnswer) => {
+
+}
+
+export const postLogin = async ( id, password ) => {
+  try {
+    if ( !id && !password ) {
+      return 'ID를 입력하세요.';
+    } else if (!password) {
+      return '비밀번호를 입력하세요.';
+    }
+    
+    const data = {
+      userUseId: id,
+      password: password
+    }
+
+    const res = await axios.post('http://52.78.145.37:8080/auth/login', data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const auth = res.headers['authorization'];
+    const accessToken = auth.substring(6);
+    localStorage.setItem('accessToken', accessToken);
+    return true;
+
+  } catch (error) {
+    if ( error.response.status === 401) {
+      return 'ID 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.';
+    }
+    return '오류가 발생했습니다.';
+  } 
+}
+
+const accessToken = localStorage.getItem('accessToken');
+
+if (accessToken) {
+  instance.interceptors.request.use(
+    function (config) {
+      instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+      return config;
+    }
+  )
+}
