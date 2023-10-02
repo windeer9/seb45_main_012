@@ -54,7 +54,9 @@ public class PostService {
     public Post createPost(Long userId, PostPostDto postPostDto, MultipartFile images)  { // 유저, 게시글
         User user = userService.getUser(userId); // user검증
 
-        if(postPostDto.getType().equals("auth") && user.getRole()!=User.Role.ADMIN) throw new BusinessLogicException(ExceptionCode.USER_FORBIDDEN);
+        if(postPostDto.getType().equals("auth") && user.getRole()!=User.Role.ADMIN){
+            throw new BusinessLogicException(ExceptionCode.USER_FORBIDDEN);
+        }
 
         Post post = mapper.postPostDtoToPost(postPostDto);
         post.setUser(user);
