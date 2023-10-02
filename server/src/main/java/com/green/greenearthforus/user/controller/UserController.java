@@ -91,4 +91,14 @@ public class UserController { // 이미지 데이터를 바이너리 형태로 �
         userService.deleteAll();
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/auth/{user_id}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable(name = "user_id") Long userId){
+
+        User updateUser = userService.updateUserAuth(userId);
+
+        UserResponseDto responseDto = mapper.userToUserResponseDto(updateUser);
+
+        return ResponseEntity.ok(responseDto);
+    }
 }

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.green.greenearthforus.user.entity.User.Role.ADMIN;
 import static com.green.greenearthforus.user.entity.User.Role.USER;
 import static com.green.greenearthforus.user.entity.User.UserGrade.LAND;
 
@@ -96,6 +97,15 @@ public class UserService {
 
 
         return userRepository.save(existing);
+    }
+
+    public User updateUserAuth(Long userId){
+
+        User user = getUser(userId);
+
+        user.setRole(ADMIN);
+
+        return userRepository.save(user);
     }
 
     // 사용자 삭제
