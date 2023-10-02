@@ -58,7 +58,7 @@ public class SecurityConfig{
                                 .antMatchers("/auth/login").permitAll()
                         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .antMatchers(HttpMethod.POST, "/user").permitAll()
-                        .antMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN", "USER")
+//                        .antMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN", "USER")
                         .antMatchers(HttpMethod.PATCH, "/user/**").hasAnyRole("ADMIN", "USER")
                         .antMatchers(HttpMethod.DELETE, "/user/**").hasAnyRole("ADMIN", "USER")
                         .antMatchers(HttpMethod.POST, "/post/**").hasAnyRole("ADMIN", "USER")
