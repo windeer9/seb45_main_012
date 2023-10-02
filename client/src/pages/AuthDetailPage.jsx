@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import '../styles/Button.css';
 import '../styles/BoardDetailPage.css';
 import NavBar from '../components/NavBar.jsx';
@@ -18,6 +19,19 @@ const AuthDetailPage = () => {
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
 
+  const [loggedInUserId, setLoggedInUserId] = useState({});
+  
+  const accessToken = localStorage.getItem('accessToken');
+  useEffect(() => {
+    if (accessToken) {
+      setIsLoggedIn(true);
+      const decodedToken = jwtDecode(accessToken);
+      setLoggedInUserId(decodedToken.userId);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [accessToken]);
+
   const [vote, setVote] = useState({});
   const [alreadyLiked, setAlreadyLiked] = useState(false); 
   const [liked, setLiked] = useState(alreadyLiked);
@@ -29,7 +43,6 @@ const AuthDetailPage = () => {
 
   const intersectionRef = useRef(null);
 
-  const accessToken = localStorage.getItem('accessToken');
   const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
   
   useEffect(() => {
@@ -106,7 +119,7 @@ const AuthDetailPage = () => {
     setCommentText(event.target.value);
   };
 
-  const handleSubmitComment = () => {
+  const handleSubmitComment = async () => {
     if (commentText.trim() === '') {
       return;
     }
@@ -115,23 +128,17 @@ const AuthDetailPage = () => {
       return;
     }
 
-    console.log('댓글 내용:', commentText);
-
-    postComment(postId, userId, commentText)
-      .then((response) => {
-        console.log('댓글 작성 완료:', response.data);
-        getComment(postId)
-          .then((response) => {
-            const sortedComments = response.data.sort((a, b) => {
-              return new Date(b.createdAt) - new Date(a.createdAt);
-            });
-            setAllComments(sortedComments);
-            setVisibleComments(sortedComments.slice(0, 10));
-          })
-      })
-      .catch((error) => {
-        console.error('댓글 작성 오류:', error);
-      });
+    try {
+      // 댓글 작성 API 호출
+      const response = await postComment(postId, loggedInUserId, commentText);
+      console.log('댓글 작성 완료:', response.data);
+      setCommentText('');
+  
+      // 페이지를 새로고침
+      window.location.reload();
+    } catch (error) {
+      console.error('댓글 작성 오류:', error);
+    }
   };
 
   useEffect(() => {
@@ -156,18 +163,41 @@ const AuthDetailPage = () => {
 
 
     // 댓글 데이터 가져오기
-    getComment(postId, userId)
-      .then((response) => {
-        const sortedComments = response.data.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setAllComments(sortedComments);
-        setVisibleComments(sortedComments.slice(0, 10));
-      })
-      .catch((error) => {
-        console.error('댓글 데이터 가져오기 오류:', error);
+    getComment(postId)
+    .then((response) => {
+      const sortedComments = response.data.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
       });
-  }, []);
+      const commentsWithUser = sortedComments.map((comment) => ({
+        ...comment,
+        user: null,
+      }));
+
+      // 사용자 정보를 가져온 후에 댓글 객체를 갱신하고 상태에 설정
+      const updateUserComments = async () => {
+        for (let i = 0; i < commentsWithUser.length; i++) {
+          const comment = commentsWithUser[i];
+          try {
+            const userResponse = await getUser(comment.userId);
+            const user = userResponse.data;
+            const updatedComment = {
+              ...comment,
+              user,
+            };
+            commentsWithUser[i] = updatedComment;
+          } catch (error) {
+            console.error('댓글 사용자 데이터 가져오기 오류:', error);
+          }
+        }
+        setVisibleComments(commentsWithUser.slice(0, 10));
+      };
+
+      updateUserComments();
+    })
+    .catch((error) => {
+      console.error('댓글 데이터 가져오기 오류:', error);
+    });
+}, [postId, userId]);
 
   useEffect(() => {
     const handleIntersect = (entries) => {
@@ -236,15 +266,15 @@ const AuthDetailPage = () => {
             </div>
           )}     
             {visibleComments.map((comment) => (
-              <div key={comment.id} className='post_detail_header'>
-                <div>
-                  <p>
-                    {user.grade} {user.userName}
-                  </p>
-                                  <p>{comment.body}</p>
-                </div>
+            <div key={comment.commentId} className='post_detail_header'>
+              <div>
+                <p>
+                  {comment.user.grade} {comment.user.userName}
+                </p>
+                <p>{comment.body}</p>
               </div>
-            ))}
+            </div>
+          ))}
           </div>
       </div>
     </>

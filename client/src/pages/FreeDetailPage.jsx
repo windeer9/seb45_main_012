@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 import '../styles/Button.css';
 import '../styles/BoardDetailPage.css';
 import NavBar from '../components/NavBar.jsx';
@@ -18,6 +19,19 @@ const FreeDetailPage = () => {
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
 
+  const [loggedInUserId, setLoggedInUserId] = useState({});
+
+  const accessToken = localStorage.getItem('accessToken');
+  useEffect(() => {
+    if (accessToken) {
+      setIsLoggedIn(true);
+      const decodedToken = jwtDecode(accessToken);
+      setLoggedInUserId(decodedToken.userId);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [accessToken]);
+
   const [vote, setVote] = useState({});
   // 해당 게시글에 이미 좋아요를 했었는지 여부를 저장하는 상태
   // 새로고침했을때 이전 기록을 로컬스토리지에서 가져오는 변수
@@ -33,7 +47,6 @@ const FreeDetailPage = () => {
 
   const intersectionRef = useRef(null);
 
-  const accessToken = localStorage.getItem('accessToken');
   const [ isLoggedIn, setIsLoggedIn] = useState(!accessToken);
   
   useEffect(() => {
@@ -110,7 +123,7 @@ const FreeDetailPage = () => {
     setCommentText(event.target.value);
   };
 
-  const handleSubmitComment = () => {
+  const handleSubmitComment = async () => {
     if (commentText.trim() === '') {
       return;
     }
@@ -118,24 +131,35 @@ const FreeDetailPage = () => {
       alert('댓글은 500자 이내로 작성해주세요.');
       return;
     }
+    try {
+      // 댓글 작성 API 호출
+      const response = await postComment(postId, loggedInUserId, commentText);
+      console.log('댓글 작성 완료:', response.data);
+      setCommentText('');
+  
+      // 페이지를 새로고침
+      window.location.reload();
+    } catch (error) {
+      console.error('댓글 작성 오류:', error);
+    }
 
-    postComment(postId, userId, commentText)
-      .then((response) => {
-        console.log('댓글 작성 완료:', response.data);
-        // window.location.reload();
-        // 댓글 새로고침 보다 갱신이 더 자연스러워서 수정합니다.
-        getComment(postId)
-          .then((response) => {
-            const sortedComments = response.data.sort((a, b) => {
-              return new Date(b.createdAt) - new Date(a.createdAt);
-            });
-            setAllComments(sortedComments);
-            setVisibleComments(sortedComments.slice(0, 10));
-          })
-      })
-      .catch((error) => {
-        console.error('댓글 작성 오류:', error);
-      });
+    // try {
+    //   // 댓글 작성 API 호출
+    //   const response = await postComment(postId, loggedInUserId, commentText);
+    //   console.log('댓글 작성 완료:', response.data);
+    //   setCommentText('');
+  
+    //   // 새로 작성된 댓글과 사용자 정보를 가져오기
+    //   const newComment = response.data;
+    //   const userResponse = await getUser(newComment.userId);
+    //   const user = userResponse.data;
+  
+    //   // 새로 작성된 댓글을 기존 댓글 상단에 추가
+    //   setAllComments((prevComments) => [newComment, ...prevComments]);
+  
+    // } catch (error) {
+    //   console.error('댓글 작성 오류:', error);
+    // }
   };
 
   useEffect(() => {
@@ -159,18 +183,40 @@ const FreeDetailPage = () => {
 
     // 댓글 데이터 가져오기
     getComment(postId)
-      .then((response) => {
-        const sortedComments = response.data.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setAllComments(sortedComments);
-        setVisibleComments(sortedComments.slice(0, 10));
-      })
-      .catch((error) => {
-        console.error('댓글 데이터 가져오기 오류:', error);
+    .then((response) => {
+      const sortedComments = response.data.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
       });
-  }, []);
+      const commentsWithUser = sortedComments.map((comment) => ({
+        ...comment,
+        user: null,
+      }));
 
+      // 사용자 정보를 가져온 후에 댓글 객체를 갱신하고 상태에 설정
+      const updateUserComments = async () => {
+        for (let i = 0; i < commentsWithUser.length; i++) {
+          const comment = commentsWithUser[i];
+          try {
+            const userResponse = await getUser(comment.userId);
+            const user = userResponse.data;
+            const updatedComment = {
+              ...comment,
+              user,
+            };
+            commentsWithUser[i] = updatedComment;
+          } catch (error) {
+            console.error('댓글 사용자 데이터 가져오기 오류:', error);
+          }
+        }
+        setVisibleComments(commentsWithUser.slice(0, 10));
+      };
+
+      updateUserComments();
+    })
+    .catch((error) => {
+      console.error('댓글 데이터 가져오기 오류:', error);
+    });
+}, [postId, userId]);
 
   useEffect(() => {
     const handleIntersect = (entries) => {
@@ -238,7 +284,7 @@ const FreeDetailPage = () => {
             <div key={comment.commentId} className='post_detail_header'>
               <div>
                 <p>
-                  {user.grade} {user.userName}
+                  {comment.user.grade} {comment.user.userName}
                 </p>
                 <p>{comment.body}</p>
               </div>

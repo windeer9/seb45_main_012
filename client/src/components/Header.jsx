@@ -48,6 +48,10 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
     dispatch(setActiveMenu('전체 글 보기'));
   };
 
+  const handleProfileClick = () => {
+    dispatch(setActiveMenu('내가 쓴 글'));
+  }
+
   useEffect(() => {
 
     if (accessToken) {
@@ -71,7 +75,7 @@ const HeaderLoggedIn = ( { isLoggedIn, handleLogout } ) => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <div className='header_bar_user'>
-          <Link to='/mypage/main' className="header_profile">
+          <Link to='/mypage/main' className="header_profile" onClick={handleProfileClick}>
             <img className="header_user_picture" src={require("../assets/user_shadow.png")} alt="user profile" />
             <div className="header_user_name">{userName} 님</div>
           </Link>
