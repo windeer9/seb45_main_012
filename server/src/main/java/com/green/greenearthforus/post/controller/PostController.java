@@ -106,16 +106,4 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/info/{user_id}")
-    public ResponseEntity<PostResponseDto> infoPost(@PathVariable(value = "user-id") Long userId,
-                                                      @RequestPart(value = "image", required = false) MultipartFile image,
-                                                      @RequestPart(value = "json") PostPostDto postPostDto) {
-
-        Post createdPost = postService.createPost(userId, postPostDto, image);
-
-        PostResponseDto responseDto = mapper.postToPostResponseDto(createdPost);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
-    }
-
 }

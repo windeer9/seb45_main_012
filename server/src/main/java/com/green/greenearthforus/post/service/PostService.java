@@ -1,5 +1,7 @@
 package com.green.greenearthforus.post.service;
 
+import com.green.greenearthforus.exception.BusinessLogicException;
+import com.green.greenearthforus.exception.ExceptionCode;
 import com.green.greenearthforus.exception.ImageDeletionException;
 import com.green.greenearthforus.exception.UnauthorizedException;
 import com.green.greenearthforus.image.service.ImageService;
@@ -52,6 +54,8 @@ public class PostService {
     public Post createPost(Long userId, PostPostDto postPostDto, MultipartFile images)  { // 유저, 게시글
         User user = userService.getUser(userId); // user검증
 
+        if(postPostDto.getType().equals("auth") && user.getRole()!=User.Role.ADMIN) throw new BusinessLogicException(ExceptionCode.USER_FORBIDDEN);
+
         Post post = mapper.postPostDtoToPost(postPostDto);
         post.setUser(user);
         post.setCreatedAt(LocalDateTime.now()); // 게시글 생성하고
@@ -61,7 +65,7 @@ public class PostService {
         Post savedPost = postsRepository.save(post); // 게시글 저장
         calendarService.updateStampedDate(userId);//post생성으로 calendar에 date저장
         // 사용자의 등급을 게시글 수에 따라서 추가 땅 -> 새싹 ...
-        userService.getUser(user.getUserId());
+
         return savedPost;
 
     }

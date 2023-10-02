@@ -3,6 +3,7 @@ package com.green.greenearthforus.exception;
 import lombok.Getter;
 
 public enum ExceptionCode {
+    USER_FORBIDDEN(403, "Access Denied"),
     VOTE_EXISTS(409, "Vote exists"),
     IMAGE_NOT_FOUND(404, "Image Not Found"),
     FILE_UPLOAD_FAIL(404, "File Upload Fail"),
