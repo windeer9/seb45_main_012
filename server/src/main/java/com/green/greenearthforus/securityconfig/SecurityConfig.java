@@ -1,11 +1,14 @@
 package com.green.greenearthforus.securityconfig;
 
+import com.green.greenearthforus.exception.BusinessLogicException;
+import com.green.greenearthforus.exception.ExceptionCode;
 import com.green.greenearthforus.login.handler.UserAccessDeniedHandler;
 import com.green.greenearthforus.login.util.UserAuthenticationEntryPoint;
 import com.green.greenearthforus.login.util.CustomAuthorityUtils;
 import com.green.greenearthforus.login.filter.JwtAuthenticationFilter;
 import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
 import com.green.greenearthforus.login.filter.JwtVerificationFilter;
+import io.jsonwebtoken.Claims;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +24,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -114,5 +118,48 @@ public class SecurityConfig{
         }
     }
 
+    public String regenerateAccessTokenUsingRefreshToken(HttpServletRequest request){
+        String jws = request.getHeader("Authorization").replace("Bearer ", "");
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        if(isAccessTokenExpired(request)){
+            if(request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()){
+                // refresh토큰으로 만료된 access토큰을 재발급하는 로직
+                Claims claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+                String neoAccessToken = generateNewAccessTokenUsingRefreshToken(request.getHeader("Refresh"), base64EncodedSecretKey, claims);
+                if(neoAccessToken != null){
+                    return neoAccessToken;
+                }
+            } else{
+                Claims claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+                return jwtTokenizer.generateAccessToken(claims, claims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
+            }
+        }
+        return new BusinessLogicException(ExceptionCode.USER_FORBIDDEN).toString();
+    }
+
+
+    public boolean isAccessTokenExpired(HttpServletRequest request){
+        String jws = request.getHeader("Authorization").replace("Bearer ", "");
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
+        long currentTime = System.currentTimeMillis();
+
+        return expirationTime < currentTime;
+    }
+
+    public String generateNewAccessTokenUsingRefreshToken(String refreshToken, String key, Claims accessTokenClaims) {
+//        Key currentKey = jwtTokenizer.getKeyFromBase64EncodedKey(key);
+//
+//        Claims claims = Jwts.parserBuilder()
+//                .setSigningKey(currentKey)
+//                .build()
+//                .parseClaimsJws(refreshToken)
+//                .getBody();
+//
+//        String username = claims.getSubject();
+        String subject = jwtTokenizer.getClaims(refreshToken, key).getBody().getSubject();
+
+        return jwtTokenizer.generateAccessToken(accessTokenClaims, subject, jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), key);
+    }
 
 }
