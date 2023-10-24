@@ -58,6 +58,9 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                 if(neoAccessToken != null){
                     jws = neoAccessToken;
                 }
+            } else{
+                Claims claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+                jws = jwtTokenizer.generateAccessToken(claims, claims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
             }
         }
 
