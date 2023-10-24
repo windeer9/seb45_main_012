@@ -86,7 +86,9 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
             } else{
                 Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
                 jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
+                String refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
                 response.setHeader("Authorization", "Bearer "+jws);
+                response.setHeader("Refresh", refresh);
             }
         }
     }
