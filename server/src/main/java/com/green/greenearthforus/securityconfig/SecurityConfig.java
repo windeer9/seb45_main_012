@@ -89,6 +89,7 @@ public class SecurityConfig{
         configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
         configuration.addAllowedHeader("Authorization");
         configuration.addAllowedHeader("Content-Type");
+        configuration.addAllowedHeader("Refresh");
         configuration.addExposedHeader("Authorization");
         configuration.addExposedHeader("Refresh");
         configuration.setAllowCredentials(true);
