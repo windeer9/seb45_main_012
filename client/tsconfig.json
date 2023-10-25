@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./src",
     "allowJs": true,
     "target": "ES5",
     "outDir": "./dist",
     "moduleResolution": "Node",
-    "lib": ["ES2015", "DOM", "DOM.Iterable"]
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"]
