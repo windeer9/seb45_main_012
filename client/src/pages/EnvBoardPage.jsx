@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Button.css';
-import '../components/PostList.jsx';
+import '../components/PostList.tsx';
 import EnvPostList from '../components/EnvPostList.jsx';
 import NavBar from '../components/NavBar.tsx';
 

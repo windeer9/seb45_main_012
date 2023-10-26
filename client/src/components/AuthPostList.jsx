@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/AuthPostList.css';
 import { getAuthPosts } from 'api/api.js';
+import { Interface } from 'readline';
 
 const AuthPostList = () => {
   const [allAuthPosts, setAllAuthPosts] = useState([]);
@@ -10,16 +11,26 @@ const AuthPostList = () => {
   const itemsPerPage = 6;
   const maxPagesToShow = 5; // 한 번에 보여줄 최대 페이지 수
 
+  // interface AuthPost {
+  //   createdAt: string;
+  //   postId: number;
+  //   title: string;
+  //   userId: number;
+  //   body: string;
+  //   open: boolean;
+  //   imageUrls: string;
+  // }
+
   useEffect(() => {
     getAuthPosts()
-      .then((res)=> {
+      .then(res => {
         const sortedData = res.data.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setAllAuthPosts(sortedData);
         setVisibleAuthPosts(sortedData.slice(0, 6));
       })
-      .catch((error) => console.error('Error:', error));
+      .catch(error => console.error('Error:', error));
   }, []);
 
   // 페이지를 변경할 때 visibleAuthPosts 업데이트
@@ -36,7 +47,7 @@ const AuthPostList = () => {
   };
 
   // 페이지 번호를 클릭했을 때 호출되는 함수
-  const handlePageClick = (pageNumber) => {
+  const handlePageClick = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
@@ -76,31 +87,33 @@ const AuthPostList = () => {
       <div className="auth_post_grid">
         {visibleAuthPosts.map((post, index) => (
           <Link
-          to={`/auth/${post.postId}/${post.userId}`} // 경로 설정
-          key={post.postId}
-          className="auth_post_item_container"
-          >
+            to={`/auth/${post.postId}/${post.userId}`} // 경로 설정
+            key={post.postId}
+            className="auth_post_item_container">
             <img src={post.imageUrl} alt={`${post.postId}`} />
           </Link>
         ))}
       </div>
       <div className="pagination">
-        {!isPrevButtonDisabled && visibleAuthPosts.length > 0 && <button onClick={() => handlePageClick(1)}>&lt;&lt;</button>}
-        {!isPrevButtonDisabled && visibleAuthPosts.length > 0 && <button onClick={() => handlePageClick(currentPage - 1)}>&lt;</button>}
-        {getPageNumbers().map((pageNumber) => (
+        {!isPrevButtonDisabled && visibleAuthPosts.length > 0 && (
+          <button onClick={() => handlePageClick(1)}>&lt;&lt;</button>
+        )}
+        {!isPrevButtonDisabled && visibleAuthPosts.length > 0 && (
+          <button onClick={() => handlePageClick(currentPage - 1)}>&lt;</button>
+        )}
+        {getPageNumbers().map(pageNumber => (
           <button
             key={pageNumber}
             onClick={() => handlePageClick(pageNumber)}
-            className={currentPage === pageNumber ? 'active' : ''}
-          >
+            className={currentPage === pageNumber ? 'active' : ''}>
             {pageNumber}
           </button>
         ))}
-        {!isNextButtonDisabled && visibleAuthPosts.length > 0 && <button onClick={() => handlePageClick(currentPage + 1)}>&gt;</button>}
         {!isNextButtonDisabled && visibleAuthPosts.length > 0 && (
-          <button onClick={() => handlePageClick(Math.ceil(allAuthPosts.length / itemsPerPage))}>
-            &gt;&gt;
-          </button>
+          <button onClick={() => handlePageClick(currentPage + 1)}>&gt;</button>
+        )}
+        {!isNextButtonDisabled && visibleAuthPosts.length > 0 && (
+          <button onClick={() => handlePageClick(Math.ceil(allAuthPosts.length / itemsPerPage))}>&gt;&gt;</button>
         )}
       </div>
     </>

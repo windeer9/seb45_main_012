@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Button.css';
-import PostList from '../components/PostList.jsx';
+import PostList from '../components/PostList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 const AllBoardPage = () => {
