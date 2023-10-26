@@ -25,10 +25,9 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authenticationException) throws IOException{
             Exception exception = (Exception) request.getAttribute("exception");
 
-
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         if(request.getHeader("Authorization") != null && !request.getHeader("Authorization").isEmpty()) {
             String jws = request.getHeader("Authorization").replace("Bearer ", "");
+            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
             if (isAccessTokenExpired(request)) {
                 if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
                     if (isRefreshTokenExpired(request)) {
