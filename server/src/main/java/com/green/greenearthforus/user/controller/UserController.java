@@ -1,17 +1,22 @@
 package com.green.greenearthforus.user.controller;
 
 
+import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
 import com.green.greenearthforus.user.entity.User;
 import com.green.greenearthforus.user.dto.UserPatchDto;
 import com.green.greenearthforus.user.dto.UserPostDto;
 import com.green.greenearthforus.user.dto.UserResponseDto;
 import com.green.greenearthforus.user.mapper.UserMapper;
 import com.green.greenearthforus.user.service.UserService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -21,11 +26,14 @@ public class UserController { // 이미지 데이터를 바이너리 형태로 �
 
     private final UserService userService;
     private final UserMapper mapper;
+    private final JwtTokenizer jwtTokenizer;
 
     public UserController(UserService userService,
-                          UserMapper mapper){
+                          UserMapper mapper,
+                          JwtTokenizer jwtTokenizer){
         this.userService = userService;
         this.mapper = mapper;
+        this.jwtTokenizer = jwtTokenizer;
     }
 
 
@@ -102,5 +110,32 @@ public class UserController { // 이미지 데이터를 바이너리 형태로 �
         return ResponseEntity.ok(responseDto);
     }
 
+    @PostMapping("auth/refresh/{user_id}")
+    public ResponseEntity<UserResponseDto> refreshToken(@PathVariable(name = "user_id") Long userId){
+        User user = userService.getUser(userId);
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getUserId());
+        claims.put("userName", user.getUserName());
+        claims.put("userUseId", user.getUserUseId());
+        claims.put("password", user.getPassword());
+        claims.put("roles", user.getRole());
+
+        String subject = user.getUserName();
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
+
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+
+        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+
+        Date refreshExpiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
+
+        String refreshToken = jwtTokenizer.generateRefreshToken(subject, refreshExpiration, base64EncodedSecretKey);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer "+accessToken);
+        headers.add("Refresh", refreshToken);
+        return ResponseEntity.ok().headers(headers).build();
+    }
 
 }
