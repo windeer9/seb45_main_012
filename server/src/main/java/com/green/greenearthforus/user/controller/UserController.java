@@ -101,4 +101,6 @@ public class UserController { // 이미지 데이터를 바이너리 형태로 �
 
         return ResponseEntity.ok(responseDto);
     }
+
+
 }
