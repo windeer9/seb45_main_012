@@ -25,15 +25,19 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authenticationException) throws IOException{
             Exception exception = (Exception) request.getAttribute("exception");
 
+
+            String jws = "";
+            String refresh = "";
+
         if(request.getHeader("Authorization") != null && !request.getHeader("Authorization").isEmpty()) {
-            String jws = request.getHeader("Authorization").replace("Bearer ", "");
+            jws = request.getHeader("Authorization").replace("Bearer ", "");
             String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
             if (isAccessTokenExpired(request)) {
                 if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
                     if (isRefreshTokenExpired(request)) {
                         Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
                         jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
-                        String refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
+                        refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
                         response.setHeader("Authorization", "Bearer " + jws);
                         response.setHeader("Refresh", refresh);
                     } else {
@@ -47,7 +51,7 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
                 } else {
                     Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
                     jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
-                    String refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
+                    refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
                     response.setHeader("Authorization", "Bearer " + jws);
                     response.setHeader("Refresh", refresh);
                 }
@@ -56,12 +60,12 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 
         ErrorResponder.sendErrorResponse(response, HttpStatus.UNAUTHORIZED);
-            logExceptionMessage(authenticationException, exception);
+            logExceptionMessage(authenticationException, exception, jws, refresh);
     }
 
-    private void logExceptionMessage(AuthenticationException authException, Exception exception){
+    private void logExceptionMessage(AuthenticationException authException, Exception exception, String access, String refresh){
         String message = exception != null ? exception.getMessage() : authException.getMessage();
-        log.warn("Unauthorized error happend: {}", message + " contain new token.");
+        log.warn("Unauthorized error happend: {}", message + "\""+ access + "\"" + refresh);
     }
 
     public boolean isAccessTokenExpired(HttpServletRequest request){
