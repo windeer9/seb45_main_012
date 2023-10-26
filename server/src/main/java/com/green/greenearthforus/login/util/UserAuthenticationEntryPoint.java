@@ -2,6 +2,7 @@ package com.green.greenearthforus.login.util;
 
 import com.green.greenearthforus.login.error.ErrorResponder;
 import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
+import com.green.greenearthforus.user.controller.UserController;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @Component
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     private JwtTokenizer jwtTokenizer;
+    private UserController userController;
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
