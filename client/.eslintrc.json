@@ -14,19 +14,22 @@
     "plugin:import/recommended",
     "prettier"
   ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
   "rules": {
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "import/no-unresolved": [2, { "commonjs": true, "amd": true }],
+    "import/extensions": [2, "ignorePackages"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src"] // src 폴더를 모듈 경로로 추가
+        "paths": ["src"], // src 폴더를 모듈 경로로 추가
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
