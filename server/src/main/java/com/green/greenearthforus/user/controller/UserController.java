@@ -110,7 +110,7 @@ public class UserController { // 이미지 데이터를 바이너리 형태로 �
         return ResponseEntity.ok(responseDto);
     }
 
-    @PostMapping("auth/refresh/{user_id}")
+    @PostMapping("refresh/{user_id}")
     public ResponseEntity<UserResponseDto> refreshToken(@PathVariable(name = "user_id") Long userId){
         User user = userService.getUser(userId);
 
