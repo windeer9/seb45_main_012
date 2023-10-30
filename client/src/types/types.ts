@@ -21,3 +21,9 @@ export interface AuthPost {
   open: boolean;
   imageUrl: string;
 }
+
+export interface ModalProps {
+  content: React.ReactNode;
+  onCancel: () => void;
+  onConfirm: () => void;
+}

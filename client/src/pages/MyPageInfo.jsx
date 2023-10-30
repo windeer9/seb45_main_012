@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setActiveMenu } from '../store/menuSlice.js';
 import NavBar from '../components/NavBar.tsx';
-import Modal from '../components/Modal.jsx';
+import Modal from '../components/Modal.tsx';
 import '../styles/Button.css';
 import '../styles/MyPageInfo.css';
 import jwtDecode from 'jwt-decode';
