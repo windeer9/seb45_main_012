@@ -18,12 +18,7 @@
   "rules": {
     "no-unused-vars": "warn",
     "import/no-unresolved": [2, { "commonjs": true, "amd": true }],
-    "import/extensions": [2, "ignorePackages"],
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+    "import/extensions": [2, "ignorePackages"]
   },
   "settings": {
     "import/resolver": {

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Button.css';
 import '../components/PostList.tsx';
-import EnvPostList from '../components/EnvPostList.jsx';
+import EnvPostList from '../components/EnvPostList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 const EnvBoardPage = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Button.css';
 import '../components/PostList.tsx';
-import AuthPostList from '../components/AuthPostList.jsx';
+import AuthPostList from '../components/AuthPostList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 const AuthBoardPage = () => {

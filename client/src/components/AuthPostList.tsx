@@ -2,35 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/AuthPostList.css';
 import { getAuthPosts } from 'api/api.js';
-import { Interface } from 'readline';
+import { AuthPost } from '../types/types';
 
-const AuthPostList = () => {
-  const [allAuthPosts, setAllAuthPosts] = useState([]);
-  const [visibleAuthPosts, setVisibleAuthPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const maxPagesToShow = 5; // 한 번에 보여줄 최대 페이지 수
-
-  // interface AuthPost {
-  //   createdAt: string;
-  //   postId: number;
-  //   title: string;
-  //   userId: number;
-  //   body: string;
-  //   open: boolean;
-  //   imageUrls: string;
-  // }
+const AuthPostList: React.FC = () => {
+  const [allAuthPosts, setAllAuthPosts] = useState<AuthPost[]>([]);
+  const [visibleAuthPosts, setVisibleAuthPosts] = useState<AuthPost[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage: number = 6;
+  const maxPagesToShow: number = 5; // 한 번에 보여줄 최대 페이지 수
 
   useEffect(() => {
     getAuthPosts()
-      .then(res => {
-        const sortedData = res.data.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
+      .then((res: any) => {
+        const sortedData = res.data.sort((a: { createdAt: string }, b: { createdAt: string }) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
         setAllAuthPosts(sortedData);
         setVisibleAuthPosts(sortedData.slice(0, 6));
       })
-      .catch(error => console.error('Error:', error));
+      .catch((error: any) => console.error('Error:', error));
   }, []);
 
   // 페이지를 변경할 때 visibleAuthPosts 업데이트
@@ -39,23 +29,23 @@ const AuthPostList = () => {
   }, [currentPage, allAuthPosts]);
 
   // 페이지를 변경하고 visibleAuthPosts 업데이트하는 함수
-  const updateVisiblePosts = (page, data) => {
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const pageData = data.slice(startIndex, endIndex);
+  const updateVisiblePosts = (page: number, data: AuthPost[]) => {
+    const startIndex: number = (page - 1) * itemsPerPage;
+    const endIndex: number = startIndex + itemsPerPage;
+    const pageData: AuthPost[] = data.slice(startIndex, endIndex);
     setVisibleAuthPosts(pageData);
   };
 
   // 페이지 번호를 클릭했을 때 호출되는 함수
-  const handlePageClick = pageNumber => {
+  const handlePageClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
   // 페이지 번호 배열 생성
   const getPageNumbers = () => {
-    const totalPages = Math.ceil(allAuthPosts.length / itemsPerPage);
-    const halfMaxPages = Math.floor(maxPagesToShow / 2);
-    let startPage, endPage;
+    const totalPages: number = Math.ceil(allAuthPosts.length / itemsPerPage);
+    const halfMaxPages: number = Math.floor(maxPagesToShow / 2);
+    let startPage: number, endPage: number;
 
     if (totalPages <= maxPagesToShow) {
       startPage = 1;
@@ -77,15 +67,15 @@ const AuthPostList = () => {
   };
 
   // 이전 페이지 버튼이 비활성화 상태인지 여부
-  const isPrevButtonDisabled = currentPage === 1;
+  const isPrevButtonDisabled: boolean = currentPage === 1;
 
   // 다음 페이지 버튼이 비활성화 상태인지 여부
-  const isNextButtonDisabled = currentPage === Math.ceil(allAuthPosts.length / itemsPerPage);
+  const isNextButtonDisabled: boolean = currentPage === Math.ceil(allAuthPosts.length / itemsPerPage);
 
   return (
     <>
       <div className="auth_post_grid">
-        {visibleAuthPosts.map((post, index) => (
+        {visibleAuthPosts.map((post: AuthPost, index: number) => (
           <Link
             to={`/auth/${post.postId}/${post.userId}`} // 경로 설정
             key={post.postId}
