@@ -60,7 +60,6 @@ export const postComment = (postId, userId, commentText) => {
   return instance.post(`/comment/${postId}/${userId}`, { body: commentText });
 };
 
-
 export const postPosts = (type, title, body, open, img, userId) => {
   const formData = new FormData();
 
@@ -176,14 +175,17 @@ export const postLogin = async ( id, password ) => {
   } 
 }
 
-const accessToken = localStorage.getItem('accessToken');
-
-if (accessToken) {
-  instance.interceptors.request.use(
-    function (config) {
+instance.interceptors.request.use(
+  function (config) {
+    // decode 토큰 만료 시간 확인하는 함수 isValid(Token) 넣기
+    const accessToken = localStorage.getItem('accessToken');
+    
+    if (accessToken /* && 함수 */) {
       instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
-      return config;
+    } else {
+      //
     }
-  )
-}
+
+    return config;
+  }
+)

@@ -3,7 +3,7 @@ import '../styles/PostList.css';
 import { Link } from 'react-router-dom';
 import { getAllPosts, getAlltypePosts } from 'api/api.js';
 import PropTypes from 'prop-types';
-import { Post, PostListProps } from '../types/types';
+import { Post, PostListProps } from '../types/types.ts';
 
 const PostList: React.FC<PostListProps> = props => {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
