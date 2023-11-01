@@ -68,15 +68,14 @@ const PostList: React.FC<PostListProps> = props => {
     <div className="post_list_container">
       {visiblePosts.map((post: Post) => (
         <div className="post_item" key={post.postId}>
-          <div className="post_header">
-            <Link
-              to={post.type === 'free' ? `/free/${post.postId}/${post.userId}` : `/auth/${post.postId}/${post.userId}`}
-              className="post_title">
-              {post.title}
-            </Link>
-            <div className="post_date">{new Date(post.createdAt).toLocaleDateString()}</div>
-          </div>
-          <div className="post_content">{post.body.length > 90 ? `${post.body.slice(0, 90)}...` : post.body}</div>
+          <Link
+            to={post.type === 'free' ? `/free/${post.postId}/${post.userId}` : `/auth/${post.postId}/${post.userId}`}>
+            <div className="post_header">
+              <div className="post_title">{post.title}</div>
+              <div className="post_date">{new Date(post.createdAt).toLocaleDateString()}</div>
+            </div>
+            <div className="post_content">{post.body.length > 90 ? `${post.body.slice(0, 90)}...` : post.body}</div>
+          </Link>
         </div>
       ))}
       {loading && <div>Loading...</div>}
