@@ -27,3 +27,7 @@ export interface ModalProps {
   onCancel: () => void;
   onConfirm: () => void;
 }
+
+export interface MenuState {
+  activeMenu: string;
+}

@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 import NavBar from 'components/NavBar.tsx';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setActiveMenu } from '../store/menuSlice.js';
+import { setActiveMenu } from '../store/menuSlice.ts';
 
 const MyPost = () => {
   const { postId } = useParams();

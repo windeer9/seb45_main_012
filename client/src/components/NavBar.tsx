@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectActiveMenu, setActiveMenu } from '../store/menuSlice.js';
+import { selectActiveMenu, setActiveMenu } from '../store/menuSlice';
 import '../styles/NavBar.css';
 
 const NavBar = () => {

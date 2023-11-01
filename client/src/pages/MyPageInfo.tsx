@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setActiveMenu } from '../store/menuSlice.js';
+import { setActiveMenu } from '../store/menuSlice';
 import NavBar from '../components/NavBar';
 import Modal from '../components/Modal';
 import '../styles/Button.css';

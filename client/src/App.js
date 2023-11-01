@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import SignUpPage from './pages/SignUpPage.jsx';
+import SignUpPage from './pages/SignUpPage.tsx';
 import Login from './pages/LoginPage.jsx';
 import EditerPage from './pages/EditerPage.jsx';
 
