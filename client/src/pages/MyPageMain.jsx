@@ -3,7 +3,7 @@ import '../styles/Button.css';
 import '../styles/MyPageMain.css';
 import Pagination from 'components/Pagination.jsx';
 import jwtDecode from 'jwt-decode';
-import { instance } from 'api/api';
+import { instance } from 'api/api.js';
 import NavBar from 'components/NavBar.tsx';
 import { Link } from 'react-router-dom';
 
