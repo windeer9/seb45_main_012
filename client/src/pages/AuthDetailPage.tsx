@@ -3,42 +3,38 @@ import { useParams } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import '../styles/Button.css';
 import '../styles/BoardDetailPage.css';
-import NavBar from '../components/NavBar.tsx';
-import { getPost, getUser, getComment, postComment, getVote, patchVote } from 'api/api.js';
+import NavBar from '../components/NavBar';
+import { getPost, getUser, getComment, postComment, getVote, patchVote } from '../api/api.js';
 
-const FreeDetailPage = () => {
-  const { postId, userId, voteId } = useParams();
+const AuthDetailPage: React.FC = () => {
+  const { postId, userId, voteId } = useParams<{ postId: string; userId: string; voteId: string }>();
 
-  const [post, setPost] = useState({});
-  const [user, setUser] = useState({});
+  const [post, setPost] = useState<any>({});
+  const [user, setUser] = useState<any>({});
 
-  const [loggedInUserId, setLoggedInUserId] = useState({});
+  const [loggedInUserId, setLoggedInUserId] = useState<any>({});
 
   const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
     if (accessToken) {
       setIsLoggedIn(true);
-      const decodedToken = jwtDecode(accessToken);
+      const decodedToken: any = jwtDecode(accessToken);
       setLoggedInUserId(decodedToken.userId);
     } else {
       setIsLoggedIn(false);
     }
   }, [accessToken]);
 
-  const [vote, setVote] = useState({});
-  // 해당 게시글에 이미 좋아요를 했었는지 여부를 저장하는 상태
-  // 새로고침했을때 이전 기록을 로컬스토리지에서 가져오는 변수
-  const [alreadyLiked, setAlreadyLiked] = useState(false);
-
-  // 좋아요 버튼 클릭 여부를 저장하는 상태
+  const [vote, setVote] = useState<any>({});
+  const [alreadyLiked, setAlreadyLiked] = useState<boolean>(false);
   const [liked, setLiked] = useState(alreadyLiked);
 
   const [commentText, setCommentText] = useState('');
 
-  const [allComments, setAllComments] = useState([]);
-  const [visibleComments, setVisibleComments] = useState([]);
+  const [allComments, setAllComments] = useState<any[]>([]);
+  const [visibleComments, setVisibleComments] = useState<any[]>([]);
 
-  const intersectionRef = useRef(null);
+  const intersectionRef = useRef<HTMLDivElement | null>(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState(!accessToken);
 
@@ -89,7 +85,6 @@ const FreeDetailPage = () => {
           ...vote, // 이전 vote 객체 내용을 그대로 유지
           voteCount: updatedVoteCount, // voteCount만 업데이트
         });
-        console.log(liked);
         console.log(vote.voteCount);
 
         // 이미 좋아요를 한 상태였다면 좋아요를 해제하고, 그 반대의 경우에는 좋아요를 활성화합니다.
@@ -102,7 +97,7 @@ const FreeDetailPage = () => {
         setLiked(!liked);
 
         // 로컬 스토리지에 좋아요 상태 저장
-        localStorage.setItem(`alreadyLikeState_${postId}_${userId}`, alreadyLiked); //JSON.stringify(alreadyLiked));
+        localStorage.setItem(`alreadyLikeState_${postId}_${userId}`, JSON.stringify(alreadyLiked));
       } else {
         console.error('좋아요 버튼 기능 오류');
       }
@@ -123,6 +118,7 @@ const FreeDetailPage = () => {
       alert('댓글은 500자 이내로 작성해주세요.');
       return;
     }
+
     try {
       // 댓글 작성 API 호출
       const response = await postComment(postId, loggedInUserId, commentText);
@@ -134,24 +130,6 @@ const FreeDetailPage = () => {
     } catch (error) {
       console.error('댓글 작성 오류:', error);
     }
-
-    // try {
-    //   // 댓글 작성 API 호출
-    //   const response = await postComment(postId, loggedInUserId, commentText);
-    //   console.log('댓글 작성 완료:', response.data);
-    //   setCommentText('');
-
-    //   // 새로 작성된 댓글과 사용자 정보를 가져오기
-    //   const newComment = response.data;
-    //   const userResponse = await getUser(newComment.userId);
-    //   const user = userResponse.data;
-
-    //   // 새로 작성된 댓글을 기존 댓글 상단에 추가
-    //   setAllComments((prevComments) => [newComment, ...prevComments]);
-
-    // } catch (error) {
-    //   console.error('댓글 작성 오류:', error);
-    // }
   };
 
   useEffect(() => {
@@ -167,6 +145,7 @@ const FreeDetailPage = () => {
     // 유저 데이터 가져오기
     getUser(userId)
       .then(response => {
+        console.log(response.data);
         setUser(response.data);
       })
       .catch(error => {
@@ -176,8 +155,8 @@ const FreeDetailPage = () => {
     // 댓글 데이터 가져오기
     getComment(postId)
       .then(response => {
-        const sortedComments = response.data.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
+        const sortedComments = response.data.sort((a: { createdAt: string }, b: { createdAt: string }) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
         const commentsWithUser = sortedComments.map(comment => ({
           ...comment,
@@ -238,28 +217,30 @@ const FreeDetailPage = () => {
 
   return (
     <>
-      <div>
-        <NavBar />
-      </div>
-
+      <NavBar />
       <div className="page_container">
-        <button className="custom_board_button cancel_button">자유 게시판</button>
-
-        <div className="free_detail_container">
-          <div className="post_detail_header">
-            <div>
-              <h3 className="post_detail_title">{post.title}</h3>
-              <p>
-                {user.grade} {user.userName}
-              </p>
-            </div>
-            <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+        <button className="custom_board_button cancel_button">인증 게시판</button>
+        <div className="auth_detail_container">
+          <div className="auth_detail_container_image">
+            <img src={post.imageUrl} alt={`${post.postId}`} />
           </div>
-          <p className="post_detail_content">{post.body}</p>
-          {/* <button onClick={handleVoteClick} className='vote_button'>
-            {liked ? `❤️ ${vote.voteCount -1 }` : `🤍 ${vote.voteCount -1}`}
-          </button> */}
+          <div className="auth_detail_container_post">
+            <div className="post_detail_header">
+              <div>
+                <h3 className="post_detail_title">{post.title}</h3>
+                <p>
+                  {user.grade} {user.userName}
+                </p>
+              </div>
+              <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+            </div>
+            <p className="post_detail_content_auth">{post.body}</p>
+            {/* <button onClick={handleVoteClick} className='vote_button'>
+              {liked ? `❤️ ${vote.voteCount}` : `🤍 ${vote.voteCount}`}
+            </button> */}
+          </div>
         </div>
+
         <div className="free_detail_container">
           {isLoggedIn && (
             <div className="detail_comment_container">
@@ -285,11 +266,10 @@ const FreeDetailPage = () => {
               </div>
             </div>
           ))}
-          <div ref={intersectionRef}></div>
         </div>
       </div>
     </>
   );
 };
 
-export default FreeDetailPage;
+export default AuthDetailPage;

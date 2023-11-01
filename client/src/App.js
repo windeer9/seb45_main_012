@@ -6,17 +6,17 @@ import SignUpPage from './pages/SignUpPage.jsx';
 import Login from './pages/LoginPage.jsx';
 import EditerPage from './pages/EditerPage.jsx';
 
-import AllBoardPage from './pages/AllBoardPage.jsx';
-import FreeBoardPage from './pages/FreeBoardPage.jsx';
-import FreeDetailPage from './pages/FreeDetailPage.jsx';
-import AuthBoardPage from './pages/AuthBoardPage.jsx';
-import AuthDetailPage from './pages/AuthDetailPage.jsx';
-import EnvBoardPage from './pages/EnvBoardPage.jsx';
+import AllBoardPage from './pages/AllBoardPage.tsx';
+import FreeBoardPage from './pages/FreeBoardPage.tsx';
+import FreeDetailPage from './pages/FreeDetailPage.tsx';
+import AuthBoardPage from './pages/AuthBoardPage.tsx';
+import AuthDetailPage from './pages/AuthDetailPage.tsx';
+import EnvBoardPage from './pages/EnvBoardPage.tsx';
 
 import Header from './components/Header.jsx';
 
 import MyPageMain from 'pages/MyPageMain.jsx';
-import MyPageInfo from './pages/MyPageInfo.jsx';
+import MyPageInfo from './pages/MyPageInfo.tsx';
 import MyPost from 'pages/MyPost.jsx';
 
 function App() {

@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/Button.css';
-import '../components/PostList.tsx';
-import EnvPostList from '../components/EnvPostList.tsx';
-import NavBar from '../components/NavBar.tsx';
+import '../components/PostList';
+import EnvPostList from '../components/EnvPostList';
+import NavBar from '../components/NavBar';
 
-const EnvBoardPage = () => {
+const EnvBoardPage: React.FC = () => {
   return (
     <>
       <div>
