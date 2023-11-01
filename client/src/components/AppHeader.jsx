@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import "../styles/Header.css";
 import { useDispatch, useSelector } from 'react-redux';
 import UserHeader from './UserHeader.jsx';
