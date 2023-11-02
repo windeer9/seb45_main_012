@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setActiveMenu } from '../store/menuSlice';
-import NavBar from '../components/NavBar';
-import Modal from '../components/Modal';
+import { setActiveMenu } from '../store/menuSlice.ts';
+import NavBar from '../components/NavBar.tsx';
+import Modal from '../components/Modal.tsx';
 import '../styles/Button.css';
 import '../styles/MyPageInfo.css';
 import jwtDecode from 'jwt-decode';
