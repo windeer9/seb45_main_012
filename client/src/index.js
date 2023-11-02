@@ -4,7 +4,7 @@ import './index.css';
 import App from 'App.js';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit'; // configureStore를 import합니다.
-import menuSliceReducer from './store/menuSlice.js'; // 리듀서를 import합니다.
+import menuSliceReducer from './store/menuSlice.ts'; // 리듀서를 import합니다.
 
 
 // 스토어를 구성합니다.
