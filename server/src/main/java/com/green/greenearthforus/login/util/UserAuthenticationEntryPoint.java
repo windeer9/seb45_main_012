@@ -4,6 +4,7 @@ import com.green.greenearthforus.login.error.ErrorResponder;
 import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
 import com.green.greenearthforus.user.controller.UserController;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,10 +83,15 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public boolean isAccessTokenExpired(HttpServletRequest request){
         String jws = request.getHeader("Authorization").replace("Bearer ", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-        long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
-        long currentTime = System.currentTimeMillis();
+        try {
+            long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
+            long currentTime = System.currentTimeMillis();
 
-        return expirationTime < currentTime;
+            return expirationTime < currentTime;
+        } catch (ExpiredJwtException e){
+            return true;
+        }
+
     }
 
     public boolean isRefreshTokenExpired(HttpServletRequest request){
