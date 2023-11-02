@@ -10,7 +10,6 @@ import { logout, setLoggedIn } from 'store/authSlice.js';
 
 const UserHeader = ( { isLoggedIn } ) => {
 
-const HeaderLoggedIn = ({ isLoggedIn, handleLogout }) => {
   const accessToken = localStorage.getItem('accessToken');
   const [userName, setUserName] = useState('');
   const dispatch = useDispatch();
