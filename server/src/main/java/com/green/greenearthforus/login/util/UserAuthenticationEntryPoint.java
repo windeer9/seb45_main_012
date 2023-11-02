@@ -5,6 +5,7 @@ import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
 import com.green.greenearthforus.user.controller.UserController;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -19,7 +20,9 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Autowired
     private JwtTokenizer jwtTokenizer;
+    @Autowired
     private UserController userController;
 
     @Override
