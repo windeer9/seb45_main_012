@@ -25,6 +25,11 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Autowired
     private UserController userController;
 
+    public UserAuthenticationEntryPoint(JwtTokenizer jwtTokenizer){
+        this.jwtTokenizer = jwtTokenizer;
+    }
+
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authenticationException) throws IOException{

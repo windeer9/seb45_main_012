@@ -8,6 +8,7 @@ import com.green.greenearthforus.login.util.CustomAuthorityUtils;
 import com.green.greenearthforus.login.filter.JwtAuthenticationFilter;
 import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
 import com.green.greenearthforus.login.filter.JwtVerificationFilter;
+import com.green.greenearthforus.user.controller.UserController;
 import io.jsonwebtoken.Claims;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,7 +54,7 @@ public class SecurityConfig{
                 .formLogin().disable()
                 .httpBasic().disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(new UserAuthenticationEntryPoint())
+                .authenticationEntryPoint(new UserAuthenticationEntryPoint(jwtTokenizer))
                 .accessDeniedHandler(new UserAccessDeniedHandler())
                 .and()
                 .apply(new CustomFilterConfigurer())
