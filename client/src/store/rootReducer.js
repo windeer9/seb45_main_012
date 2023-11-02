@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import authReducer from './authSlice.js';
-import menuReducer from './menuSlice.js';
+import menuReducer from './menuSlice.ts';
 
 const rootReducer = combineReducers({
     auth: authReducer,

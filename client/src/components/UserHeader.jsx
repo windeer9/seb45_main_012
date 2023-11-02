@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightFromBracket, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { setActiveMenu } from 'store/menuSlice.js';
+import { setActiveMenu } from 'store/menuSlice.ts';
 import { logout, setLoggedIn } from 'store/authSlice.js';
 
 const UserHeader = ( { isLoggedIn } ) => {
