@@ -33,7 +33,8 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
         if(request.getHeader("Authorization") != null && !request.getHeader("Authorization").isEmpty()) {
             jws = request.getHeader("Authorization").replace("Bearer ", "");
-            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+//            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+            String base64EncodedSecretKey = jwtTokenizer.key();
             if (isAccessTokenExpired(request)) {
                 if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
                     if (isRefreshTokenExpired(request)) {

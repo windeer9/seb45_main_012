@@ -33,7 +33,9 @@ public class JwtTokenizer {
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
     }
-
+    public String key(){
+        return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
+    }
     public String generateAccessToken(Map<String, Object> claims,
                                       String subject,
                                       Date expiration,
