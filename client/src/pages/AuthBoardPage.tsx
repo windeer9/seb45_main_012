@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/Button.css';
-import '../components/PostList.tsx';
-import AuthPostList from '../components/AuthPostList.jsx';
-import NavBar from '../components/NavBar.tsx';
+import '../components/PostList';
+import AuthPostList from '../components/AuthPostList';
+import NavBar from '../components/NavBar';
 
-const AuthBoardPage = () => {
+const AuthBoardPage: React.FC = () => {
   return (
     <>
       <div>

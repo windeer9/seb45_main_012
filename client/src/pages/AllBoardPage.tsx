@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/Button.css';
-import PostList from '../components/PostList.tsx';
-import NavBar from '../components/NavBar.tsx';
+import PostList from '../components/PostList';
+import NavBar from '../components/NavBar';
 
-const AllBoardPage = () => {
+const AllBoardPage: React.FC = () => {
   return (
     <>
       <div>

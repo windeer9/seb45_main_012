@@ -10,8 +10,9 @@ import { logout, setLoggedIn } from 'store/authSlice.js';
 
 const UserHeader = ( { isLoggedIn } ) => {
 
+const HeaderLoggedIn = ({ isLoggedIn, handleLogout }) => {
   const accessToken = localStorage.getItem('accessToken');
-  const [ userName, setUserName ] = useState('');
+  const [userName, setUserName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const UserHeader = ( { isLoggedIn } ) => {
 
   const handleProfileClick = () => {
     dispatch(setActiveMenu('내가 쓴 글'));
-  }
+  };
 
   const handleLogout = () => {
     try {
@@ -42,7 +43,7 @@ const UserHeader = ( { isLoggedIn } ) => {
       setUserName(userName);
     }
   }, [accessToken]);
-  
+
   if (!isLoggedIn) {
     return null;
   }
@@ -50,15 +51,15 @@ const UserHeader = ( { isLoggedIn } ) => {
   return (
     <header className="header_container">
       <div className="header_bar">
-        <Link to='/' className="header_logo" onClick={handleLogoClick}>
-          <img src={require("../assets/logo.png")} alt="logo" />
+        <Link to="/" className="header_logo" onClick={handleLogoClick}>
+          <img src={require('../assets/logo.png')} alt="logo" />
         </Link>
         <div className="search">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
-        <div className='header_bar_user'>
-          <Link to='/mypage/main' className="header_profile" onClick={handleProfileClick}>
-            <img className="header_user_picture" src={require("../assets/user_shadow.png")} alt="user profile" />
+        <div className="header_bar_user">
+          <Link to="/mypage/main" className="header_profile" onClick={handleProfileClick}>
+            <img className="header_user_picture" src={require('../assets/user_shadow.png')} alt="user profile" />
             <div className="header_user_name">{userName} 님</div>
           </Link>
           <Link to={'/posts/write'}>
@@ -70,8 +71,8 @@ const UserHeader = ( { isLoggedIn } ) => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
 UserHeader.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,

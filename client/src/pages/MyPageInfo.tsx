@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setActiveMenu } from '../store/menuSlice.js';
-import NavBar from '../components/NavBar.tsx';
-import Modal from '../components/Modal.jsx';
+import { setActiveMenu } from '../store/menuSlice';
+import NavBar from '../components/NavBar';
+import Modal from '../components/Modal';
 import '../styles/Button.css';
 import '../styles/MyPageInfo.css';
 import jwtDecode from 'jwt-decode';
 import { deleteUser } from '../api/api.js';
 
-const MyPageInfo = () => {
+const MyPageInfo: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [previewImageUrl, setPreviewImageUrl] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImageUrl, setPreviewImageUrl] = useState<string>('');
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const [showModal, setShowModal] = useState(false);
-  const [agreed, setAgreed] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [agreed, setAgreed] = useState<boolean>(false);
 
-  const accessToken = localStorage.getItem('accessToken');
-  const [isLoggedIn, setIsLoggedIn] = useState(!accessToken);
-  const decodedToken = jwtDecode(accessToken);
-  const userId = decodedToken.userId;
+  const accessToken: string | null = localStorage.getItem('accessToken');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!accessToken);
+  const decodedToken: { userId: number } = jwtDecode(accessToken);
+  const userId: number = decodedToken.userId;
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -59,14 +59,14 @@ const MyPageInfo = () => {
     }
   };
 
-  const handleImageChange = e => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
 
     if (file) {
       const reader = new FileReader();
 
       reader.onload = event => {
-        const imageUrl = event.target.result;
+        const imageUrl = event.target.result as string;
         setPreviewImageUrl(imageUrl);
         setSelectedImage(file);
       };
