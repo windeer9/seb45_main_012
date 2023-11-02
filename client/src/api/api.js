@@ -1,11 +1,13 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { setAccessToken, setRefreshToken } from "store/authSlice.js";
 
 axios.defaults.withCredentials = true;
 
 export const instance = axios.create({
-
   baseURL: 'http://ec2-52-78-145-37.ap-northeast-2.compute.amazonaws.com:8080',
-
   timeout: 5000,
 });
 
@@ -59,7 +61,6 @@ export const getComment = (postId) => {
 export const postComment = (postId, userId, commentText) => {
   return instance.post(`/comment/${postId}/${userId}`, { body: commentText });
 };
-
 
 export const postPosts = (type, title, body, open, img, userId) => {
   const formData = new FormData();
@@ -166,6 +167,10 @@ export const postLogin = async ( id, password ) => {
     const auth = res.headers['authorization'];
     const accessToken = auth.substring(6);
     localStorage.setItem('accessToken', accessToken);
+
+    const refresh = res.headers['refresh'];
+    Cookies.set('refreshToken', refresh);
+
     return true;
 
   } catch (error) {
@@ -176,14 +181,46 @@ export const postLogin = async ( id, password ) => {
   } 
 }
 
-const accessToken = localStorage.getItem('accessToken');
+instance.interceptors.request.use(
+  async function (config) {
+    if (config.method === 'get' ) return config;
+    else {
+      const isValid = (token) => {
+        const decodedToken = jwtDecode(token)
+        const tokenExpirationTime = decodedToken.exp;
+        const currentTime = Math.floor(Date.now() / 1000);
+        return tokenExpirationTime >= currentTime;
+      }
+      
+      const accessToken = localStorage.getItem('accessToken');
+      const userId = accessToken.userId;
+      const refreshToken = Cookies.get('refreshToken');
+      
+      if (accessToken && isValid(accessToken)) {
+        instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        instance.defaults.headers.common['Refresh'] = `${refreshToken}`;
+        return config;
+      } else if (refreshToken && isValid(refreshToken)) {
+        
+          try {
+            const dispatch = useDispatch();
+            const res = await instance.patch(`user/refresh/${userId}`);
 
-if (accessToken) {
-  instance.interceptors.request.use(
-    function (config) {
-      instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
-      return config;
-    }
-  )
-}
+            const newAuth = res.headers['authorization'];
+            const newAccessToken = newAuth.substring(6);
+            localStorage.setItem('accessToken', newAccessToken);
+            dispatch(setAccessToken(newAccessToken));
+            instance.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+            
+            const newRefresh = res.headers['refresh'];
+            Cookies.set('refreshToken', newRefresh);
+            dispatch(setRefreshToken(newRefresh));
+            instance.defaults.headers.common['Refresh'] = `${newRefresh}`;
+          } catch (error) {
+            console.error('accessToken을 갱신하지 못했습니다.');
+            throw error;
+          }
+        }
+      }
+  return config;
+});
