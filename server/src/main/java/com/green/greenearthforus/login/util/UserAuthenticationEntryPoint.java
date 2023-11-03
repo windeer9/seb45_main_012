@@ -37,47 +37,54 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
             Exception exception = (Exception) request.getAttribute("exception");
 
 
-            String jws = "";
-            String refresh = "";
-
-        if(request.getHeader("Authorization") != null && !request.getHeader("Authorization").isEmpty()) {
-            jws = request.getHeader("Authorization").replace("Bearer ", "");
-//            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-            String base64EncodedSecretKey = jwtTokenizer.key();
-            if (isAccessTokenExpired(request)) {
-                if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
-                    if (isRefreshTokenExpired(request)) {
-                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
-                        jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
-                        refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
-                        response.setHeader("Authorization", "Bearer " + jws);
-                        response.setHeader("Refresh", refresh);
-                    } else {
-                        // refresh토큰으로 만료된 access토큰을 재발급하는 로직
-                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
-                        String neoAccessToken = generateNewAccessTokenUsingRefreshToken(request.getHeader("Refresh"), base64EncodedSecretKey, accessClaims);
-                        if (neoAccessToken != null) {
-                            response.setHeader("Authorization", "Bearer " + neoAccessToken);
-                        }
-                    }
-                } else {
-                    Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
-                    jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
-                    refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
-                    response.setHeader("Authorization", "Bearer " + jws);
-                    response.setHeader("Refresh", refresh);
-                }
-            }
-        }
-
+//            String jws = "";
+//            String refresh = "";
+//
+//        if(request.getHeader("Authorization") != null && !request.getHeader("Authorization").isEmpty()) {
+//            jws = request.getHeader("Authorization").replace("Bearer ", "");
+////            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+//            String base64EncodedSecretKey = jwtTokenizer.key();
+//            Claims accessClaims = null;
+//            try {
+//                accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+//            } catch (ExpiredJwtException e){
+//                userController.refreshToken(); // userId 입력
+//            }
+//
+//            if (isAccessTokenExpired(request)) {
+//                if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
+//                    if (isRefreshTokenExpired(request)) {
+////                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+//                        jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
+//
+//                        refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
+//                        response.setHeader("Authorization", "Bearer " + jws);
+//                        response.setHeader("Refresh", refresh);
+//                    } else {
+//                        // refresh토큰으로 만료된 access토큰을 재발급하는 로직
+////                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+//                        String neoAccessToken = generateNewAccessTokenUsingRefreshToken(request.getHeader("Refresh"), base64EncodedSecretKey, accessClaims);
+//                        if (neoAccessToken != null) {
+//                            response.setHeader("Authorization", "Bearer " + neoAccessToken);
+//                        }
+//                    }
+//                } else {
+////                    Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+//                    jws = jwtTokenizer.generateAccessToken(accessClaims, accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), base64EncodedSecretKey);
+//                    refresh = jwtTokenizer.generateRefreshToken(accessClaims.getSubject(), jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes()), base64EncodedSecretKey);
+//                    response.setHeader("Authorization", "Bearer " + jws);
+//                    response.setHeader("Refresh", refresh);
+//                }
+//            }
+//        }
 
         ErrorResponder.sendErrorResponse(response, HttpStatus.UNAUTHORIZED);
-            logExceptionMessage(authenticationException, exception, jws, refresh);
+            logExceptionMessage(authenticationException, exception);
     }
 
-    private void logExceptionMessage(AuthenticationException authException, Exception exception, String access, String refresh){
+    private void logExceptionMessage(AuthenticationException authException, Exception exception){
         String message = exception != null ? exception.getMessage() : authException.getMessage();
-        log.warn("Unauthorized error happend: {}", message + "\""+ access + "\"" + refresh);
+        log.warn("Unauthorized error happend: {}", message);
     }
 
     public boolean isAccessTokenExpired(HttpServletRequest request){
