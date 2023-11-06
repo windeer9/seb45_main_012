@@ -118,20 +118,28 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
     public boolean isAccessTokenExpired(HttpServletRequest request){
         String jws = request.getHeader("Authorization").replace("Bearer ", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-        long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
-        long currentTime = System.currentTimeMillis();
+        try {
+            long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
+            long currentTime = System.currentTimeMillis();
 
-        return expirationTime < currentTime;
+            return expirationTime < currentTime;
+        } catch (ExpiredJwtException e){
+            return true;
+        }
+
     }
 
     public boolean isRefreshTokenExpired(HttpServletRequest request){
         String jws = request.getHeader("Refresh");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        try {
+            long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
+            long currentTime = System.currentTimeMillis();
 
-        long expirationTime = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getExpiration().getTime();
-        long currentTime = System.currentTimeMillis();
-
-        return expirationTime < currentTime;
+            return expirationTime < currentTime;
+        } catch (ExpiredJwtException e){
+            return true;
+        }
     }
 
     public String generateNewAccessTokenUsingRefreshToken(String refreshToken, String key, Claims accessTokenClaims) {
