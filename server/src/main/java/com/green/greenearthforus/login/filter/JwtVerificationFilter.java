@@ -36,8 +36,24 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
             Map<String, Object> claims = verifyJws(request);
             setAuthenticationToContext(claims, request, response);
         } catch(Exception e){
-            request.setAttribute("exception", e);
+//            request.setAttribute("exception", e);
+            if(isAccessTokenExpired(request)) {
+                if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
+                    if (!isRefreshTokenExpired(request)) {
+                        // refresh토큰으로 만료된 access토큰을 재발급하는 로직
+                        String jws = request.getHeader("Refresh");
+                        String base64EncodedSecretKey = jwtTokenizer.key();
+                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+                        String neoAccessToken = generateNewAccessTokenUsingRefreshToken(request.getHeader("Refresh"), base64EncodedSecretKey, accessClaims);
+                        if (neoAccessToken != null) {
+                            response.setHeader("Authorization", "Bearer " + neoAccessToken);
+                        }
+                    }
+                }
+            }
         }
+
+
 
         chain.doFilter(request, response);
     }
@@ -54,13 +70,13 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
 //        String jws = "";
 //        String refresh = "";
-//
+
 //        if(request.getHeader("Authorization") != null && !request.getHeader("Authorization").isEmpty()) {
 //            jws = request.getHeader("Authorization").replace("Bearer ", "");
-////            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+//            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 //            String base64EncodedSecretKey = jwtTokenizer.key();
-//
-//
+
+
 //            if (isAccessTokenExpired(request)) {
 //                if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
 //                    if (isRefreshTokenExpired(request)) {
