@@ -36,7 +36,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
             Map<String, Object> claims = verifyJws(request);
             setAuthenticationToContext(claims, request, response);
         } catch(Exception e){
-//            request.setAttribute("exception", e);
+            request.setAttribute("exception", e);
             if(isAccessTokenExpired(request)) {
                 if (request.getHeader("Refresh") != null && !request.getHeader("Refresh").isEmpty()) {
                     if (!isRefreshTokenExpired(request)) {
