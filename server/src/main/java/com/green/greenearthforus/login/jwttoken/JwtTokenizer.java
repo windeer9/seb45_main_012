@@ -71,8 +71,14 @@ public class JwtTokenizer {
                 .build()
                 .parseClaimsJws(jws);
     }
-
-    // 단순히 검증만 하는 용도로 쓰일 경우
+    public String getSubject(String jws, String base64EncodedSecretKey)
+    {
+        Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(jws).getBody().getSubject();
+    }    // 단순히 검증만 하는 용도로 쓰일 경우
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 

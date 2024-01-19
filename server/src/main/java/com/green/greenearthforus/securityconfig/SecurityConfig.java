@@ -9,6 +9,7 @@ import com.green.greenearthforus.login.filter.JwtAuthenticationFilter;
 import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
 import com.green.greenearthforus.login.filter.JwtVerificationFilter;
 import com.green.greenearthforus.user.controller.UserController;
+import com.green.greenearthforus.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,10 +36,14 @@ public class SecurityConfig{
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
+    private final UserRepository userRepository;
+
     public SecurityConfig(JwtTokenizer jwtTokenizer,
-                          CustomAuthorityUtils authorityUtils){
+                          CustomAuthorityUtils authorityUtils,
+                          UserRepository userRepository){
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
+        this.userRepository = userRepository;
     }
 
     @Bean
@@ -112,7 +117,7 @@ public class SecurityConfig{
                     new JwtAuthenticationFilter(aUthenticationManager, jwtTokenizer);
             jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
 
-            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils, userRepository, jwtAuthenticationFilter);
 
             builder.addFilter(jwtAuthenticationFilter)
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);

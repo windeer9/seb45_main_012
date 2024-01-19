@@ -1,7 +1,11 @@
 package com.green.greenearthforus.login.filter;
 
+import com.green.greenearthforus.exception.BusinessLogicException;
+import com.green.greenearthforus.exception.ExceptionCode;
 import com.green.greenearthforus.login.util.CustomAuthorityUtils;
 import com.green.greenearthforus.login.jwttoken.JwtTokenizer;
+import com.green.greenearthforus.user.entity.User;
+import com.green.greenearthforus.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,16 +22,26 @@ import java.security.Key;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 import io.jsonwebtoken.Jwts;
 
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
+    private final UserRepository userRepository;
+
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
     public JwtVerificationFilter(JwtTokenizer jwtTokenizer,
-                                 CustomAuthorityUtils customAuthorityUtils){
+                                 CustomAuthorityUtils customAuthorityUtils,
+                                 UserRepository userRepository,
+                                 JwtAuthenticationFilter jwtAuthenticationFilter){
         this.authorityUtils = customAuthorityUtils;
         this.jwtTokenizer = jwtTokenizer;
+        this.userRepository = userRepository;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Override
@@ -43,18 +57,25 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                         // refresh토큰으로 만료된 access토큰을 재발급하는 로직
                         String jws = request.getHeader("Refresh");
                         String base64EncodedSecretKey = jwtTokenizer.key();
-                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
-                        String neoAccessToken = generateNewAccessTokenUsingRefreshToken(request.getHeader("Refresh"), base64EncodedSecretKey, accessClaims);
-                        if (neoAccessToken != null) {
+                        String subject = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody().getSubject();
+                        Optional<User> optionalUser = userRepository.findByUserName(subject);
+                        if(optionalUser.isPresent()){
+                            User user = optionalUser.get();
+                            String neoAccessToken = jwtAuthenticationFilter.delegateAccessToken(user);
                             response.setHeader("Authorization", "Bearer " + neoAccessToken);
                         }
+
+
+//                        Claims accessClaims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+//
+//                        String neoAccessToken = generateNewAccessTokenUsingRefreshToken(request.getHeader("Refresh"), base64EncodedSecretKey, accessClaims, subject);
+//                        if (neoAccessToken != null) {
+//                            response.setHeader("Authorization", "Bearer " + neoAccessToken);
+//                        }
                     }
                 }
             }
         }
-
-
-
         chain.doFilter(request, response);
     }
 
@@ -142,8 +163,10 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         }
     }
 
-    public String generateNewAccessTokenUsingRefreshToken(String refreshToken, String key, Claims accessTokenClaims) {
+    public String generateNewAccessTokenUsingRefreshToken(String refreshToken, String key, Claims accessTokenClaims, String subject) {
 //        Key currentKey = jwtTokenizer.getKeyFromBase64EncodedKey(key);
+
+
 //
 //        Claims claims = Jwts.parserBuilder()
 //                .setSigningKey(currentKey)
@@ -152,7 +175,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 //                .getBody();
 //
 //        String username = claims.getSubject();
-        String subject = jwtTokenizer.getClaims(refreshToken, key).getBody().getSubject();
+
 
         return jwtTokenizer.generateAccessToken(accessTokenClaims, subject, jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes()), key);
     }
