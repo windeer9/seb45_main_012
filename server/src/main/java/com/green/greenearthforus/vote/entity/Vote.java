@@ -22,7 +22,7 @@ public class Vote {
     @Column
     private String voteType;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "post_id")
     private Post post;
 

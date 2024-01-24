@@ -29,7 +29,7 @@ public class Calendar {
     @ElementCollection
     private List<LocalDate> stampedDates;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private User user;
 

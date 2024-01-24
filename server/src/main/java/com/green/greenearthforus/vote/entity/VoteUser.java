@@ -15,11 +15,11 @@ public class VoteUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long voteUserId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "vote_id")
     private Vote vote;
 
